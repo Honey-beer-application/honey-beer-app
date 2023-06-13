@@ -1,0 +1,49 @@
+.navigation{
+    display: flex;
+    background-color: #e4ddcd;
+    width:100%;
+    white-space: nowrap;
+    border-bottom: 1px solid #B8ADA0;
+    position: sticky;
+    top:0px;
+    
+}
+.center-content, footer{
+    background-color: #fcf7eb;
+}
+@media only screen and (max-width: 1029px) {
+    .app-navigation-big{
+        display: none;
+    }
+    .app-navigation-medium{
+        display: flex;
+        width:100%;
+    }
+    .app-navigation-small{
+        display: none;
+    }
+}
+@media only screen and (min-width: 1029px) {
+    .app-navigation-big{
+        display: flex;
+        width: 100%;
+    }
+    .app-navigation-medium{
+        display: none;
+    }
+    .app-navigation-small{
+        display: none;
+    }
+}
+@media only screen and (max-width: 575px) {
+    .app-navigation-big{
+        display: none;
+    }
+    .app-navigation-medium{
+        display: none;
+    }
+    .app-navigation-small{
+        display: flex;
+        width: 100%;
+    }
+}

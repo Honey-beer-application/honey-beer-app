@@ -1,0 +1,65 @@
+.navigation-big{
+    &>img{
+        padding-bottom:auto;
+        height:100px;
+        width:100px;
+    }
+    display: flex;
+    width:100%;
+    align-items: center;
+    gap:20px;
+    height:100px;    
+    &>.menu-button{
+        &:hover>.arrow-drop-down-menu{
+            height:600%;
+            padding: 20px 20px 20px 20px;
+            border-bottom: 1px solid #B8ADA0;
+        }
+        &>.arrow-drop-down-menu{
+            position: absolute;
+            width:100%;
+            height:0%;
+            top:99px;
+            left:0px;
+            transition: height 0.5s ease-in-out,padding 0.5s ease-in-out;
+            background-color: #e4ddcd;
+            overflow: hidden;
+            padding:0px 20px 0px 20px;
+        }  
+    }
+    &>.inside-honey-beer-button{
+        margin-right: auto;
+    }
+    display: flex;
+    &>button{
+        height:100%;
+        background-color: transparent;
+        font-family: 'Freizeit120';
+    }
+    
+    &>a{
+        text-decoration: none;
+        color: black;
+        text-transform: uppercase;
+        font-family: 'Freizeit120';
+        font-size: 14px;
+    }
+    .build-a-bottle-link{
+        border:1px solid #B7ADA1;
+        border-radius: 3px;
+        padding:10px 20px 10px 20px;
+        font-family: 'Freizeit120';
+        background-color: #1e1e1e;
+        color:white;
+        transition:background-color 0.2s ease-in-out,color 0.2s ease-in-out,box-shadow 0.2s ease-in-out;
+        &:hover{
+            color: #1e1e1e;
+            border-color:#b7ada1;
+            background-color: #FFFCF2;
+            box-shadow: 4px -4px #fffcf2,-4px 4px #fffcf2,-4px -4px #fffcf2,4px 4px #fffcf2
+        }
+    }
+    .shopping-card-icon{
+        margin-right: 20px;
+    }
+}

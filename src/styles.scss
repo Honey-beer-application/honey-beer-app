@@ -1,1 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+@font-face {
+    font-family: 'Freizeit120';
+    src: url("assets/fonts/Freizeit120-Regular.otf");
+}
+@font-face {
+    font-family: 'Cako';
+    src: url('assets/fonts/Cako-Regular.ttf');
+}
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+:root{
+    --nav-color:#fcf0d6;
+    --black:black;
+}
+body{
+    max-width: 100%;
+    min-width: 215px;
+}
+.full-height,.app-height,html, body{
+    min-height:100svh;
+}
+
+//flex
+
+.flex-row{
+    display: flex;
+}
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+// button style
+button{
+    width:fit-content;
+    height:fit-content;
+    border:none;
+    display: flex;
+    align-items: center;
+    color:black;
+    text-transform: uppercase;
+    gap:5px;
+    padding:0px 5px 0px 5px;
+}
+.center-content{
+    flex-grow: 1;
+}
+.application{
+    width:100%;
+    height: 100svh;
+}
+canvas{
+    max-width: 100%;
+}
