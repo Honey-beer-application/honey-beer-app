@@ -59,6 +59,11 @@ export class MainPageComponent implements OnInit,AfterViewInit {
           this.model = gltf.scene;
           this.scene.add( this.model);
         });
+        //deployment link
+        // this.loader.load('./assets/3D-models/honey-bottle-and-can.glb',(gltf:GLTF)=>{ 
+        //   this.model = gltf.scene;
+        //   this.scene.add( this.model);
+        // });
       }
       //creating directional light
       if(this.model!=undefined){
