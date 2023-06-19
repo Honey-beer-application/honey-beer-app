@@ -54,17 +54,7 @@ export class MainPageComponent implements OnInit,AfterViewInit {
      this.scene.add(this.camera);
       //this.modelBox.getCenter(this.model.position);
       //this.scene.add(this.model);
-      if(this.model==undefined){
-        this.loader.load('./../../assets/3D-models/honey-bottle-and-can.glb',(gltf:GLTF)=>{ 
-          this.model = gltf.scene;
-          this.scene.add( this.model);
-        });
-        //deployment link
-        // this.loader.load('./assets/3D-models/honey-bottle-and-can.glb',(gltf:GLTF)=>{ 
-        //   this.model = gltf.scene;
-        //   this.scene.add( this.model);
-        // });
-      }
+      
       //creating directional light
       if(this.model!=undefined){
         this.light = new THREE.DirectionalLight(0xffffff,2);
@@ -105,9 +95,23 @@ export class MainPageComponent implements OnInit,AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.createScene();
+    this.load3Dmodels();
     this.startRenderingLoop();
   }
   ngOnInit(): void {
 
+  }
+  private load3Dmodels():void{
+    if(this.model==undefined){
+      this.loader.load('./../../assets/3D-models/honey-bottle-and-can.glb',(gltf:GLTF)=>{ 
+        this.model = gltf.scene;
+        this.scene.add( this.model);
+      });
+      //deployment link
+      // this.loader.load('./assets/3D-models/honey-bottle-and-can.glb',(gltf:GLTF)=>{ 
+      //   this.model = gltf.scene;
+      //   this.scene.add( this.model);
+      // });
+    }
   }
 }

@@ -1,0 +1,39 @@
+<div class="back-to-site-button-container">
+    <button (click)="this.backToPrevoiusPage()">Back to website</button>
+</div>
+<div #main class="container" id="main">
+    <div class="sign-up">
+        <form action="#">
+            <h1>Company registration</h1>
+            <input type="text" name="txt" placeholder="Name" required="">
+            <input type="email" name="email" placeholder="Email" required="">
+            <input type="password" name="pswd" placeholder="Password" required="">
+            <button>Sign up</button>
+        </form>
+    </div>
+    <div class="sign-in">
+        <form action="#">
+            <h1>Customer registration</h1>
+            <input type="text" name="username" placeholder="username" required="">
+            <input type="email" name="email" placeholder="Email" required="">
+            <input type="password" name="pswd" placeholder="Password" required="">
+            <input type="password" name="confirmpswd" placeholder="Confirm password" required="">
+            <a href="#">Forgot your password?</a>
+            <button>Sign in</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-left">
+                <h1>Customer registration</h1>
+                <p>If you want to register your personal account, please click the button below.</p>
+                <button id="signIn" #signIn>Customer registration</button>
+            </div>
+            <div class="overlay-right">
+                <h1>Company registration</h1>
+                <p>If you want to register your company for buying products, please click button below.</p>
+                <button id="register" #register>Company registration</button>
+            </div>
+        </div>
+    </div>
+</div>

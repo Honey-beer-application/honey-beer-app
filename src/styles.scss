@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Space+Mono&display=swap');
 @font-face {
     font-family: 'Freizeit120';
     src: url("assets/fonts/Freizeit120-Regular.otf");
@@ -53,6 +54,18 @@ button{
 .application{
     width:100%;
     height: 100svh;
+    &>app-application,app-register{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    &>app-register{
+        align-items: center;
+        justify-content: center;
+        background-color: #f6f5f7;
+        font-family: 'Montserrat', sans-serif;
+        min-height: 100%;
+    }
 }
 canvas{
     max-width: 100%;
