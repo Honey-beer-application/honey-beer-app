@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ApplicationModule } from './application/application.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -12,7 +12,7 @@ import { ApplicationModule } from './application/application.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ApplicationModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

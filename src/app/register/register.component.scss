@@ -173,3 +173,12 @@
     }
     padding:10px;
 }
+.error{
+    border: 1px solid rgb(255, 49, 49) !important;
+}
+.success{
+    border: 1px solid rgb(0, 219, 0) !important;
+}
+.none{
+    border: 1px solid transparent !important;
+}

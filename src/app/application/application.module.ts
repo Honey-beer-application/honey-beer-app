@@ -5,8 +5,8 @@ import { NavigationBigComponent } from '../navigation/navigation-big/navigation-
 import { NavigationMediumComponent } from '../navigation/navigation-medium/navigation-medium.component';
 import { NavigationSmallComponent } from '../navigation/navigation-small/navigation-small.component';
 import { MainPageModule } from '../main-page/main-page.module';
-import { AppRoutingModule } from '../app-routing.module';
 import {MatIconModule} from '@angular/material/icon';
+import { ApplicationRoutingModule } from './application-routing.module';
 
 @NgModule({
   declarations: [
@@ -18,8 +18,8 @@ import {MatIconModule} from '@angular/material/icon';
   imports: [
     CommonModule,
     MainPageModule,
-    AppRoutingModule,
     MatIconModule,
+    ApplicationRoutingModule
   ]
 })
 export class ApplicationModule { }

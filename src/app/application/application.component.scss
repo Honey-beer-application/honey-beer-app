@@ -11,7 +11,7 @@
 .center-content, footer{
     background-color: #fcf7eb;
 }
-@media only screen and (max-width: 1029px) {
+@media only screen and (max-width: 1190px) {
     .app-navigation-big{
         display: none;
     }
@@ -23,7 +23,7 @@
         display: none;
     }
 }
-@media only screen and (min-width: 1029px) {
+@media only screen and (min-width: 1190px) {
     .app-navigation-big{
         display: flex;
         width: 100%;

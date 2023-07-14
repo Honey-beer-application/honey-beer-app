@@ -1,6 +1,6 @@
 {
-    "/users":{
-        "target":"http://localhost:9001",
+    "/api":{
+        "target":"https://localhost:7165",
         "secure":false
     }
 }

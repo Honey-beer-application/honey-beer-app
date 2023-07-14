@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./application.component.scss'],
 })
 export class ApplicationComponent {
-
 }

@@ -1,0 +1,8 @@
+<!-- For camera -->
+<ngx-scanner-qrcode #action="scanner" id="qrCodeScanner" (event)="onEvent($event)"></ngx-scanner-qrcode>
+
+<!-- Loading -->
+<p *ngIf="action.isLoading">⌛ Loading...</p>
+
+<!-- start -->
+<button class="qrCodeButton" (click)="action.isStart ? action.stop() : beginScanning()">{{action.isStart ? 'Stop' : 'Start'}}</button>

@@ -3,23 +3,45 @@
 </div>
 <div #main class="container" id="main">
     <div class="sign-up">
-        <form action="#">
+        <form [formGroup]="companyForm" action="#">
             <h1>Company registration</h1>
-            <input type="text" name="txt" placeholder="Name" required="">
-            <input type="email" name="email" placeholder="Email" required="">
-            <input type="password" name="pswd" placeholder="Password" required="">
-            <button>Sign up</button>
+            <input
+            [ngClass]="this.companyPIB.valid?'success':'none'"
+            type="text" name="txt" placeholder="PIB" formControlName="companyPIB" required="">
+            <input
+            [ngClass]="this.companyUsername.valid?'success':'none'"
+            type="text" name="txt" placeholder="Name" formControlName="companyUsername" required="">
+            <input
+            [ngClass]="this.companyEmail.valid?'success':'none'"
+            type="email" name="email" placeholder="Email" formControlName="companyEmail" required="">
+            <input 
+            [ngClass]="this.companyPassword.valid?'success':'none'"
+            type="password" name="pswd" placeholder="Password" formControlName="companyPassword" required="">
+            <input 
+            [ngClass]="this.companyConfirmedPassword.valid?'success':'none'"
+            type="password" name="confirmPswd" placeholder="Confirm password" formControlName="companyConfirmedPassword" required="">
+            <button id="companyRegister" [disabled]="!this.companyForm.valid"
+            (click)="saveCompany()">Register</button>
         </form>
     </div>
     <div class="sign-in">
-        <form action="#">
+            <form [formGroup]="customerForm" action="#">
             <h1>Customer registration</h1>
-            <input type="text" name="username" placeholder="username" required="">
-            <input type="email" name="email" placeholder="Email" required="">
-            <input type="password" name="pswd" placeholder="Password" required="">
-            <input type="password" name="confirmpswd" placeholder="Confirm password" required="">
-            <a href="#">Forgot your password?</a>
-            <button>Sign in</button>
+            <input
+            [ngClass]="this.customerUsername.valid?'success':'none'" 
+            type="text" name="username" placeholder="Username" formControlName="username" required="">
+            <input
+            [ngClass]="this.customerEmail.valid?'success':'none'" 
+             type="email" name="email" placeholder="Email" formControlName="email" required="">
+            <input 
+            [ngClass]="this.customerPassword.valid?'success':'none'"
+            type="password" name="pswd" placeholder="Password" formControlName="password" required="">
+            <input
+            [ngClass]="this.customerConfirmedPassword.valid?'success':'none'"
+             type="password" name="confirmpswd" placeholder="Confirm password" formControlName="confirmationPassword" required="">
+            <!-- <a href="#">Forgot your password?</a> -->
+            <button id="customerRegister" [disabled]="!this.customerForm.valid" 
+            (click)="saveCustomer()">Register</button>
         </form>
     </div>
     <div class="overlay-container">

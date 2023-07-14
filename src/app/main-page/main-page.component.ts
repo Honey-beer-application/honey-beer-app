@@ -82,11 +82,11 @@ export class MainPageComponent implements OnInit,AfterViewInit {
   }
   private startRenderingLoop():void{
     this.renderer = new THREE.WebGLRenderer({canvas:this.canvas});
-    this.renderer.setPixelRatio(devicePixelRatio);
-    this.renderer.setSize(this.modelContainer.clientWidth,this.modelContainer.clientHeight);
 
     let component: MainPageComponent = this;
     (function render(){
+      component.renderer.setPixelRatio(devicePixelRatio*2);
+      component.renderer.setSize(component.modelContainer.clientWidth,component.modelContainer.clientHeight);
       requestAnimationFrame(render);
       component.createScene();
       component.animeteCube();
