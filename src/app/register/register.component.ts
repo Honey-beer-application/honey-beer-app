@@ -3,13 +3,11 @@ import {Location } from '@angular/common';
 import { NavigationEnd, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { filter } from 'rxjs';
-import CustomerController from 'src/Data/Controllers/CustomerConstroller';
-import Customer from 'src/Data/Classes/Customer';
-import ICustomer from 'src/Data/Interfaces/ICustomer';
-import CompanyController from 'src/Data/Controllers/CompanyController';
-import Company from 'src/Data/Classes/Company';
-import Comapny from 'src/Data/Classes/Company';
-import ICompany from 'src/Data/Interfaces/ICompany';
+import CustomerController from './../Data/Controllers/CustomerConstroller';
+import Customer from './../Data/Classes/Customer';
+import ICustomer from './../Data/Interfaces/ICustomer';
+import CompanyController from './../Data/Controllers/CompanyController';
+import Company from './../Data/Classes/Company';
 
 @Component({
   selector: 'app-register',
@@ -65,7 +63,7 @@ export class RegisterComponent implements OnInit,AfterViewInit {
     ){
     
     this.customer = new Customer();
-    this.company = new Comapny();
+    this.company = new Company();
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {

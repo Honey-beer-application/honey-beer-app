@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './register.component';
 import { ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { RegisterRoutingModule } from './register-routing.module';
 
 
 @NgModule({
@@ -10,9 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
     RegisterComponent
   ],
   imports: [
-    CommonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    RegisterRoutingModule,
+    CommonModule
   ]
 })
 export class RegisterModule {}

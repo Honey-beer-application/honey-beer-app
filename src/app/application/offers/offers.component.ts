@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import Offer from 'src/Data/Classes/Offer';
-import { Product } from 'src/Data/Classes/Product';
-import OfferController from 'src/Data/Controllers/OfferComtroller';
+import { Product } from './../../Data/Classes/Product';
+import OfferController from './../../Data/Controllers/OfferComtroller';
 
 @Component({
   selector: 'app-offers',

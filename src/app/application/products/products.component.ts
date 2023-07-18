@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import {ProductController} from 'src/Data/Controllers/ProductController';
-import IProduct from 'src/Data/Interfaces/IProduct';
+import {ProductController} from './../../Data/Controllers/ProductController';
+import IProduct from './../../Data/Interfaces/IProduct';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss'],
-  providers:[ProductController]
+  styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent {
 

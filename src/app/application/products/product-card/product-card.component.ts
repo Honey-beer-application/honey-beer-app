@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import IProduct from 'src/Data/Interfaces/IProduct';
-import {Product} from "./../../../../Data/Classes/Product";
+import IProduct from './../../../Data/Interfaces/IProduct';
+import {Product} from "./../../../Data/Classes/Product";
 
 @Component({
   selector: 'app-product-card',

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import Company from 'src/Data/Classes/Company';
-import CompanyController from 'src/Data/Controllers/CompanyController';
-import CustomerController from 'src/Data/Controllers/CustomerConstroller';
-import ICompany from 'src/Data/Interfaces/ICompany';
-import ICustomer from 'src/Data/Interfaces/ICustomer';
+import Company from './../../../Data/Classes/Company';
+import CompanyController from './../../../Data/Controllers/CompanyController';
+import CustomerController from './../../../Data/Controllers/CustomerConstroller';
+import ICompany from './../../../Data/Interfaces/ICompany';
+import ICustomer from './../../../Data/Interfaces/ICustomer';
 
 @Component({
   selector: 'app-navigation-big',

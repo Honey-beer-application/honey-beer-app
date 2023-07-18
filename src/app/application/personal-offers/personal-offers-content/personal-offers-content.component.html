@@ -1,0 +1,26 @@
+<div class="personal-offers-page">
+    <form [formGroup]="OffersFG">
+        <input type="number" name="number" formControlName="discount" placeholder="Discount" >
+        <div>
+            <label for="beginDate">Begin date:</label>
+            <input class="date" type="date" name="beginDate" formControlName="beginDate" value>
+        </div>
+        <div>
+            <label for="endDate">End date:</label>
+            <input class="date" type="date" name="endDate" formControlName="endDate">
+        </div>
+        <input type="text" name="product" placeholder="Product name" formControlName="productName">
+        <input type="text" placeholder="Product description" formControlName="productDescription">
+    </form>
+    <div>
+        <div *ngFor="let offerBC of this.offerByCompanyList">
+            <h1>Offer: {{offerBC.offerInstance.amount}}%</h1>
+            <p>from {{offerBC.offerInstance.beginDate.toLocaleDateString()}} to {{offerBC.offerInstance.endDate.toLocaleDateString()}}</p>
+            <h1 *ngIf="offerBC.offerInstance.productInstance!=null">For product: {{offerBC.offerInstance.productInstance.name}}</h1>
+            <p *ngIf="offerBC.offerInstance.productInstance!=null">description: {{offerBC.offerInstance.productInstance.description}}</p>
+            <a href="app/personal_offers/${{offerBC.offerId}}/edit" (click)="saveOfferByCompanyToLoad(offerBC)">Edit</a>
+        </div>
+        <h1 *ngIf="this.offerByCompanyList==null">Loading...</h1>
+        <h1 *ngIf="this.offerByCompanyList!=null&&this.offerByCompanyList.length==0">No results</h1>
+    </div>
+</div>

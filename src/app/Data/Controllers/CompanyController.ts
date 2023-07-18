@@ -15,10 +15,10 @@ export default class CompanyController{
     }
     constructor(private companyService:CompanyService){
         this._registeredCompany = new Company();
-        // this._registeredCompany.PIB=10000005n;
-        // this._registeredCompany.email="company5@gmail.com";
-        // this._registeredCompany.name="company5";
-        // this._registeredCompany.password="company5";
+        this._registeredCompany.PIB=10000001n;
+        this._registeredCompany.email="kompanija1@gmail.com";
+        this._registeredCompany.name="kompanija1";
+        this._registeredCompany.password="kompanija1";
     }
 
     public createCompany(PIB:bigint,name:string,email:string,password:string):Observable<ICompany>{
