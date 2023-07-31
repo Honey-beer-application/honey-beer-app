@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PersonalOffersContentComponent } from './personal-offers-content/personal-offers-content.component';
 import { PersonalOffersRoutingModule } from './personal-offers-routing.module';
-import { OfferByCompanyControllerModule } from 'src/app/Data/Controllers/OfferByCompanyController.module';
 
 
 
@@ -15,8 +14,7 @@ import { OfferByCompanyControllerModule } from 'src/app/Data/Controllers/OfferBy
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    PersonalOffersRoutingModule,
-    OfferByCompanyControllerModule
+    PersonalOffersRoutingModule
   ]
 })
 export class PersonalOffersModule {

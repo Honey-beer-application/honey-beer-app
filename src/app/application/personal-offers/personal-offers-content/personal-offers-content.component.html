@@ -1,9 +1,9 @@
 <div class="personal-offers-page">
-    <form [formGroup]="OffersFG">
+    <form [formGroup]="offersFG">
         <input type="number" name="number" formControlName="discount" placeholder="Discount" >
         <div>
             <label for="beginDate">Begin date:</label>
-            <input class="date" type="date" name="beginDate" formControlName="beginDate" value>
+            <input class="date" type="date" name="beginDate" formControlName="beginDate">
         </div>
         <div>
             <label for="endDate">End date:</label>
@@ -15,12 +15,18 @@
     <div>
         <div *ngFor="let offerBC of this.offerByCompanyList">
             <h1>Offer: {{offerBC.offerInstance.amount}}%</h1>
-            <p>from {{offerBC.offerInstance.beginDate.toLocaleDateString()}} to {{offerBC.offerInstance.endDate.toLocaleDateString()}}</p>
-            <h1 *ngIf="offerBC.offerInstance.productInstance!=null">For product: {{offerBC.offerInstance.productInstance.name}}</h1>
-            <p *ngIf="offerBC.offerInstance.productInstance!=null">description: {{offerBC.offerInstance.productInstance.description}}</p>
-            <a href="app/personal_offers/${{offerBC.offerId}}/edit" (click)="saveOfferByCompanyToLoad(offerBC)">Edit</a>
+            <p>from {{convertDate(offerBC.offerInstance.beginDate)}} to {{convertDate(offerBC.offerInstance.endDate)}}</p>
+            <h1 *ngIf="offerBC.offerInstance.productInstance!=null">For product: <br>{{offerBC.offerInstance.productInstance.name}}</h1>
+            <p *ngIf="offerBC.offerInstance.productInstance!=null">description: <br>{{offerBC.offerInstance.productInstance.description}}</p>
+            <!-- <a href="app/personal_offers/{{offerBC.offerId}}/edit" (click)="saveOfferByCompanyToLoad(offerBC)">Edit</a> -->
+            <button class="btn-redirect" (click)="redirectToEdit(offerBC)">Edit</button>
         </div>
-        <h1 *ngIf="this.offerByCompanyList==null">Loading...</h1>
-        <h1 *ngIf="this.offerByCompanyList!=null&&this.offerByCompanyList.length==0">No results</h1>
+        <ng-component *ngIf="this.offerByCompanyList.length>0;else noResult">
+            <h1 >Loading...</h1>
+        </ng-component>
+        <ng-template #noResult>
+            <h1 >No results</h1>
+        </ng-template>
+        
     </div>
 </div>

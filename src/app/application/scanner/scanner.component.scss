@@ -22,3 +22,12 @@
         display: flex;
     }
 }
+.scannerPage{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-top: 50px;
+    max-width: 600px;
+    margin-inline:auto;
+    max-height: 200px;
+}

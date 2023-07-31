@@ -1,0 +1,14 @@
+<div class="offerByCompanyCard" [formGroup]="offerByCompanyForm">
+    <input type="number" placeholder="Discount" formControlName="discount" value="{{this.offerByCompany.offerInstance.amount}}">
+    <div>
+        <label for="beginDate">Begin date:</label>
+        <input type="date" name="beginDate" formControlName="beginDate" [value]="convertDate(this.offerByCompany.offerInstance.beginDate)| date:'yyyy-MM-dd'">
+    </div>
+    <div>
+        <label for="endDate">End date:</label>
+        <input type="date" name="endDate" formControlName="endDate" [value]="convertDate(this.offerByCompany.offerInstance.endDate) | date:'yyyy-MM-dd'">
+    </div>
+    <h2>For product: <br> {{this.offerByCompany.offerInstance.productInstance?.name}}</h2>
+    <p>Description: <br> {{this.offerByCompany.offerInstance.productInstance?.description}}</p>
+    <button (click)="saveOfferByComapny()">Create personalized offer</button>
+</div>

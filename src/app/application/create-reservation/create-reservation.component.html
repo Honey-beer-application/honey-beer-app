@@ -1,0 +1,9 @@
+<div class="createReservation">
+    <div [formGroup]="productsForm">
+        <input type="text" placeholder="Name" formControlName="name">
+        <input type="text" placeholder="Description" formControlName="description">
+    </div>
+    <div class="products" >
+        <product-card *ngFor="let product of products" [product]="product"></product-card>
+    </div>
+</div>

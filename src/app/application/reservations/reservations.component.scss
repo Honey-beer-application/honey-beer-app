@@ -1,0 +1,66 @@
+.reservationsPage{
+    width:100%;
+    display: flex;
+    margin-top: 20px;
+    >:first-child{
+        width:20%;
+        padding:20px 0px 20px 0px;
+        margin-inline:50px;
+        border-radius: 15px;
+        min-width: 280px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        height: fit-content;
+        gap: 20px;
+        background-color: rgba($color: #e4ddcd, $alpha:0.6);
+        max-width: 200px;
+
+        >div{
+            display: flex;
+            flex-direction: column;
+            >label{
+                text-align: center;
+                font-family: "Freizeit120";
+                padding:5px 0px 5px 0px;
+            }
+            >input{
+                width:80%;
+                text-align: center;
+                border:none;
+                padding:5px;
+                font-size: 16px;
+                outline: none;
+                margin-inline: auto;
+            }
+        }
+        >div,input{
+            width:80%;
+        }
+        >input{
+            padding:5px;
+            border:none;
+            font-size: 16px;
+            outline: none;
+        }
+    }
+    >:last-child{
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+        gap: 20px;
+        width:80%;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .reservationsPage {
+        flex-direction: column;
+        gap:20px;
+      >:first-child{
+        margin-inline: 0px;
+        &,>:last-child{
+            width:100%;
+          }
+      }
+    }
+  }

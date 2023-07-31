@@ -1,0 +1,12 @@
+<button class="link-product-card">
+    <div class="product-container">
+        <img src="./../../../../assets/images/honey-beer-logo.png" alt="">
+        <h1>Location: {{this.shoppingLocation.location}}</h1>
+        <div class="productsGrid"  *ngIf="this.shoppingLocation.productsInLocation.length>0">
+            <div class="product-card" *ngFor="let product of this.shoppingLocation.productsInLocation">
+                <img src="./../../../../assets/images/honey-beer-logo.png" alt="">
+                <h3>Product: <br> {{product.name}}</h3>
+            </div>
+        </div>
+    </div>
+</button>

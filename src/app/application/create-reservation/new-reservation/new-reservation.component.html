@@ -1,0 +1,10 @@
+<div class="offerByCompanyCard" [formGroup]="reservationForm">
+    <input type="number" placeholder="Discount" formControlName="amount" value="{{this.reservation.amount}}">
+    <div>
+        <label for="beginDate">Delivery date:</label>
+        <input type="date" name="beginDate" formControlName="deliveryDate" [value]="convertDate(this.reservation.delivery)| date:'yyyy-MM-dd'">
+    </div>
+    <h2>For product: <br> {{this.reservation.productInstance.name}}</h2>
+    <p>Description: <br> {{this.reservation.productInstance.description}}</p>
+    <button (click)="saveOfferByComapny()">Create reservation</button>
+</div>

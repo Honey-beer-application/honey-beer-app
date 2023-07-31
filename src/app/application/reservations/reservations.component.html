@@ -1,0 +1,12 @@
+<div class="reservationsPage">
+    <div [formGroup]="reservationForm">
+        <input type="text" placeholder="Amount" formControlName="amount">
+        <div>
+            <label for="deliveryDate">delivery date:</label>
+            <input type="date" formControlName="delivery">
+        </div>
+    </div>
+    <div >
+        <app-reservation-card *ngFor="let reservation of this.reservations"  [reservation]="reservation"></app-reservation-card>
+    </div>
+</div>

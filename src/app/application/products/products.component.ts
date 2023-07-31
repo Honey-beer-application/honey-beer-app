@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import {ProductController} from './../../Data/Controllers/ProductController';
 import IProduct from './../../Data/Interfaces/IProduct';
 
@@ -8,16 +8,19 @@ import IProduct from './../../Data/Interfaces/IProduct';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnDestroy {
 
+  private subs:Subscription = new Subscription();
   public products:IProduct[] = [];
   constructor(private productController:ProductController){
-    this.productController.loadAllProducts().subscribe(
-      (data:IProduct[])=>this.products=data,
-      (error)=>alert(error.error.detail)
+    this.subs.add(
+      this.productController.loadAllProducts().subscribe(
+        (data:IProduct[])=>this.products=data,
+        (error)=>alert(error.error.detail)
+      )
     )
   }
-  public saveProductToLoad(product:IProduct){
-    ProductController.productToLoad = new BehaviorSubject(product);
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 }

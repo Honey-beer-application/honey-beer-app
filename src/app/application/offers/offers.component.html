@@ -1,3 +1,18 @@
-<div class="offers-page">
-    <app-offer-card *ngFor="let product of this.products" [product]="product"></app-offer-card>
+<div class="offers-container">
+    <div [formGroup]="offersFG">
+        <input type="number" name="number" formControlName="discount" placeholder="Discount" >
+        <div>
+            <label for="beginDate">Begin date:</label>
+            <input class="date" type="date" name="beginDate" formControlName="beginDate">
+        </div>
+        <div>
+            <label for="endDate">End date:</label>
+            <input class="date" type="date" name="endDate" formControlName="endDate">
+        </div>
+        <input type="text" name="product" placeholder="Product name" formControlName="productName">
+        <input type="text" placeholder="Product description" formControlName="productDescription">
+    </div>
+    <div class="offers-page">
+        <app-offer-card *ngFor="let offer of this.offers" [offer]="offer"></app-offer-card>
+    </div>
 </div>

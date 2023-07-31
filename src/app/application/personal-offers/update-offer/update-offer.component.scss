@@ -1,0 +1,58 @@
+div{
+    height: 100%;
+}
+
+.offerByCompanyCard{
+    margin-top: 200px;
+    margin-inline:auto;
+    padding:20px 0px 20px 0px;
+    border-radius: 15px;
+    width:20%;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: fit-content;
+    gap: 20px;
+    background-color: rgba($color: #e4ddcd, $alpha:0.6);
+    max-width: 200px;
+    >div{
+        display: flex;
+        flex-direction: column;
+        >label{
+            text-align: center;
+            font-family: "Freizeit120";
+            padding:5px 0px 5px 0px;
+        }
+        >input{
+            width:100%;
+            text-align: center;
+        }
+    }
+    >div,input{
+        width:80%;
+    }
+    input{
+        border:none;
+        padding:5px 20px 5px 20px;
+        font-size: 16px;
+        border-radius:15px;
+        outline: none;
+    }
+    >button{
+        border:1px solid #B7ADA1;
+        border-radius: 3px;
+        padding:10px 20px 10px 20px;
+        font-family: 'Freizeit120';
+        background-color: #1e1e1e;
+        color:white;
+        transition:background-color 0.2s ease-in-out,color 0.2s ease-in-out,box-shadow 0.2s ease-in-out;
+        &:hover{
+            color: #1e1e1e;
+            border-color:#b7ada1;
+            background-color: #FFFCF2;
+            box-shadow: 4px -4px #fffcf2,-4px 4px #fffcf2,-4px -4px #fffcf2,4px 4px #fffcf2
+        }
+    }
+}

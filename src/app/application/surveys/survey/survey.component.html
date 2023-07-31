@@ -1,0 +1,48 @@
+<form onsubmit="">
+    <h1>Survey: {{this.survey.title}}</h1>
+    <div *ngFor="let question of this.survey.questions">
+        <label for="">{{question.text}}</label>
+        <ng-container [ngSwitch]="question.questionTypeInstance.name">
+            <ng-container *ngSwitchCase="'Text'">
+                <textarea name="" id="" cols="30" rows="10" ></textarea>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Optional'">
+                <div>
+                    <ng-container *ngFor="let answer of question.answers">
+                        <input type="checkbox">
+                        <label for="">{{answer.value}}</label>
+                    </ng-container>
+                </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Multiple optional'">
+                <div>
+                    <ng-container *ngFor="let answer of question.answers">
+                        <input type="checkbox">
+                        <label for="">{{answer.value}}</label>
+                    </ng-container>
+                </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Multiple choice'">
+                <div>
+                    <ng-container *ngFor="let answer of question.answers">
+                        <input type="checkbox">
+                        <label for="">{{answer.value}}</label>
+                    </ng-container>
+                </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Single choice'">
+                <div>
+                    <ng-container *ngFor="let answer of question.answers">
+                        <input type="radio" name="{{question.text}}">
+                        <label for="">{{answer.value}}</label>
+                    </ng-container>
+                </div>
+            </ng-container>
+            <!-- <div *ngSwitchDefault>
+                <p>Error</p>
+            </div> -->
+        </ng-container>
+        
+    </div>
+    <button type="submit">Submit your answers</button>
+</form>

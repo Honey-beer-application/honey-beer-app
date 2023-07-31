@@ -1,11 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductsComponent } from './products/products.component';
-import { ProductComponent } from './products/product/product.component';
-import { ScannerComponent } from './scanner/scanner.component';
-import { OffersComponent } from './offers/offers.component';
-import { PersonalOffersComponent } from './personal-offers/personal-offers.component';
-import { UpdateOfferComponent } from './personal-offers/update-offer/update-offer.component';
 import { ApplicationComponent } from './application.component';
 
 const routes: Routes = [
@@ -23,7 +17,6 @@ const routes: Routes = [
         path:"products",
         loadChildren:()=>import("./products/products.module").then(m=>m.ProductsModule)
       },
-      
       {
         path:"scanner",
         loadChildren:()=>import("./scanner/scanner.module").then(m=>m.ScannerModule),
@@ -35,6 +28,34 @@ const routes: Routes = [
       {
         path:"personal_offers",
         loadChildren:()=>import("./personal-offers/personal-offers.module").then(m=>m.PersonalOffersModule)
+      },
+      {
+        path:"new_offer",
+        loadChildren:()=>import("./create-new-offer/create-new-offer.module").then(m=>m.CreateNewOfferModule)
+      },
+      {
+        path:"reservations",
+        loadChildren:()=>import("./reservations/reservations.module").then(m=>m.ReservationsModule)
+      },
+      {
+        path:"create-reservation",
+        loadChildren:()=>import("./create-reservation/create-reservation.module").then(m=>m.CreateReservationModule)
+      },
+      {
+        path:"product-stores",
+        loadChildren:()=>import("./product-stores/product-stores.module").then(m=>m.ProductStoresModule)
+      },
+      {
+        path:"our-stores",
+        loadChildren:()=>import("./our-stores/our-stores.module").then(m=>m.OurStoresModule)
+      },
+      {
+        path:"discounts",
+        loadChildren:()=>import("./discounts/discounts.module").then(m=>m.DiscountsModule)
+      },
+      {
+        path:"surveys",
+        loadChildren:()=>import("./surveys/surveys.module").then(m=>m.SurveysModule)
       }
     ]
     

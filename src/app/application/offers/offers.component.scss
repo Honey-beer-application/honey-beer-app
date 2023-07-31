@@ -3,5 +3,56 @@
     width:100%;
     gap: 20px;
     grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-    padding: 50px;
+    //padding: 50px;
 }
+.offers-container{
+    display: flex;
+    margin: 50px;
+    gap:20px;
+    >:first-child{
+        padding:20px 0px 20px 0px;
+        margin-inline:20px;
+        border-radius: 15px;
+        width:20%;
+        min-width: 250px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 20px;
+        background-color: rgba($color: #e4ddcd, $alpha:0.6);
+        max-width: 200px;
+        >div{
+            display: flex;
+            flex-direction: column;
+            >label{
+                text-align: center;
+                font-family: "Freizeit120";
+                padding:5px 0px 5px 0px;
+            }
+            >input{
+                width:100%;
+                text-align: center;
+                border:none;
+                padding:5px;
+                outline: none;
+            }
+        }
+        >div,input{
+            width:80%;
+            border:none;
+            text-align: center;
+            font-size: 16px;
+        }
+        >input{
+            padding:5px;
+            outline: none;
+        }
+    }
+}
+@media only screen and (max-width: 730px) {
+    .offers-container{
+        flex-direction: column;
+        margin: 10px;
+    }
+  }

@@ -1,0 +1,68 @@
+import { Component, OnDestroy } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription, filter } from 'rxjs';
+import Offer from 'src/app/Data/Classes/Offer';
+import OfferController from 'src/app/Data/Controllers/OfferComtroller';
+import { ProductController } from 'src/app/Data/Controllers/ProductController';
+import IOffer from 'src/app/Data/Interfaces/IOffer';
+import IProduct from 'src/app/Data/Interfaces/IProduct';
+
+@Component({
+  selector: 'app-create-offer',
+  templateUrl: './create-offer.component.html',
+  styleUrls: ['./create-offer.component.scss']
+})
+export class CreateOfferComponent implements OnDestroy {
+
+  private subs:Subscription = new Subscription();
+  public offer:IOffer;
+
+  public offerByCompanyForm!:FormGroup;
+  public offerAmount:FormControl;
+  public offerBeginDate:FormControl;
+  public offerEndDate:FormControl;
+  constructor(private fb:FormBuilder,private offerController:OfferController){
+    this.offer = new Offer();
+    this.subs.add(
+      ProductController.productToLoadObservable.subscribe((data:IProduct)=>{
+        this.offer.productInstance = data;
+      })
+    )
+
+    this.offerAmount = new FormControl(this.offer.amount,[Validators.required,Validators.min(0)]);
+    this.offerBeginDate = new FormControl(this.offer.beginDate.toLocaleDateString(),Validators.required);
+    this.offerEndDate = new FormControl(this.offer.endDate.toLocaleDateString(),Validators.required)
+    this.offerByCompanyForm = this.fb.group({
+      discount:this.offerAmount,
+      beginDate:this.offerBeginDate,
+      endDate:this.offerEndDate
+    });
+    this.subs.add(
+      this.offerByCompanyForm.valueChanges
+      .pipe(filter(data=>this.offerByCompanyForm.valid))
+      .subscribe((data:{discount:number,beginDate:any,endDate:any})=>{
+        this.offer.amount=data.discount;
+        this.offer.beginDate = new Date(data.beginDate);
+        this.offer.endDate = new Date(data.endDate);
+      })
+    )
+  }
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
+
+  public saveOffer():void{
+    console.log(this.offer);
+    this.offerController.saveOffer(this.offer).subscribe(
+      (data)=>alert("Offer is successfully saved."),
+      (error)=>alert(error.error.detail))
+    // this.subs.add(
+      
+    // )
+  }
+  public convertDate(date:Date):string{
+    let month:number = date.getMonth()+1;
+    let day:number = date.getDate();
+    return date.getFullYear()+"-"+(month<10?'0'+month:month)+"-"+(day<10?'0'+day:day);
+  }
+}

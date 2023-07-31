@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UpdateOfferComponent } from './update-offer.component';
 import { UpdateOfferRoutingModule } from './update-offer-routing.module';
-import { OfferByCompanyControllerModule } from 'src/app/Data/Controllers/OfferByCompanyController.module';
-import { OfferByCompanyController } from 'src/app/Data/Controllers/OfferByCompanyController';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -11,8 +10,8 @@ import { OfferByCompanyController } from 'src/app/Data/Controllers/OfferByCompan
   declarations: [UpdateOfferComponent],
   imports: [
     CommonModule,
-    UpdateOfferRoutingModule,
-    OfferByCompanyControllerModule
+    ReactiveFormsModule,
+    UpdateOfferRoutingModule
   ]
 })
 export class UpdateOfferModule { }

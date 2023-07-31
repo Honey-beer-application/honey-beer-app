@@ -7,19 +7,33 @@ import { NavigationSmallComponent } from './navigation/navigation-small/navigati
 import {MatIconModule} from '@angular/material/icon';
 import { ApplicationRoutingModule } from './application-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CreateNewOfferComponent } from './create-new-offer/create-new-offer.component';
+import { CreateNewOfferModule } from "./create-new-offer/create-new-offer.module";
+import { CreateReservationComponent } from './create-reservation/create-reservation.component';
+import { CreateReservationModule } from "./create-reservation/create-reservation.module";
+import { ProductStoresComponent } from './product-stores/product-stores.component';
+import { OurStoresComponent } from './our-stores/our-stores.component';
+import { ProductStoresModule } from "./product-stores/product-stores.module";
 
 @NgModule({
-  declarations: [
-    ApplicationComponent,
-    NavigationBigComponent,
-    NavigationMediumComponent,
-    NavigationSmallComponent
-  ],
-  imports: [
-    CommonModule,
-    MatIconModule,
-    ApplicationRoutingModule,
-    ReactiveFormsModule
-  ]
+    declarations: [
+        ApplicationComponent,
+        NavigationBigComponent,
+        NavigationMediumComponent,
+        NavigationSmallComponent,
+        CreateNewOfferComponent,
+        CreateReservationComponent,
+        ProductStoresComponent,
+        OurStoresComponent
+    ],
+    imports: [
+        CommonModule,
+        MatIconModule,
+        ApplicationRoutingModule,
+        ReactiveFormsModule,
+        CreateNewOfferModule,
+        CreateReservationModule,
+        ProductStoresModule
+    ]
 })
 export class ApplicationModule { }

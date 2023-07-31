@@ -1,17 +1,69 @@
+
 .navigation{
     display: flex;
     background-color: #e4ddcd;
     width:100%;
     white-space: nowrap;
     border-bottom: 1px solid #B8ADA0;
-    position: sticky;
-    top:0px;
-    z-index: 1;
+    // position: sticky;
+    // top:0px;
+    z-index: 1100;
 }
-.center-content, footer{
+.center-content{
     background-color: #fcf7eb;
+    // min-height: 90%;
 }
-@media only screen and (max-width: 1190px) {
+.footer{
+    border-top: 1px solid #B8ADA0;
+    background-color: #e4ddcd;
+    &>.suggestions{
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        // border:2px solid black;
+        gap:20px;
+        padding:15px;
+        width:30%;
+        font-family: 'Freizeit120';
+        >input,textarea{
+            border:none;
+            padding:10px;
+            outline:none;
+            border-radius: 5px;
+            font-family: 'Freizeit120';
+        }
+        >textarea{
+            resize: none;
+        }
+        >button{
+            margin-left: auto;
+            border:1px solid #B7ADA1;
+            border-radius: 3px;
+            padding:10px 20px 10px 20px;
+            font-family: 'Freizeit120';
+            background-color: #1e1e1e;
+            color:white;
+            height:fit-content;
+            transition:background-color 0.2s ease-in-out,color 0.2s ease-in-out,box-shadow 0.2s ease-in-out;
+            &:hover{
+                color: #1e1e1e;
+                border-color:#b7ada1;
+                background-color: #FFFCF2;
+                box-shadow: 4px -4px #fffcf2,-4px 4px #fffcf2,-4px -4px #fffcf2,4px 4px #fffcf2
+            }
+        }
+    }
+}
+.error{
+    border: 1px solid rgb(255, 49, 49) !important;
+}
+.success{
+    border: 1px solid rgb(0, 219, 0) !important;
+}
+.none{
+    border: 1px solid transparent !important;
+}
+@media only screen and (max-width: 1270px) {
     .app-navigation-big{
         display: none;
     }
@@ -22,8 +74,11 @@
     .app-navigation-small{
         display: none;
     }
+    .suggestions{
+        margin: 20px 40px;
+    }
 }
-@media only screen and (min-width: 1190px) {
+@media only screen and (min-width: 1270px) {
     .app-navigation-big{
         display: flex;
         width: 100%;
@@ -33,6 +88,9 @@
     }
     .app-navigation-small{
         display: none;
+    }
+    .suggestions{
+        margin: 20px 40px;
     }
 }
 @media only screen and (max-width: 575px) {
@@ -45,5 +103,8 @@
     .app-navigation-small{
         display: flex;
         width: 100%;
+    }
+    .suggestions{
+        margin:0px;
     }
 }

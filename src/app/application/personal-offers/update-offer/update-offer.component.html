@@ -1,1 +1,12 @@
-<p>update-offer works!</p>
+<div class="offerByCompanyCard" [formGroup]="offerByCompanyForm">
+    <input type="number" placeholder="Discount" formControlName="discount" [value]="this.offerByCompany.offerInstance.amount">
+    <div>
+        <label for="beginDate">Begin date:</label>
+        <input type="date" name="beginDate" formControlName="beginDate" [value]="convertDate(this.offerByCompany.offerInstance.beginDate)">
+    </div>
+    <div>
+        <label for="endDate">End date:</label>
+        <input type="date" name="endDate" formControlName="endDate" [value]="convertDate(this.offerByCompany.offerInstance.endDate)">
+    </div>
+    <button (click)="saveOfferByComapny()">Save offer</button>
+</div>

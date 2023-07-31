@@ -6,15 +6,16 @@ import { Product } from "../Classes/Product";
 
 @Injectable({providedIn:"root"})
  export class ProductController{
+    setProduct(product: IProduct) {
+      ProductController._productToLoad.next(product);
+    }
 
-    private static _productToLoad: Observable<IProduct> = new BehaviorSubject(new Product());
-    public static get productToLoad(): Observable<IProduct> {
-        return ProductController._productToLoad;
-    }
-    public static set productToLoad(value: Observable<IProduct>) {
-        ProductController._productToLoad = value;
-    }
-   
+    private static _productToLoad: BehaviorSubject<IProduct> = new BehaviorSubject(<IProduct>(new Product()));
+    public static productToLoadObservable:Observable<IProduct> = ProductController._productToLoad.asObservable();
+    
+   public static setProduct(product:IProduct){
+    ProductController._productToLoad.next(product);
+   }
     constructor(private productService:ProductService){
     }
     public loadAllProducts():Observable<Array<IProduct>>{

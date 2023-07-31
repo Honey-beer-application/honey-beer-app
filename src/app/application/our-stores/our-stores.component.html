@@ -1,0 +1,19 @@
+<div class="ourStores">
+    <div>
+        <h1>Where we are</h1>
+        <div>
+            <ul>
+                <li *ngFor="let location of locations">
+                    <h3>Location: {{location.locationName}}</h3>
+                    <div>
+                        <p>e-mail: {{location.email}}</p>
+                        <p>phone: {{location.phone}}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="map">
+        
+    </div>
+</div>

@@ -12,7 +12,8 @@ const routes:Routes = [
             },
             {
                 path:":id/edit",
-                loadChildren:()=>import("./update-offer/update-offer.module").then(m=>m.UpdateOfferModule)
+                loadChildren:()=>import("./update-offer/update-offer.module").then(m=>m.UpdateOfferModule),
+                
             }
         ]
     }

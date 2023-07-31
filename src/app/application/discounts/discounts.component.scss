@@ -1,0 +1,7 @@
+.discounts{
+    display: grid;
+    width:100%;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    padding: 50px;
+}

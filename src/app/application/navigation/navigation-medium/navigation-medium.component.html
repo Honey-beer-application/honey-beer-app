@@ -1,13 +1,25 @@
 <div class="navigation-medium">
     <div>
         <!-- development link -->
-        <img src="./../assets/images/honey-beer-logo.png" alt="">
+        <img src="./../assets/images/honey-beer-logo.png" alt="" (click)="redirectToMainPage()">
         <!-- deployment link -->
         <!-- <img src="./assets/images/honey-beer-logo.png" alt=""> -->
         <button class="menu-button">Our beer<mat-icon>arrow_drop_down</mat-icon>
             <!-- our beer drop down menu -->
             <div class="arrow-drop-down-menu">
-                <h1>Content menu for Our beer button</h1>
+                <div class="arrow-drop-down-content">
+                    <ul>
+                        <li>
+                            <button (click)="redirectToDiscounts()" (mouseenter)="setImage(images[0])" (mouseleave)="setImage('#')">Discounts</button>
+                        </li> 
+                        <li>
+                            <button (click)="redirectToSurveys()" (mouseenter)="setImage(images[1])" (mouseleave)="setImage('#')">Surveys</button>
+                        </li>    
+                    </ul>
+                </div>
+                <div class="arrow-drop-down-content-right">
+                    <img src="{{this.hoveredImage}}" alt="">
+                </div>
             </div>
         </button>
         
@@ -15,7 +27,34 @@
         <button class="menu-button inside-honey-beer-button">Inside honey beer<mat-icon>arrow_drop_down</mat-icon>
             <!-- Inside honey beer drop down menu -->
             <div class="arrow-drop-down-menu">
-                <h1>Content menu for Inside honey beer button</h1>
+                <div class="arrow-drop-down-content">
+                    <ul>
+                        <li>
+                            <button (click)="redirectToProducts()" (mouseenter)="setImage(images[0])" (mouseleave)="setImage('#')">Products</button>
+                        </li>
+                        <li>
+                            <button (click)="navigateToScanner()" (mouseenter)="setImage(images[1])" (mouseleave)="setImage('#')">QR code Scanner</button>
+                        </li>
+                        <li>
+                            <button (click)="navigateToOffers()" (mouseenter)="setImage(images[2])" (mouseleave)="setImage('#')">Offers</button>
+                        </li>
+                        <li>
+                            <button (click)="navigateToPersonalOffers()" (mouseenter)="setImage(images[3])" (mouseleave)="setImage('#')">Personal offers</button>
+                        </li>
+                        <li>
+                            <button (click)="navigateToCreateOffer()" (mouseenter)="setImage(images[4])" (mouseleave)="setImage('#')">Create offer</button>
+                        </li>
+                        <li>
+                            <button (click)="navigateToReservations()" (mouseenter)="setImage(images[5])" (mouseleave)="setImage('#')">Reservations</button>
+                        </li>
+                        <li>
+                            <button (click)="navigateToCreateReservation()" (mouseenter)="setImage(images[6])" (mouseleave)="setImage('#')">Create reservation</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="arrow-drop-down-content-right">
+                    <img src="{{this.hoveredImage}}" alt="">
+                </div>
             </div>
         </button>
         
@@ -23,10 +62,16 @@
     <div class="menu-container">
         <mat-icon class="side-menu-bitton">menu
             <div class="side-menu">
-                <a href="#">Buy online</a>
-                <a href="#">Store locator</a>
-                <a href="#" class="build-a-bottle-link">Build a bottle</a>
-                <a href="#" class="shopping-card-icon"><mat-icon>shopping_cart</mat-icon></a>
+                <button class="menu-button" (click)="redirectToLogin()">Log in</button>
+                <button class="menu-button" (click)="redirectToRegister()">Register</button>
+                <!-- <button class="menu-button" href="#" *ngIf="this.isCompanyRegistered()">Buy online</button> -->
+                <button class="menu-button" (click)="redirectToProductStores()">Product stores</button>
+                <button class="menu-button" (click)="redirectToOurStores()">Our stores</button>
+                <button href="#" class="build-a-bottle-link">Buy online</button>
+                <!-- <button class="menu-button" *ngIf="this.isCompanyRegistered()"><mat-icon>shopping_cart</mat-icon></button> -->
+                <button class="person-avatar-icon">
+                    <mat-icon>person</mat-icon>
+                </button>
             </div>
         </mat-icon>
         

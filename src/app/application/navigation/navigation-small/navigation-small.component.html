@@ -1,7 +1,7 @@
 <div class="navigation-small">
     <div>
         <!-- development link -->
-        <img src="./../assets/images/honey-beer-logo.png" alt="">
+        <img src="./../assets/images/honey-beer-logo.png" (click)="redirectToMainPage()" alt="">
         <!-- deployment link -->
         <!-- <img src="./assets/images/honey-beer-logo.png" alt=""> -->
     </div>
@@ -10,20 +10,61 @@
             
         </mat-icon>
         <div class="side-menu">
-            <button class="menu-button">Our beer<mat-icon>arrow_drop_down</mat-icon></button>
-            <!-- our beer drop down menu -->
-            <div class="arrow-drop-down-menu">
-                <h1>Content menu for Our beer button</h1>
+            <div class="arrow-drop-down-content">
+                <h1>Account</h1>
+                <ul>
+                    <li>
+                        <button  (click)="redirectToLogin()">Log in</button>
+                    </li>
+                    <li>
+                        <button  (click)="redirectToRegister()">Register</button>
+                    </li>
+                </ul>
             </div>
-            <button class="menu-button inside-honey-beer-button">Inside honey beer<mat-icon>arrow_drop_down</mat-icon></button>
-            <!-- Inside honey beer drop down menu -->
-            <div class="arrow-drop-down-menu">
-                <h1>Content menu for Inside honey beer button</h1>
+            <div class="arrow-drop-down-content">
+                <h1>Our beer</h1>
+                <ul>
+                    <li>
+                        <!-- <button class="menu-button" href="#" *ngIf="this.isCompanyRegistered()">Buy online</button> -->
+                        <button (click)="redirectToProductStores()">Product stores</button>
+                    </li>
+                    <li>
+                        <button (click)="redirectToOurStores()">Our stores</button>
+                    </li>
+                    <li>
+                        <button (click)="redirectToDiscounts()">Discounts</button>
+                    </li>
+                    <li>
+                        <button (click)="redirectToSurveys()">Surveys</button>
+                    </li>
+                </ul>
             </div>
-            <a href="#">Buy online</a>
-            <a href="#">Store locator</a>
-            <a href="#" class="build-a-bottle-link">Build a bottle</a>
-            <a href="#" class="shopping-card-icon"><mat-icon>shopping_cart</mat-icon></a>
+            <div class="arrow-drop-down-content">
+                <h1>Inside honey beer</h1>
+                <ul>
+                    <li>
+                        <button (click)="redirectToProducts()">Products</button>
+                    </li>
+                    <li>
+                        <button (click)="navigateToScanner()">QR code Scanner</button>
+                    </li>
+                    <li>
+                        <button (click)="navigateToOffers()">Offers</button>
+                    </li>
+                    <li>
+                        <button (click)="navigateToPersonalOffers()">Personal offers</button>
+                    </li>
+                    <li>
+                        <button (click)="navigateToCreateOffer()">Create offer</button>
+                    </li>
+                    <li>
+                        <button (click)="navigateToReservations()">Reservations</button>
+                    </li>
+                    <li>
+                        <button (click)="navigateToCreateReservation()">Create reservation</button>
+                    </li>
+                </ul>
+            </div>
         </div>  
     </div>
 </div>

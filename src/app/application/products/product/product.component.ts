@@ -13,8 +13,9 @@ export class ProductComponent implements OnInit{
 
   public product:IProduct=new Product();
   constructor(private productController:ProductController){
+    ProductController.productToLoadObservable.subscribe((data:IProduct)=>this.product=data);
   }
   ngOnInit(): void {
-    ProductController.productToLoad.subscribe((data:IProduct)=>console.log(data));
+    
   }
 }

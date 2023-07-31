@@ -7,13 +7,12 @@
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        padding:0px 0px 0px 40px;
+        //padding:0px 0px 0px 40px;
         &>button{
             margin-top:50px;
             margin-bottom:50px;
             color: #fffcf2;
             border-radius: 3px;
-            height: 54px;
             padding: 19px 54px;
             font-size: 14px;
             line-height: 14px;
@@ -68,5 +67,13 @@
         width:100%;
         min-height: 600px;
         height: 50%;
+    }
+    .main-header-and-pargraph{
+        padding:20px;
+    }
+}
+@media only screen and (min-width: 801px) {
+    .main-header-and-pargraph{
+        padding:0px 0px 0px 40px;
     }
 }

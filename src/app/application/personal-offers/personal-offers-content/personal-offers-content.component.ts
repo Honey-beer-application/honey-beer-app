@@ -1,15 +1,13 @@
-import { ApplicationRef, Component } from '@angular/core';
+import { ApplicationRef, Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { map,BehaviorSubject} from 'rxjs';
+import { map,BehaviorSubject, Subscription} from 'rxjs';
 import CompanyController from './../../../Data/Controllers/CompanyController';
 import {OfferByCompanyController} from './../../../Data/Controllers/OfferByCompanyController';
 import IOfferByCompany from './../../../Data/Interfaces/IOfferByCompany';
-import OfferByCompany from 'src/app/Data/Classes/OfferByCompany';
+import { Router } from '@angular/router';
+import ICompany from 'src/app/Data/Interfaces/ICompany';
 
 
-Date.prototype.toLocaleDateString = function(){
-  return this.getDate()+"/"+this.getMonth()+"/"+this.getFullYear();
-}
 interface IData{
   beginDate:string | null,
   discount: number | null,
@@ -23,11 +21,13 @@ interface IData{
   templateUrl: './personal-offers-content.component.html',
   styleUrls: ['./personal-offers-content.component.scss']
 })
-export class PersonalOffersContentComponent {
+export class PersonalOffersContentComponent implements OnDestroy {
   private observable:BehaviorSubject<IOfferByCompany[]> = new BehaviorSubject(new Array<IOfferByCompany>());
-  public offerByCompanyList!:IOfferByCompany[];
+  public offerByCompanyList:IOfferByCompany[] = [];
 
-  public OffersFG!:FormGroup;
+  private subs:Subscription = new Subscription();
+  private registeredCompany!:ICompany;
+  public offersFG!:FormGroup;
   private discount!:FormControl;
   private offerBeginDate!:FormControl;
   private offerEndDate!:FormControl;
@@ -36,34 +36,44 @@ export class PersonalOffersContentComponent {
 
   constructor(public offerByCompanyController:OfferByCompanyController,
               private companyController:CompanyController, 
-              private fb:FormBuilder){
+              private fb:FormBuilder,
+              private router:Router){
+    this.subs.add(
+      CompanyController.companyObservable.subscribe(
+        (data:ICompany)=>this.registeredCompany=data
+      )
+    )
+    this.subs.add(
+      this.offerByCompanyController.loadAllOffersByCompany(this.registeredCompany)
+      .pipe(map(list=>
+        {
+          list.map(item=>{
+            item.offerInstance.beginDate = new Date(item.offerInstance.beginDate.toString().split('T')[0]);
+            item.offerInstance.endDate = new Date(item.offerInstance.endDate.toString().split('T')[0]);
+            item.companyInstance=this.registeredCompany;
+          });
+        return list;
+        }))
+      .subscribe(
+        (data:IOfferByCompany[])=>{this.observable=new BehaviorSubject(data);this.offerByCompanyList=data;},
+        (error)=>alert(error.error.detail)
+      )
+    )
 
-    this.offerByCompanyController.loadAllOffersByCompany(this.companyController.registeredCompany)
-    .pipe(map(list=>
-      {
-        list.map(item=>{
-          item.offerInstance.beginDate = new Date(item.offerInstance.beginDate.toString().split('T')[0]);
-          item.offerInstance.endDate = new Date(item.offerInstance.endDate.toString().split('T')[0]);
-          item.companyInstance=this.companyController.registeredCompany;
-        });
-       return list;
-      }))
-    .subscribe(
-      (data:IOfferByCompany[])=>{this.observable=new BehaviorSubject(data);this.offerByCompanyList=data;},
-      (error)=>alert(error.error.detail)
-    );
-
-    this.OffersFG = this.fb.group({
+    this.offersFG = this.fb.group({
       "discount":this.discount,
       "beginDate":this.offerBeginDate,
       "endDate":this.offerEndDate,
       "productName":this.productName,
       "productDescription":this.productDescription
     });
-    this.OffersFG.valueChanges
+    this.offersFG.valueChanges
     .subscribe((data:IData)=>{
       this.selectData(data);
     });
+  }
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 
   private selectData(select:IData):void{
@@ -79,12 +89,18 @@ export class PersonalOffersContentComponent {
       if(select.productName!=null)
       this.offerByCompanyList = this.offerByCompanyList.filter((item:IOfferByCompany)=>item.offerInstance.productInstance?.name.includes(String(select.productName)));
       if(select.productDescription!=null)
-      this.offerByCompanyList = this.offerByCompanyList.filter((item:IOfferByCompany)=>item.offerInstance.productInstance?.name.includes(String(select.productDescription)));
+      this.offerByCompanyList = this.offerByCompanyList.filter((item:IOfferByCompany)=>item.offerInstance.productInstance?.description.includes(String(select.productDescription)));
     })
   }
   public saveOfferByCompanyToLoad(data:IOfferByCompany){
     this.offerByCompanyController.setOfferByCompanyToLoad(data);
-    this.offerByCompanyController.offerByCompanyToLoadObservable.subscribe(data=>console.log(data));
 
+  }
+  public redirectToEdit(offerBC:IOfferByCompany):void{
+    this.router.navigate([`/app/personal_offers/${offerBC.offerId}/edit`]);
+    this.saveOfferByCompanyToLoad(offerBC);
+  }
+  public convertDate(date:Date):string{
+    return date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
   }
 }

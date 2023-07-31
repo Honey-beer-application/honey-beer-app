@@ -1,0 +1,57 @@
+.products{
+    display: grid;
+    width:80%;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    padding: 50px 0px 50px 0px;
+}
+.products-container{
+    display: flex;
+    >:first-child{
+        padding:20px 0px 20px 0px;
+        margin:50px 20px 50px 20px;
+        border-radius: 15px;
+        width:20%;
+        min-width: 250px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 20px;
+        background-color: rgba($color: #e4ddcd, $alpha:0.6);
+        max-width: 200px;
+        height: fit-content;
+        >div{
+            display: flex;
+            flex-direction: column;
+            >label{
+                text-align: center;
+                font-family: "Freizeit120";
+                padding:5px 0px 5px 0px;
+            }
+            >input{
+                width:100%;
+                text-align: center;
+                border:none;
+                padding:5px;
+                outline: none;
+            }
+        }
+        >div,input{
+            width:80%;
+            border:none;
+            text-align: center;
+            font-size: 16px;
+        }
+        >input{
+            padding:5px;
+            outline: none;
+        }
+    }
+}
+@media only screen and (max-width: 800px) {
+    .products-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  }

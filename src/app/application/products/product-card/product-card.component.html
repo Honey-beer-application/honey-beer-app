@@ -1,7 +1,7 @@
-<a href="app/products/${{this.product.productId}}" class="link-product-card">
+<button (click)="redirectToProduct(this.product)" class="link-product-card">
     <div class="product-container">
         <img src="./../../../../assets/images/honey-beer-logo.png" alt="">
         <h1>{{this.product.name}}</h1>
         <p>{{this.product.description}}</p>
     </div>
-</a>
+</button>

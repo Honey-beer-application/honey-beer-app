@@ -122,7 +122,7 @@ export class RegisterComponent implements OnInit,AfterViewInit {
     this.companyController.createCompany(this.company.PIB,this.company.name,this.company.email,this.company.password)
     .subscribe((res)=>{
       alert("Company is successfuly registered.");
-      this.companyController.registeredCompany=this.company;
+      this.companyController.setCompany(this.company);
     },(error)=>alert(error.error.detail));
   }
 }

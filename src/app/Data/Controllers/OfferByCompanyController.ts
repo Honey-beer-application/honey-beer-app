@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 import OfferByCompany from "../Classes/OfferByCompany";
 
 
-@Injectable()
+@Injectable({providedIn:"root"})
 export class OfferByCompanyController{
     private offerByCompanyToLoadObject: IOfferByCompany;
     private _offerBycompanyToLoad: BehaviorSubject<IOfferByCompany>;
@@ -24,12 +24,20 @@ export class OfferByCompanyController{
                 but this service should be a singleton.`
             );
         }
-        console.log("values are instanctiated");
         this.offerByCompanyToLoadObject= new OfferByCompany();
         this._offerBycompanyToLoad = new BehaviorSubject(this.offerByCompanyToLoadObject);
         this._offerByCompanyToLoadObservable = this._offerBycompanyToLoad.asObservable();
     }
     public loadAllOffersByCompany(company:ICompany):Observable<IOfferByCompany[]>{
         return this.offerByCompanyService.loadAllOffersByCompany(company);
+    }
+    public getOfferByCompany(id:number):Observable<OfferByCompany>{
+        return this.offerByCompanyService.getOfferByCompany(id);
+    }
+    public changeOfferByCompany(offerByCompany:IOfferByCompany):Observable<boolean>{
+        return this.offerByCompanyService.changeOfferByCompany(offerByCompany);
+    }
+    public saveOfferByCompany(offerByCompany:IOfferByCompany):Observable<boolean>{
+        return this.offerByCompanyService.saveOfferByCompany(offerByCompany);
     }
 }

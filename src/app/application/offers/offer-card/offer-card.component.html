@@ -1,7 +1,7 @@
 <div class="offer-card">
-    <h1>Offer: {{product.offerInstance.amount}}%</h1>
-    <p> from {{product.offerInstance.beginDate}} to {{product.offerInstance.endDate}}</p>
-    <h1>For product:</h1>
-    <p>{{product.name}}</p>
-    <p>{{product.description}}</p>
+    <h1>Offer: {{offer.amount}}%</h1>
+    <p> from {{convertDate(offer.beginDate)}} to {{convertDate(offer.endDate)}}</p>
+    <h1>For product: <br> {{offer.productInstance?.name}}</h1>
+    <p>{{offer.productInstance?.description}}</p>
+    <button (click)="redirectToPersonalOffer(offer)">Personalize offer</button>
 </div>

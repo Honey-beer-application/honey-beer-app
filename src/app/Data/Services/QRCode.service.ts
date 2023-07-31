@@ -8,10 +8,18 @@ export class QRCodeService{
 
     }
     public scanQRCode(qrCode:IQRCode):Observable<IQRCode>{
-        return this.httpClient.post<IQRCode>("",{body:{
-            "qr_code_id":qrCode.QRCodeId,
+        return this.httpClient.post<IQRCode>("https://localhost:7165/api/QRCode",{
+            "qrCodeId":Number(qrCode.QRCodeId),
             "code":qrCode.Code,
-            "scanned":qrCode.Scanned
-        }});
+            "scannedBy":{
+                "customerId":Number(qrCode.scannedBy.customerId),
+                "username":qrCode.scannedBy.username,
+                "password":qrCode.scannedBy.password,
+                "email":qrCode.scannedBy.email,
+                "personalEmailInstance":{
+                    "email":qrCode.scannedBy.personalEmailInstance.email
+                }
+            }
+        });
     }
 }

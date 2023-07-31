@@ -3,10 +3,11 @@ import {Injectable} from "@angular/core"
 import ICompany from "../Interfaces/ICompany";
 import IOfferByCompany from "../Interfaces/IOfferByCompany";
 import { Observable } from "rxjs";
+import OfferByCompany from "../Classes/OfferByCompany";
 
 @Injectable({providedIn:"root"})
 export default class OfferByCompanyService{
-
+    
     constructor(private httpClient:HttpClient){
 
     }
@@ -18,6 +19,54 @@ export default class OfferByCompanyService{
             "email":company.email,
             "password":company.password
             }
+        );
+    }
+    public getOfferByCompany(id:number):Observable<OfferByCompany>{
+        return this.httpClient.get<OfferByCompany>(`https://localhost:7165/api/OfferByCompany/getOfferByCompany/:id?id=${id}`);
+    }
+    public changeOfferByCompany(offerByCompany:IOfferByCompany):Observable<boolean>{
+        console.log(offerByCompany.offerInstance.beginDate.toISOString().split('.')[0]);
+        var object:Object = {
+            "pib": Number(offerByCompany.pib),
+            "productId": Number(offerByCompany.offerId),
+            "offerId": Number(offerByCompany.productId),
+            "companyInstance": {
+                "pib":Number(offerByCompany.companyInstance.PIB),
+                "name":offerByCompany.companyInstance.name,
+                "email":offerByCompany.companyInstance.email,
+                "password":offerByCompany.companyInstance.password
+            },
+            "offerInstance": {
+                "productId": Number(offerByCompany.offerInstance.productId),
+                "offerId": Number(offerByCompany.offerInstance.offerId),
+                "amount": offerByCompany.offerInstance.amount,
+                "beginDate": offerByCompany.offerInstance.beginDate.toISOString().split('.')[0],
+                "endDate": offerByCompany.offerInstance.endDate.toISOString().split('.')[0],
+                "productInstance": {
+                    "productId": Number(offerByCompany.offerInstance.productInstance?.productId),
+                    "name": offerByCompany.offerInstance.productInstance?.name,
+                    "description": offerByCompany.offerInstance.productInstance?.description
+                }
+            }
+        };
+        console.log(object)
+        return this.httpClient.post<boolean>("https://localhost:7165/api/OfferByCompany/update",
+        object);
+    }
+    saveOfferByCompany(offerByCompany: IOfferByCompany): Observable<boolean> {
+        return this.httpClient.post<boolean>("https://localhost:7165/api/offerByCompany/save",
+        {
+            "offerId":Number(offerByCompany.offerId),
+            "productId":Number(offerByCompany.productId),
+            "pib":Number(offerByCompany.pib),
+            "offerInstance":{
+                "offerId":Number(offerByCompany.offerInstance.offerId),
+                "productId":Number(offerByCompany.offerInstance.productId),
+                "amount":offerByCompany.offerInstance.amount,
+                "beginDate":offerByCompany.offerInstance.beginDate,
+                "endDate":offerByCompany.offerInstance.endDate
+            }
+        }
         );
     }
 }
