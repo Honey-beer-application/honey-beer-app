@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "@emailjs/browser": "^3.11.0",
+    "@syncfusion/ej2-material-theme": "~22.2.5",
     "@types/three": "^0.152.1",
     "leaflet": "^1.9.4",
     "ngx-scanner-qrcode": "^1.5.8",

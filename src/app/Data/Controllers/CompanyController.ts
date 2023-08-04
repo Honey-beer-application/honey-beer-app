@@ -18,10 +18,10 @@ export default class CompanyController{
     }
     constructor(private companyService:CompanyService){
          CompanyController._registeredCompany = new Company();
-        // CompanyController._registeredCompany.PIB=10000001n;
-        // CompanyController._registeredCompany.email="kompanija1@gmail.com";
-        // CompanyController._registeredCompany.name="kompanija1";
-        // CompanyController._registeredCompany.password="kompanija1";
+        CompanyController._registeredCompany.PIB=10000001n;
+        CompanyController._registeredCompany.email="kompanija1@gmail.com";
+        CompanyController._registeredCompany.name="kompanija1";
+        CompanyController._registeredCompany.password="kompanija1";
         CompanyController.companyBehaviour = new BehaviorSubject<ICompany>(CompanyController._registeredCompany);
         CompanyController._companyObservable = CompanyController.companyBehaviour.asObservable();
     }

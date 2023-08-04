@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import Company from 'src/app/Data/Classes/Company';
+import Customer from 'src/app/Data/Classes/Customer';
+import CompanyController from 'src/app/Data/Controllers/CompanyController';
+import CustomerController from 'src/app/Data/Controllers/CustomerConstroller';
+import ICompany from 'src/app/Data/Interfaces/ICompany';
+import ICustomer from 'src/app/Data/Interfaces/ICustomer';
 
 @Component({
   selector: 'app-navigation-small',
@@ -8,8 +15,19 @@ import { Router } from '@angular/router';
 })
 export class NavigationSmallComponent {
 
-  constructor(private router:Router){
-
+  private subs:Subscription;
+  private customer:ICustomer;
+  private company:ICompany;
+  constructor(private router:Router,private customerController:CustomerController){
+    this.subs = new Subscription();
+    this.customer = new Customer();
+    this.company = new Company();
+    this.subs.add(
+      this.customerController.registeredCustomer.asObservable().subscribe((data:ICustomer)=>this.customer=data)
+    )
+    this.subs.add(
+      CompanyController.companyObservable.subscribe((data:ICompany)=>this.company=data)
+    )
   }
   public redirectToMainPage():void{
     this.router.navigateByUrl("app");
@@ -52,5 +70,17 @@ export class NavigationSmallComponent {
   }
   public redirectToSurveys():void{
     this.router.navigateByUrl('app/surveys');
+  }
+  public redirectToPromotions():void{
+    this.router.navigateByUrl('app/promotions');
+  }
+  public redirectToMeetings():void{
+    this.router.navigateByUrl('app/meetings');
+  }
+  public isCustomerRegistered():boolean{
+    return this.customer.customerId!=0n;
+  }
+  public isCompanyRegistered():boolean{
+    return this.company.PIB!=0n;
   }
 }

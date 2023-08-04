@@ -3,6 +3,7 @@ import OfferService from "../Services/Offer.service";
 import {Injectable} from "@angular/core"
 import Offer from "../Classes/Offer";
 import IOffer from "../Interfaces/IOffer";
+import IOfferByCompany from "../Interfaces/IOfferByCompany";
 @Injectable({providedIn:"root"})
 export default class OfferController{
     
@@ -21,7 +22,7 @@ export default class OfferController{
     public loadAllOffers():Observable<Offer[]>{
         return this.offerService.loadAllOffers();
     }
-    public saveOffer(offer: IOffer):Observable<boolean> {
-        return this.offerService.saveOffer(offer);
+    public saveOffer(offerByCompany: IOfferByCompany):Observable<boolean> {
+        return this.offerService.saveOffer(offerByCompany);
     }
 }

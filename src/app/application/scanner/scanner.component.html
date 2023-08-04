@@ -6,5 +6,5 @@
     <p *ngIf="action.isLoading">⌛ Loading...</p>
 
     <!-- start -->
-    <button class="qrCodeButton" (click)="action.isStart ? action.stop() : beginScanning()">{{action.isStart ? 'Stop' : 'Start'}}</button>
+    <button class="qrCodeButton" (click)="action.isStart ? endScanning() : beginScanning()">{{action.isStart ? 'Stop' : 'Start'}}</button>
 </div>

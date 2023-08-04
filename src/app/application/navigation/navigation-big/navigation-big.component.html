@@ -10,10 +10,10 @@
     <div class="arrow-drop-down-menu">
         <div class="arrow-drop-down-content">
             <ul>
-                <li>
+                <li *ngIf="isCompanyRegistered()">
                     <button (click)="redirectToDiscounts()" (mouseenter)="setImage(images[0])" (mouseleave)="setImage('#')">Discounts</button>
                 </li> 
-                <li>
+                <li *ngIf="isCustomerRegistered()">
                     <button (click)="redirectToSurveys()" (mouseenter)="setImage(images[1])" (mouseleave)="setImage('#')">Surveys</button>
                 </li>    
             </ul>
@@ -33,22 +33,28 @@
                     <button (click)="redirectToProducts()" (mouseenter)="setImage(images[0])" (mouseleave)="setImage('#')">Products</button>
                 </li>
                 <li>
+                    <button (click)="redirectToPromotions()" (mouseenter)="setImage(images[0])" (mouseleave)="setImage('#')">Promotions</button>
+                </li>
+                <li *ngIf="isCustomerRegistered()">
                     <button (click)="navigateToScanner()" (mouseenter)="setImage(images[1])" (mouseleave)="setImage('#')">QR code Scanner</button>
                 </li>
-                <li>
+                <li *ngIf="isCompanyRegistered()">
                     <button (click)="navigateToOffers()" (mouseenter)="setImage(images[2])" (mouseleave)="setImage('#')">Offers</button>
                 </li>
-                <li>
+                <li *ngIf="isCompanyRegistered()">
                     <button (click)="navigateToPersonalOffers()" (mouseenter)="setImage(images[3])" (mouseleave)="setImage('#')">Personal offers</button>
                 </li>
-                <li>
+                <li *ngIf="isCompanyRegistered()">
                     <button (click)="navigateToCreateOffer()" (mouseenter)="setImage(images[4])" (mouseleave)="setImage('#')">Create offer</button>
                 </li>
-                <li>
+                <li *ngIf="isCompanyRegistered()">
                     <button (click)="navigateToReservations()" (mouseenter)="setImage(images[5])" (mouseleave)="setImage('#')">Reservations</button>
                 </li>
-                <li>
+                <li *ngIf="isCompanyRegistered()">
                     <button (click)="navigateToCreateReservation()" (mouseenter)="setImage(images[6])" (mouseleave)="setImage('#')">Create reservation</button>
+                </li>
+                <li *ngIf="isCompanyRegistered()">
+                    <button (click)="redirectToMeetings()" (mouseenter)="setImage(images[6])" (mouseleave)="setImage('#')">Meetings</button>
                 </li>
             </ul>
         </div>

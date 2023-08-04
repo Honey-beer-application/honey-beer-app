@@ -36,7 +36,8 @@
             ],
             "styles": [
               "./node_modules/leaflet/dist/leaflet.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/@syncfusion/ej2-material-theme/styles/material.css"
             ],
             "scripts": []
           },
@@ -99,7 +100,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/@syncfusion/ej2-material-theme/styles/material.css"
             ],
             "scripts": []
           }

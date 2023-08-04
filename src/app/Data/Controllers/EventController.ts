@@ -13,4 +13,10 @@ export class EventController{
     public loadAllEvents():Observable<IEvent[]>{
         return this.eventService.loadAllEvents();
     }
+    loadAllPromotions():Observable<IEvent[]> {
+        return this.eventService.loadAllPromotions();
+    }
+    setEvent(promotion: IEvent) {
+        this.surveyToLoad.next(promotion);
+    }
 }

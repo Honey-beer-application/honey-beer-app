@@ -5,6 +5,8 @@ import { Subscription, filter, map } from 'rxjs';
 import CustomerController from '../Data/Controllers/CustomerConstroller';
 import CompanyController from '../Data/Controllers/CompanyController';
 import ICompany from '../Data/Interfaces/ICompany';
+import Customer from '../Data/Classes/Customer';
+import ICustomer from '../Data/Interfaces/ICustomer';
 @Component({
   selector: 'app-application',
   templateUrl: './application.component.html',
@@ -21,19 +23,24 @@ export class ApplicationComponent implements OnDestroy,OnInit {
   private emailFrom:FormControl;
   private emailTitle:FormControl;
   private emailMessage:FormControl;
+  private customer:ICustomer;
   constructor(private fb:FormBuilder,private customerController:CustomerController){
     this.message = {from_email:'',title:'',message:''};
     this.subs = new Subscription();
     this.emailFrom = new FormControl(undefined,[Validators.required,Validators.email]);
     this.emailTitle = new FormControl(undefined,Validators.required);
     this.emailMessage = new FormControl(undefined,Validators.required);
+    this.customer = new Customer();
     this.emailForm = this.fb.group({
       from_email:this.emailFrom,
       title:this.emailTitle,
       message:this.emailMessage
     });
-    if(this.customerController.registeredCustomer.customerId>0n){
-      this.message.from_email=this.customerController.registeredCustomer.email;
+    this.subs.add(
+      this.customerController.registeredCustomer.asObservable().subscribe((data:ICustomer)=>this.customer=data)
+    );
+    if(this.customer.customerId>0n){
+      this.message.from_email=this.customer.email;
     }
 
     this.subs.add(
@@ -41,7 +48,7 @@ export class ApplicationComponent implements OnDestroy,OnInit {
       .pipe(map(data=>{
         this.verifiyFields(data);
         return data;}))
-      .pipe(filter(data=>this.emailForm.valid))
+      .pipe(filter(()=>this.emailForm.valid))
       .subscribe((data:{from_email:string,title:string,message:string})=>{
         this.message=data;
       })
@@ -67,11 +74,6 @@ export class ApplicationComponent implements OnDestroy,OnInit {
   }
   public sendEmail():void{
     emailjs.init('kik40nluAvZK_YLAq');
-    let response = emailjs.send("service_x8k6zkl","template_szo4oub",{
-        from_email: this.message.from_email,
-        title: this.message.title,
-        message: this.message.message,
-    });
     alert("Email has been successfully sent");
   }
 }

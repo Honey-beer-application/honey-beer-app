@@ -4,9 +4,13 @@ import { IEvent } from "../Interfaces/IEvent";
 import { Observable } from "rxjs";
 @Injectable({providedIn:"root"})
 export class EventService{
+    
     constructor(private httpClient:HttpClient){
     }
     public loadAllEvents():Observable<IEvent[]>{
         return this.httpClient.get<IEvent[]>("https://localhost:7165/api/Event");
+    }
+    loadAllPromotions(): Observable<IEvent[]> {
+        return this.httpClient.get<IEvent[]>("https://localhost:7165/api/Promotion");
     }
 }

@@ -35,7 +35,6 @@
         }
         &>h1{
             text-transform: uppercase;
-            font-size: 5.6vw;
             font-family: 'Cako';
             font-weight: 400;
             &>b{
@@ -70,10 +69,16 @@
     }
     .main-header-and-pargraph{
         padding:20px;
+        &>h1{
+            font-size: 60px;
+        }
     }
 }
 @media only screen and (min-width: 801px) {
     .main-header-and-pargraph{
         padding:0px 0px 0px 40px;
+        &>h1{
+            font-size: 5.6vw;
+        }
     }
 }

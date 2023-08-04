@@ -1,4 +1,5 @@
 import { IEvent } from "../Interfaces/IEvent";
+import { IEventLocation } from "../Interfaces/IEventLocation";
 import { IEventType } from "../Interfaces/IEventType";
 import { IQuestion } from "../Interfaces/IQuestion";
 import { EventType } from "./EventType";
@@ -13,6 +14,7 @@ export class Event implements IEvent{
     private _eventTypeId: bigint;
     private _eventTypeInstance: IEventType;
     private _questions: IQuestion[];
+    private _eventLocations: IEventLocation[];
     public get questions(): IQuestion[] {
         return this._questions;
     }
@@ -67,6 +69,12 @@ export class Event implements IEvent{
     public set eventTypeInstance(value: IEventType) {
         this._eventTypeInstance = value;
     }
+    public get eventLocations(): IEventLocation[] {
+        return this._eventLocations;
+    }
+    public set eventLocations(value: IEventLocation[]) {
+        this._eventLocations = value;
+    }
     constructor(){
         this._beginDate = null;
         this._creationDate = new Date();
@@ -77,5 +85,7 @@ export class Event implements IEvent{
         this._eventTypeInstance = new EventType();
         this._questions = [];
         this._title="";
+        this._eventLocations = [];
     }
+    
 }

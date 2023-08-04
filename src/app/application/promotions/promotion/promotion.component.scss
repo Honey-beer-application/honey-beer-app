@@ -1,0 +1,74 @@
+.ourStores{
+    display: flex;
+    height:100%;
+    padding: 50px;
+    gap:20px;
+    &>:first-child{
+        width:50%;
+        display: flex;
+        flex-direction: column;
+        >h1{
+            margin-bottom: 50px;
+            text-align: start;
+            font-family: 'Freizeit120';
+            font-size: 2vw;
+            padding-left: 50px;
+        }
+        >div{
+            display: block;
+            overflow: auto;
+            border:3px solid #d6ac60;
+            background-color: #ffd689;
+            padding:5px;
+            >ul{
+                display: flex;
+                flex-direction: column;
+                gap:3px;
+                max-height: 600px;
+                >li{
+                    height: 100%;
+                    padding:20px 10px 20px 10px;
+                    border:5px solid rgb(235, 235, 235);
+                    display: flex;
+                    flex-direction: column;
+                    background-color: rgba(255,255,255,1);
+                    border-radius: 15px;
+                    gap:10px;
+                    >h3{
+                        font-size: 20px;
+                    }
+                    >div{
+                        display: flex;
+                        >p{
+                            margin-inline:20px;
+                            font-size: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    >:last-child{
+        width:50%;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .ourStores {
+        padding: 20px 0px 0px 0px;
+      flex-direction: column;
+      >:first-child{
+        width:100%;
+        >h1{
+            font-size: 30px;
+            padding-left: 0px;
+        }
+        >div>ul{
+            max-height: 300px;
+        }
+      }
+      >:last-child{
+        width:100%;
+        height: 50%;
+      }
+    }
+  }

@@ -116,7 +116,10 @@ export class RegisterComponent implements OnInit,AfterViewInit {
   }
   public saveCustomer():void{
     this.customerController.createCustomer(this.customer.username,this.customer.email,this.customer.password)
-    .subscribe((res:ICustomer)=>this.customerController.registeredCustomer=res,(error)=>{alert(error.error.detail)});
+    .subscribe((res:ICustomer)=>{
+      this.customerController.registeredCustomer.next(res);
+      alert("Account is successfully created.");
+    },(error)=>{alert(error.error.detail)});
   }
   public saveCompany():void{
     this.companyController.createCompany(this.company.PIB,this.company.name,this.company.email,this.company.password)

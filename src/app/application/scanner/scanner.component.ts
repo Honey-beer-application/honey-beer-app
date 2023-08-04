@@ -5,6 +5,7 @@ import IQRCode from './../../Data/Interfaces/IQRCode';
 import QRCode from './../../Data/Classes/QRCode';
 import QRCodeController from './../../Data/Controllers/QRCodeController';
 import CustomerController from 'src/app/Data/Controllers/CustomerConstroller';
+import ICustomer from 'src/app/Data/Interfaces/ICustomer';
 
 @Component({
   selector: 'app-scanner',
@@ -22,7 +23,7 @@ export class ScannerComponent implements OnDestroy{
     this.subs = new Subscription();
   }
   ngOnDestroy(): void {
-    
+    this.subs.unsubscribe();
   }
 
   public beginScanning():void{
@@ -35,7 +36,9 @@ export class ScannerComponent implements OnDestroy{
       this.qrCode = e[0].value;
       let qrCode:IQRCode = new QRCode();
       qrCode.Code=this.qrCode;
-      qrCode.scannedBy=this.customerController.registeredCustomer;
+      this.subs.add(
+        this.customerController.registeredCustomer.asObservable().subscribe((data:ICustomer)=>qrCode.scannedBy=data)
+      );
       console.log(qrCode);
       this.qrCodeController.scanQRCode(qrCode)
       .subscribe(
@@ -43,5 +46,9 @@ export class ScannerComponent implements OnDestroy{
         (error)=>alert(JSON.stringify(error.error))
       );
     }
+  }
+  public endScanning(){
+    this.action.stop();
+    this.qrCode=null;
   }
 }

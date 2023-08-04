@@ -31,10 +31,10 @@
                     <li>
                         <button (click)="redirectToOurStores()">Our stores</button>
                     </li>
-                    <li>
+                    <li *ngIf="isCompanyRegistered()">
                         <button (click)="redirectToDiscounts()">Discounts</button>
                     </li>
-                    <li>
+                    <li *ngIf="isCustomerRegistered()">
                         <button (click)="redirectToSurveys()">Surveys</button>
                     </li>
                 </ul>
@@ -46,22 +46,28 @@
                         <button (click)="redirectToProducts()">Products</button>
                     </li>
                     <li>
+                        <button (click)="redirectToPromotions()">Promotions</button>
+                    </li>
+                    <li *ngIf="isCustomerRegistered()">
                         <button (click)="navigateToScanner()">QR code Scanner</button>
                     </li>
-                    <li>
+                    <li *ngIf="isCompanyRegistered()">
                         <button (click)="navigateToOffers()">Offers</button>
                     </li>
-                    <li>
+                    <li *ngIf="isCompanyRegistered()">
                         <button (click)="navigateToPersonalOffers()">Personal offers</button>
                     </li>
-                    <li>
+                    <li *ngIf="isCompanyRegistered()">
                         <button (click)="navigateToCreateOffer()">Create offer</button>
                     </li>
-                    <li>
+                    <li *ngIf="isCompanyRegistered()">
                         <button (click)="navigateToReservations()">Reservations</button>
                     </li>
-                    <li>
+                    <li *ngIf="isCompanyRegistered()">
                         <button (click)="navigateToCreateReservation()">Create reservation</button>
+                    </li>
+                    <li *ngIf="isCompanyRegistered()">
+                        <button (click)="redirectToMeetings()">Meetings</button>
                     </li>
                 </ul>
             </div>

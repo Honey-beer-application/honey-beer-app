@@ -6,6 +6,7 @@ import ICompany from './../../../Data/Interfaces/ICompany';
 import ICustomer from './../../../Data/Interfaces/ICustomer';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import Customer from 'src/app/Data/Classes/Customer';
 
 @Component({
   selector: 'app-navigation-big',
@@ -30,8 +31,11 @@ export class NavigationBigComponent {
   constructor(private customerController:CustomerController,
     private companyController:CompanyController,
     private router:Router){
-    this.customer=this.customerController.registeredCustomer;
-    console.log(this.customer);
+    // this.customer=this.customerController.registeredCustomer;
+    this.customer=new Customer();
+    this.subs.add(
+      this.customerController.registeredCustomer.asObservable().subscribe((data:ICustomer)=>this.customer=data)
+    )
     this.subs.add(
       CompanyController.companyObservable.subscribe((data:ICompany)=>this.company=data)
     )
@@ -49,9 +53,12 @@ export class NavigationBigComponent {
     )
   }
   public deleteCustomerAccount(){
-    this.customerController.deleteCustomer(this.customerController.registeredCustomer)
+    this.customerController.deleteCustomer(this.customer)
     .subscribe(
-      (data)=>alert("Personal account was successfuly deleted."),
+      (data)=>{
+        alert("Personal account was successfuly deleted.");
+        this.customerController.registeredCustomer.next(new Customer());
+      },
       (error)=>alert(error.error.detail)
     );
   }
@@ -99,5 +106,11 @@ export class NavigationBigComponent {
   }
   public redirectToSurveys():void{
     this.router.navigateByUrl('app/surveys');
+  }
+  public redirectToPromotions():void{
+    this.router.navigateByUrl('app/promotions');
+  }
+  public redirectToMeetings():void{
+    this.router.navigateByUrl('app/meetings');
   }
 }

@@ -56,6 +56,14 @@ const routes: Routes = [
       {
         path:"surveys",
         loadChildren:()=>import("./surveys/surveys.module").then(m=>m.SurveysModule)
+      },
+      {
+        path:"promotions",
+        loadChildren:()=>import("./promotions/promotions.module").then(m=>m.PromotionsModule)
+      },
+      {
+        path:"meetings",
+        loadChildren:()=>import("./meetings/meetings.module").then(m=>m.MeetingsModule)
       }
     ]
     

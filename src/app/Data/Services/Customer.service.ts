@@ -17,7 +17,15 @@ export class CustomerService{
     public deleteCustomer(customer:ICustomer):Observable<ICustomer>{
         return this.httpClient.delete<ICustomer>('https://localhost:7165/api/customer',
         {
-            body: JSON.stringify(customer)
+            body:{
+                "customerId": Number(customer.customerId),
+                "username": customer.username,
+                "password": customer.password,
+                "email": customer.email,
+                "personalEmailInstance": {
+                  "email": customer.personalEmailInstance.email
+                }
+            }
         });
     }
 }

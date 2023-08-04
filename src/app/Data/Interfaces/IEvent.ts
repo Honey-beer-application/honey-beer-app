@@ -1,3 +1,4 @@
+import { IEventLocation } from "./IEventLocation";
 import { IEventType } from "./IEventType";
 import { IQuestion } from "./IQuestion";
 
@@ -10,5 +11,6 @@ export interface IEvent{
     endDate:Date|null;
     eventTypeId:bigint;
     eventTypeInstance:IEventType;
-    questions:IQuestion[]
+    questions:IQuestion[];
+    eventLocations:IEventLocation[];
 }

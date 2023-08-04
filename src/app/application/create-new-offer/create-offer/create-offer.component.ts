@@ -1,10 +1,15 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription, filter } from 'rxjs';
+import Company from 'src/app/Data/Classes/Company';
 import Offer from 'src/app/Data/Classes/Offer';
+import OfferByCompany from 'src/app/Data/Classes/OfferByCompany';
+import CompanyController from 'src/app/Data/Controllers/CompanyController';
 import OfferController from 'src/app/Data/Controllers/OfferComtroller';
 import { ProductController } from 'src/app/Data/Controllers/ProductController';
+import ICompany from 'src/app/Data/Interfaces/ICompany';
 import IOffer from 'src/app/Data/Interfaces/IOffer';
+import IOfferByCompany from 'src/app/Data/Interfaces/IOfferByCompany';
 import IProduct from 'src/app/Data/Interfaces/IProduct';
 
 @Component({
@@ -16,6 +21,7 @@ export class CreateOfferComponent implements OnDestroy {
 
   private subs:Subscription = new Subscription();
   public offer:IOffer;
+  private company:ICompany;
 
   public offerByCompanyForm!:FormGroup;
   public offerAmount:FormControl;
@@ -23,11 +29,18 @@ export class CreateOfferComponent implements OnDestroy {
   public offerEndDate:FormControl;
   constructor(private fb:FormBuilder,private offerController:OfferController){
     this.offer = new Offer();
+    this.company = new Company();
     this.subs.add(
       ProductController.productToLoadObservable.subscribe((data:IProduct)=>{
         this.offer.productInstance = data;
       })
-    )
+    );
+    this.subs.add(
+      CompanyController.companyObservable.subscribe((data:ICompany)=>{
+        this.company=data;
+        console.log(this.company);
+      })
+    );
 
     this.offerAmount = new FormControl(this.offer.amount,[Validators.required,Validators.min(0)]);
     this.offerBeginDate = new FormControl(this.offer.beginDate.toLocaleDateString(),Validators.required);
@@ -52,8 +65,13 @@ export class CreateOfferComponent implements OnDestroy {
   }
 
   public saveOffer():void{
-    console.log(this.offer);
-    this.offerController.saveOffer(this.offer).subscribe(
+    let offerByCompany:IOfferByCompany= new OfferByCompany();
+    offerByCompany.companyInstance=this.company;
+    offerByCompany.pib=this.company.PIB;
+    offerByCompany.productId=this.offer.productInstance==undefined?0n:this.offer.productInstance.productId;
+    offerByCompany.offerInstance=this.offer;
+    console.log(offerByCompany);
+    this.offerController.saveOffer(offerByCompany).subscribe(
       (data)=>alert("Offer is successfully saved."),
       (error)=>alert(error.error.detail))
     // this.subs.add(

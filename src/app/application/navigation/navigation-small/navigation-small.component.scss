@@ -69,7 +69,6 @@
                 &>.arrow-drop-down-content{
                     display: flex;
                     flex-direction: column;
-                    height:100%;
                     width:100%;
                     padding:20px;
                     align-items: center;
@@ -84,6 +83,7 @@
                         list-style-position: inside;
                         height:100%;
                         justify-content: space-evenly;
+                        gap: 20px;
                         >li{
                             >button{
                                 text-decoration: none;
