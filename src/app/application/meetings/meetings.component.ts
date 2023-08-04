@@ -24,7 +24,6 @@ export class MeetingsComponent implements OnDestroy{
     this.subs.add(
       this.meetingController.loadAllMeetings().subscribe((data:IMeeting[])=>{
         this.availableMeetings=data;
-        console.log(this.availableMeetings);
       })
     )
     this.subs.add(
@@ -40,7 +39,6 @@ export class MeetingsComponent implements OnDestroy{
       alert("Meeting is scheduled successfully.");
     },(error:Object)=>alert(JSON.stringify(error)));
     this.availableMeetings = this.availableMeetings.filter(meet=>meet.meetingId!==meeting.meetingId);
-    console.log(this.availableMeetings);
   }
 
   getDate(date:Date):string{

@@ -3,6 +3,7 @@
     color: black;
     background-color: transparent;
     height: 100%;
+    place-self: center;
     >.product-container{
         >img{
             object-fit: contain;
