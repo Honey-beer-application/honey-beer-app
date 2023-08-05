@@ -1,0 +1,37 @@
+.suggestions{
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    // border:2px solid black;
+    gap:20px;
+    padding:15px;
+    width:100%;
+    font-family: 'Freizeit120';
+    >input,textarea{
+        border:none;
+        padding:10px;
+        outline:none;
+        border-radius: 5px;
+        font-family: 'Freizeit120';
+    }
+    >textarea{
+        resize: none;
+    }
+    >button{
+        margin-left: auto;
+        border:1px solid #B7ADA1;
+        border-radius: 3px;
+        padding:10px 20px 10px 20px;
+        font-family: 'Freizeit120';
+        background-color: #1e1e1e;
+        color:white;
+        height:fit-content;
+        transition:background-color 0.2s ease-in-out,color 0.2s ease-in-out,box-shadow 0.2s ease-in-out;
+        &:hover{
+            color: #1e1e1e;
+            border-color:#b7ada1;
+            background-color: #FFFCF2;
+            box-shadow: 4px -4px #fffcf2,-4px 4px #fffcf2,-4px -4px #fffcf2,4px 4px #fffcf2
+        }
+    }
+}

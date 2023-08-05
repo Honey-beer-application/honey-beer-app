@@ -113,4 +113,7 @@ export class NavigationBigComponent {
   public redirectToMeetings():void{
     this.router.navigateByUrl('app/meetings');
   }
+  public redirectToAccount():void{
+    this.router.navigateByUrl('app/account');
+  }
 }

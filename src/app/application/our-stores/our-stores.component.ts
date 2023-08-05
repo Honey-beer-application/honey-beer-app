@@ -20,7 +20,6 @@ export class OurStoresComponent implements AfterViewInit{
       this.locationController.loadAllLocations().subscribe(
         (data:ILocation[])=>{
           this.locations=data;
-          console.log(data);
         }
       )
     )

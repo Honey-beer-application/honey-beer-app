@@ -17,8 +17,6 @@ export class SurveysComponent implements OnDestroy {
     this.surveys = new Array<IEvent>();
     this.subs.add(
       this.eventController.loadAllEvents().subscribe((data:IEvent[])=>{
-        console.log("data: ");
-        console.log(data);
         this.surveys=data;
       })
     )

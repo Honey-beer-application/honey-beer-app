@@ -80,8 +80,6 @@ export class UpdateOfferComponent implements OnDestroy{
       this.subs.unsubscribe();
     }
     public saveOfferByComapny(){
-      console.log("funkcija je pokrenuta");
-      console.log(this.offerByCompany)
       this.offerByCompanyController.changeOfferByCompany(this.offerByCompany)
       .subscribe(
         (data)=>alert("Offer is successfully changed."),

@@ -11,14 +11,11 @@ import { IShoppingLocation } from 'src/app/Data/Interfaces/IShoppingLocation';
   templateUrl: './product-store-card.component.html',
   styleUrls: ['./product-store-card.component.scss']
 })
-export class ProductStoreCardComponent implements OnInit {
+export class ProductStoreCardComponent {
 
   @Input('shoppingLocation') shoppingLocation:IShoppingLocation;
 
   constructor(private router:Router,private productController:ProductController){
     this.shoppingLocation = new ShoppingLocation();
-  }
-  ngOnInit(): void {
-    console.log(this.shoppingLocation);
   }
 }

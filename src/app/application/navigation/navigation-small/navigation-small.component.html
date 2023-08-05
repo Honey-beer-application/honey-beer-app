@@ -19,6 +19,9 @@
                     <li>
                         <button  (click)="redirectToRegister()">Register</button>
                     </li>
+                    <li *ngIf="isCustomerRegistered() || isCompanyRegistered()">
+                        <button  (click)="redirectToAccount()">Account</button>
+                    </li>
                 </ul>
             </div>
             <div class="arrow-drop-down-content">
@@ -31,10 +34,10 @@
                     <li>
                         <button (click)="redirectToOurStores()">Our stores</button>
                     </li>
-                    <li *ngIf="isCompanyRegistered()">
+                    <li>
                         <button (click)="redirectToDiscounts()">Discounts</button>
                     </li>
-                    <li *ngIf="isCustomerRegistered()">
+                    <li>
                         <button (click)="redirectToSurveys()">Surveys</button>
                     </li>
                 </ul>

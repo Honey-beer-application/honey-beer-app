@@ -101,4 +101,7 @@ export class NavigationMediumComponent implements OnDestroy {
   public isCompanyRegistered():boolean{
     return this.company.PIB!=0n;
   }
+  public redirectToAccount():void{
+    this.router.navigateByUrl('app/account');
+  }
 }

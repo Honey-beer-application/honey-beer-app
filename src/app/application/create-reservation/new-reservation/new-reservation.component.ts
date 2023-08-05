@@ -46,7 +46,6 @@ export class NewReservationComponent {
       this.reservationForm.valueChanges
       .pipe(filter(data=>this.reservationForm.valid))
       .subscribe((data:{amount:number,deliveryDate:string})=>{
-        console.log(data);
         if(data.amount!=undefined&&data.amount>0)
           this.reservation.amount=data.amount;
         if(data.deliveryDate!=undefined&&data.deliveryDate!=null&&data.deliveryDate!='')
@@ -59,7 +58,6 @@ export class NewReservationComponent {
   }
 
   public saveOfferByComapny(){
-    console.log(this.reservation);
     this.subs.add(
       this.reservationController.saveReservation(this.reservation).subscribe(
         (data)=>alert("Reservation is successfully saved."),

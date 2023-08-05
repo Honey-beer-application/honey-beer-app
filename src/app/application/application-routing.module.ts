@@ -64,6 +64,10 @@ const routes: Routes = [
       {
         path:"meetings",
         loadChildren:()=>import("./meetings/meetings.module").then(m=>m.MeetingsModule)
+      },
+      {
+        path:"account",
+        loadChildren:()=>import("./account/account.module").then(m=>m.AccountModule)
       }
     ]
     

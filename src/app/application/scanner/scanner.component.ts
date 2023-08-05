@@ -39,7 +39,6 @@ export class ScannerComponent implements OnDestroy{
       this.subs.add(
         this.customerController.registeredCustomer.asObservable().subscribe((data:ICustomer)=>qrCode.scannedBy=data)
       );
-      console.log(qrCode);
       this.qrCodeController.scanQRCode(qrCode)
       .subscribe(
         (data)=>alert("QR code is successfully scanned."),

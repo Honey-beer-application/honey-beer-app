@@ -45,7 +45,6 @@ export class ReservationsComponent {
     this.subs.add(
       this.reservationForm.valueChanges.subscribe(
         (data:{amount:number,delivery:string})=>{
-          console.log(data);
           this.reservations = this.allReservations;
           if(data.amount!=undefined&&data.amount!=null)
             this.reservations = this.reservations.filter(reservation=>reservation.amount==data.amount);

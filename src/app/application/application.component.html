@@ -18,7 +18,7 @@
   <!-- <h1>Footer</h1> -->
   <div class="suggestions" [formGroup]="emailForm">
     <h3>Suggestions:</h3>
-    <input [ngClass]="this.emailEntered==undefined?'none':(this.emailEntered==true?'success':'error')" type="text" placeholder="From" formControlName="from_email">
+    <input [ngClass]="this.emailEntered==undefined?'none':(this.emailEntered==true?'success':'error')" type="text" placeholder="From (for not registered users)" formControlName="from_email">
     <input [ngClass]="this.titleEntered==undefined?'none':(this.titleEntered==true?'success':'error')" type="text" placeholder="Title" formControlName="title">
     <textarea [ngClass]="this.messageEntered==undefined?'none':(this.messageEntered==true?'success':'error')" name="message" formControlName="message" placeholder="Message" id="" cols="30" rows="10"></textarea>
     <button (click)="sendEmail()">Send suggestion</button>

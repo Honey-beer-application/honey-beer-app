@@ -10,10 +10,10 @@
     <div class="arrow-drop-down-menu">
         <div class="arrow-drop-down-content">
             <ul>
-                <li *ngIf="isCompanyRegistered()">
+                <li >
                     <button (click)="redirectToDiscounts()" (mouseenter)="setImage(images[0])" (mouseleave)="setImage('#')">Discounts</button>
                 </li> 
-                <li *ngIf="isCustomerRegistered()">
+                <li>
                     <button (click)="redirectToSurveys()" (mouseenter)="setImage(images[1])" (mouseleave)="setImage('#')">Surveys</button>
                 </li>    
             </ul>
@@ -72,7 +72,7 @@
 <button href="#" class="build-a-bottle-link">Buy online</button>
 <!-- <button class="menu-button" *ngIf="this.isCompanyRegistered()"><mat-icon>shopping_cart</mat-icon></button> -->
 <button class="person-avatar-icon">
-<mat-icon>person</mat-icon>
+<mat-icon (click)="redirectToAccount()">person</mat-icon>
     <div class="avatar-info" *ngIf="this.isCustomerRegistered()">
         <div>
             <label for="">Name:</label>

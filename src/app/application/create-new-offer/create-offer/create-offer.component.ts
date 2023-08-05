@@ -38,7 +38,6 @@ export class CreateOfferComponent implements OnDestroy {
     this.subs.add(
       CompanyController.companyObservable.subscribe((data:ICompany)=>{
         this.company=data;
-        console.log(this.company);
       })
     );
 
@@ -70,7 +69,6 @@ export class CreateOfferComponent implements OnDestroy {
     offerByCompany.pib=this.company.PIB;
     offerByCompany.productId=this.offer.productInstance==undefined?0n:this.offer.productInstance.productId;
     offerByCompany.offerInstance=this.offer;
-    console.log(offerByCompany);
     this.offerController.saveOffer(offerByCompany).subscribe(
       (data)=>alert("Offer is successfully saved."),
       (error)=>alert(error.error.detail))

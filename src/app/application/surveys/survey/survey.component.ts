@@ -23,15 +23,12 @@ export class SurveyComponent implements OnDestroy {
     this.answers = new Array<FormControl>();
     this.subs.add(
       this.surveyController.surveyToLoad.asObservable().subscribe((data:IEvent)=>{
-        console.log(data);
-        // console.log(JSON.stringify(data));
         this.survey=data;
       })
     );
     this.surveyForm=this.fb.array(
       this.survey.questions[1].answers
     );
-    console.log(this.surveyForm);
   }
   ngOnDestroy(): void {
     this.subs.unsubscribe();
