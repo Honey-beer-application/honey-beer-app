@@ -92,7 +92,7 @@ export class RegisterComponent implements OnInit,AfterViewInit {
 
     this.companyForm.valueChanges
     .pipe(filter(data=>this.companyForm.valid&&data.companyPassword==data.companyConfirmedPassword))
-    .subscribe(data=>{console.log(data);this.company.PIB=data.companyPIB;this.company.email=data.companyEmail;this.company.name=data.companyUsername;this.company.password=data.companyPassword});
+    .subscribe(data=>{this.company.PIB=data.companyPIB;this.company.email=data.companyEmail;this.company.name=data.companyUsername;this.company.password=data.companyPassword});
   }
 
   ngAfterViewInit(): void {

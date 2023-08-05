@@ -21,7 +21,6 @@ export default class CompanyService{
         });
     }
     deleteCompany(company: ICompany): Observable<ICompany> {
-        console.log(Number(company.PIB))
         return this.httpClient.delete<ICompany>("https://localhost:7165/api/company",{body:{
             "pib":Number(company.PIB),
             "name":company.email,

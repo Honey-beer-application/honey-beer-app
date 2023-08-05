@@ -25,7 +25,6 @@ export default class OfferByCompanyService{
         return this.httpClient.get<OfferByCompany>(`https://localhost:7165/api/OfferByCompany/getOfferByCompany/:id?id=${id}`);
     }
     public changeOfferByCompany(offerByCompany:IOfferByCompany):Observable<boolean>{
-        console.log(offerByCompany.offerInstance.beginDate.toISOString().split('.')[0]);
         var object:Object = {
             "pib": Number(offerByCompany.pib),
             "productId": Number(offerByCompany.offerId),
@@ -49,7 +48,6 @@ export default class OfferByCompanyService{
                 }
             }
         };
-        console.log(object)
         return this.httpClient.post<boolean>("https://localhost:7165/api/OfferByCompany/update",
         object);
     }
