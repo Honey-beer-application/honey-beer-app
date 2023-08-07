@@ -19,4 +19,10 @@ export class QuestionType implements IQuestionType{
         this._questionTypeId=0n;
         this._name="";
     }
+    public toJSON(questionType:IQuestionType) {
+        return {
+            "questionTypeId":Number(questionType.questionTypeId),
+            "name":questionType.name
+        }
+    }
 }

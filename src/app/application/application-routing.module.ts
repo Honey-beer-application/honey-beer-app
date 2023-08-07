@@ -68,6 +68,10 @@ const routes: Routes = [
       {
         path:"account",
         loadChildren:()=>import("./account/account.module").then(m=>m.AccountModule)
+      },
+      {
+        path:"voting-forms",
+        loadChildren:()=>import("./voting-forms/voting-forms.module").then(m=>m.VotingFormsModule)
       }
     ]
     

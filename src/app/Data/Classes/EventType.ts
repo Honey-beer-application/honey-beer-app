@@ -19,4 +19,11 @@ export class EventType implements IEventType{
         this._eventTypeId=0n;
         this._name="";
     }
+    public toJSON(eventType:IEventType){
+        return{
+            "eventTypeId":Number(eventType.eventTypeId),
+            "name":eventType.name,
+            "events":[]
+        }
+    }
 }

@@ -14,6 +14,8 @@ import { CreateReservationModule } from "./create-reservation/create-reservation
 import { ProductStoresComponent } from './product-stores/product-stores.component';
 import { OurStoresComponent } from './our-stores/our-stores.component';
 import { ProductStoresModule } from "./product-stores/product-stores.module";
+import { VotingFormsComponent } from './voting-forms/voting-forms.component';
+import { VotingFormsModule } from "./voting-forms/voting-forms.module";
 
 @NgModule({
     declarations: [
@@ -24,7 +26,8 @@ import { ProductStoresModule } from "./product-stores/product-stores.module";
         CreateNewOfferComponent,
         CreateReservationComponent,
         ProductStoresComponent,
-        OurStoresComponent
+        OurStoresComponent,
+        VotingFormsComponent
     ],
     imports: [
         CommonModule,
@@ -33,7 +36,8 @@ import { ProductStoresModule } from "./product-stores/product-stores.module";
         ReactiveFormsModule,
         CreateNewOfferModule,
         CreateReservationModule,
-        ProductStoresModule
+        ProductStoresModule,
+        VotingFormsModule
     ]
 })
 export class ApplicationModule { }

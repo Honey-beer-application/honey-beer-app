@@ -1,0 +1,28 @@
+import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { EventController } from 'src/app/Data/Controllers/EventController';
+import { IEvent } from 'src/app/Data/Interfaces/IEvent';
+
+@Component({
+  selector: 'app-voting-forms',
+  templateUrl: './voting-forms.component.html',
+  styleUrls: ['./voting-forms.component.scss']
+})
+export class VotingFormsComponent {
+
+  public surveys:IEvent[];
+  private subs:Subscription;
+  constructor(private eventController:EventController){
+    this.subs = new Subscription();
+    this.surveys = new Array<IEvent>();
+    this.subs.add(
+      this.eventController.loadAllEvents().subscribe((data:IEvent[])=>{
+        this.surveys=data;
+      })
+    )
+    
+  }
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
+}

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SurveyComponent } from './survey.component';
 import { SurveyRoutingModule } from './survey-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,8 @@ import { SurveyRoutingModule } from './survey-routing.module';
   ],
   imports: [
     CommonModule,
-    SurveyRoutingModule
+    SurveyRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class SurveyModule { }

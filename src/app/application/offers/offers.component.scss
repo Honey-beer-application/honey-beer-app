@@ -2,13 +2,14 @@
     display: grid;
     width:100%;
     gap: 20px;
-    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
     //padding: 50px;
 }
 .offers-container{
     display: flex;
     margin: 50px;
     gap:20px;
+
     >:first-child{
         padding:20px 0px 20px 0px;
         margin-inline:20px;
@@ -22,6 +23,7 @@
         gap: 20px;
         background-color: rgba($color: #e4ddcd, $alpha:0.6);
         max-width: 200px;
+        max-height: 400px;
         >div{
             display: flex;
             flex-direction: column;

@@ -36,4 +36,14 @@ export class Answer implements IAnswer{
         this._answerId=0n;
         this._value="";
     }
+    toJSON(answer:IAnswer): {} {
+        return {
+            "eventId":Number(answer.eventId),
+            "questionId":Number(answer.questionId),
+            "answerId":Number(answer.answerId),
+            "value":answer.value.toString(),
+            "eventQuestion":null,
+            "customerAnswer":null
+        }
+    }
 }

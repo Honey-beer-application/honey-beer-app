@@ -13,10 +13,13 @@ export class EventController{
     public loadAllEvents():Observable<IEvent[]>{
         return this.eventService.loadAllEvents();
     }
-    loadAllPromotions():Observable<IEvent[]> {
+    public loadAllPromotions():Observable<IEvent[]> {
         return this.eventService.loadAllPromotions();
     }
-    setEvent(promotion: IEvent) {
+    public setEvent(promotion: IEvent) {
         this.surveyToLoad.next(promotion);
+    }
+    public saveEventForm(eventForm:IEvent):Observable<boolean>{
+        return this.eventService.saveEventForm(eventForm);
     }
 }

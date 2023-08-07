@@ -104,4 +104,7 @@ export class NavigationMediumComponent implements OnDestroy {
   public redirectToAccount():void{
     this.router.navigateByUrl('app/account');
   }
+  public redirectToVotingForms():void{
+    this.router.navigateByUrl("app/voting-forms");
+  }
 }

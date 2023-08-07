@@ -116,4 +116,7 @@ export class NavigationBigComponent {
   public redirectToAccount():void{
     this.router.navigateByUrl('app/account');
   }
+  public redirectToVotingForms():void{
+    this.router.navigateByUrl("app/voting-forms");
+  }
 }

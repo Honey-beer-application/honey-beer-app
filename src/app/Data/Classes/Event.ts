@@ -3,11 +3,12 @@ import { IEventLocation } from "../Interfaces/IEventLocation";
 import { IEventType } from "../Interfaces/IEventType";
 import { IQuestion } from "../Interfaces/IQuestion";
 import { EventType } from "./EventType";
+import { Question } from "./Question";
 
 export class Event implements IEvent{
     private _eventId: bigint;
     private _title: string;
-    private _decription: string;
+    private _description: string;
     private _creationDate: Date;
     private _beginDate: Date | null;
     private _endDate: Date | null;
@@ -34,10 +35,10 @@ export class Event implements IEvent{
         this._title = value;
     }
     public get description(): string {
-        return this._decription;
+        return this._description;
     }
     public set description(value: string) {
-        this._decription = value;
+        this._description = value;
     }
     public get creationDate(): Date {
         return this._creationDate;
@@ -78,7 +79,7 @@ export class Event implements IEvent{
     constructor(){
         this._beginDate = null;
         this._creationDate = new Date();
-        this._decription = "";
+        this._description = "";
         this._endDate= new Date();
         this._eventId = 0n;
         this._eventTypeId = 0n;
@@ -88,4 +89,24 @@ export class Event implements IEvent{
         this._eventLocations = [];
     }
     
+    
+    public arrayToJSON(array:IQuestion[]){
+        let result:Object[]=[];
+        array.forEach((question:IQuestion)=>result.push(new Question().toJSON(question)))
+        return result;
+    }
+    public toJSON(event:IEvent){
+        return {
+            "beginDate":event.beginDate,
+            "creationDate":event.creationDate,
+            "description":event.description,
+            "endDate":event.endDate,
+            "eventId":Number(event.eventId),
+            "eventTypeId":Number(event.eventTypeId),
+            "eventTypeInstance":new EventType().toJSON(event.eventTypeInstance),
+            "questions":new Event().arrayToJSON(event.questions),
+            "title":event.title,
+            "eventLocations":new Array<Object>()
+        };
+    }
 }

@@ -1,48 +1,48 @@
-<form >
-    <h1>Survey: {{this.survey.title}}</h1>
-    <div *ngFor="let question of this.survey.questions">
-        <label for="">{{question.text}}</label>
-        <ng-container [ngSwitch]="question.questionTypeInstance.name">
-            <ng-container *ngSwitchCase="'Text'">
-                <textarea name="" id="" cols="30" rows="10" ></textarea>
-            </ng-container>
-            <ng-container *ngSwitchCase="'Optional'">
-                <div>
-                    <ng-container *ngFor="let answer of question.answers">
-                        <input type="checkbox">
-                        <label for="">{{answer.value}}</label>
-                    </ng-container>
-                </div>
-            </ng-container>
-            <ng-container *ngSwitchCase="'Multiple optional'">
-                <div>
-                    <ng-container *ngFor="let answer of question.answers">
-                        <input type="checkbox">
-                        <label for="">{{answer.value}}</label>
-                    </ng-container>
-                </div>
-            </ng-container>
-            <ng-container *ngSwitchCase="'Multiple choice'">
-                <div>
-                    <ng-container *ngFor="let answer of question.answers">
-                        <input type="checkbox">
-                        <label for="">{{answer.value}}</label>
-                    </ng-container>
-                </div>
-            </ng-container>
-            <ng-container *ngSwitchCase="'Single choice'">
-                <div>
-                    <ng-container *ngFor="let answer of question.answers">
-                        <input type="radio" name="{{question.text}}">
-                        <label for="">{{answer.value}}</label>
-                    </ng-container>
-                </div>
-            </ng-container>
-            <!-- <div *ngSwitchDefault>
-                <p>Error</p>
-            </div> -->
-        </ng-container>
-        
-    </div>
-    <button type="submit">Submit your answers</button>
+<form [formGroup]="surveyForm" class="surveyForm">
+    <h1>{{this.survey.title}}</h1>
+    <ng-container formArrayName="questions">
+        <div *ngFor="let question of questions;let i=index" [formGroupName]="i" >
+                <p>{{question.controls['questionName'].value}}</p>
+            <div [ngSwitch]="question.controls['questionType'].value">
+                <ng-container *ngSwitchCase="'Text'">
+                    <p>(Required)</p>
+                    <div formArrayName="answers">
+                        <ng-container *ngFor="let answer of returnAnswersArray(question);let i=index" [formGroupName]="i">
+                            <textarea formControlName="value" type="text"></textarea>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="'Multiple choice'">
+                    <p>(2 options at least must be checked)</p>
+                    <div formArrayName="answers">
+                        <div *ngFor="let answer of returnAnswersArray(question);let i=index" [formGroupName]="i">
+                            <input formControlName="value" type="checkbox">
+                            <label>{{answer.get("label")?.value}}</label>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="'Single choice'">
+                    <p>(1 option must be checked)</p>
+                    <div formArrayName="answers">
+                        <ng-container *ngFor="let answer of returnAnswersArray(question);let i=index" [formGroupName]="i">
+                            <div *ngFor="let label of returnLabelsArray(answer)">
+                                <input formControlName="value" type="radio" name="value" value='{{label.get("value")?.value}}'>
+                                <label>{{label.get("value")?.value}}</label>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <ng-container *ngSwitchCase="'Optional'">
+                    <p>(Optional)</p>
+                    <div formArrayName="answers">
+                        <div *ngFor="let answer of returnAnswersArray(question);let i=index" [formGroupName]="i">
+                            <input formControlName="value" type="checkbox">
+                            <label>{{answer.get("label")?.value}}</label>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+    <button (click)="saveAnswers()">Submit your answers</button>
 </form>

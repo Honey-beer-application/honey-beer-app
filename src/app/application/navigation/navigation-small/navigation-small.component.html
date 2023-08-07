@@ -40,6 +40,9 @@
                     <li>
                         <button (click)="redirectToSurveys()">Surveys</button>
                     </li>
+                    <li>
+                        <button (click)="redirectToVotingForms()">Pick your choice</button>
+                    </li>
                 </ul>
             </div>
             <div class="arrow-drop-down-content">
@@ -70,7 +73,7 @@
                         <button (click)="navigateToCreateReservation()">Create reservation</button>
                     </li>
                     <li *ngIf="isCompanyRegistered()">
-                        <button (click)="redirectToMeetings()">Meetings</button>
+                        <button (click)="redirectToMeetings()">Available meetings</button>
                     </li>
                 </ul>
             </div>
