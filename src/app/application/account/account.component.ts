@@ -96,7 +96,8 @@ export class AccountComponent {
     });
     let sentEmail:ISentCompanyEmail = new SentCompanyEmail();
     sentEmail.pib=this.company.PIB;
-    this.sentCompanyEmailController.saveCompanyEmail(sentEmail).subscribe((data)=>alert("Email is registered in database."),(error)=>JSON.stringify(error));
+    this.sentCompanyEmailController.saveCompanyEmail(sentEmail).subscribe((data)=>
+    alert("Email is registered in database."),(error)=>JSON.stringify(error));
     alert("Email has been successfully sent");
   }
   public isCompanyRegistered():boolean{

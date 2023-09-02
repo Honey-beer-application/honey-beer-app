@@ -57,7 +57,7 @@ export class NewReservationComponent {
     this.subs.unsubscribe();
   }
 
-  public saveOfferByComapny(){
+  public saveReservation(){
     this.subs.add(
       this.reservationController.saveReservation(this.reservation).subscribe(
         (data)=>alert("Reservation is successfully saved."),

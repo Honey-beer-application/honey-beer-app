@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent{
+  public title:string = 'honey-beer-app';
+  
   constructor(public offerByCompanyController:OfferByCompanyController){
 
   }

@@ -20,12 +20,12 @@ export default class CustomerController{
 
     constructor(private customerService:CustomerService){
         let customer:ICustomer = new Customer();
-        // customer.customerId=6n;
-        // customer.email="customer3@gmail.com";
-        // customer.password="customer3";
-        // customer.username="customer3";
+        // customer.customerId=13n;
+        // customer.email="customer10@gmail.com";
+        // customer.password="customer10";
+        // customer.username="customer10";
         // customer.personalEmailInstance = new PersonalEmail();
-        // customer.personalEmailInstance.email="customer3@gmail.com";
+        // customer.personalEmailInstance.email="customer10@gmail.com";
         this.registeredCustomer = new BehaviorSubject(customer);
         //this.registeredCustomer = new BehaviorSubject(<ICustomer>(new Customer()));
     }

@@ -17,7 +17,7 @@ export default class CompanyController{
         CompanyController.companyBehaviour.next(company);
     }
     constructor(private companyService:CompanyService){
-         CompanyController._registeredCompany = new Company();
+        CompanyController._registeredCompany = new Company();
         CompanyController._registeredCompany.PIB=10000001n;
         CompanyController._registeredCompany.email="kompanija1@gmail.com";
         CompanyController._registeredCompany.name="kompanija1";

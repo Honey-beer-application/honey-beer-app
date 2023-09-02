@@ -12,7 +12,8 @@ export class CustomerService{
 
     }
     public createCustomer(username:string,email:string,password:string):Observable<ICustomer>{
-        return this.httpClient.post<Customer>('https://localhost:7165/api/customer',{"username":username,"password":password,"email":email,"personalEmailInstance":{"email":email}});
+        return this.httpClient.post<Customer>('https://localhost:7165/api/customer',{"username":username,"password":password,
+        "email":email,"personalEmailInstance":{"email":email}});
     }
     public deleteCustomer(customer:ICustomer):Observable<ICustomer>{
         return this.httpClient.delete<ICustomer>('https://localhost:7165/api/customer',
