@@ -102,11 +102,16 @@ export class MainPageComponent implements OnInit,AfterViewInit {
 
   }
   private load3Dmodels():void{
-    if(this.model==undefined){
-      this.loader.load('./../../assets/3D-models/honey-bottle-and-can.glb',(gltf:GLTF)=>{ 
+    // if(this.model==undefined){
+    //   this.loader.load('./../../assets/3D-models/honey-bottle-and-can.glb',(gltf:GLTF)=>{ 
+    //     this.model = gltf.scene;
+    //     this.scene.add( this.model);
+    //   });
+      if(this.model==undefined){
+        this.loader.load('./assets/3D-models/honey-bottle-and-can.glb',(gltf:GLTF)=>{ 
         this.model = gltf.scene;
         this.scene.add( this.model);
-      });
+        });
       //deployment link
       // this.loader.load('./assets/3D-models/honey-bottle-and-can.glb',(gltf:GLTF)=>{ 
       //   this.model = gltf.scene;
