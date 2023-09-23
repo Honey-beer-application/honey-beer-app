@@ -108,7 +108,7 @@ export class MainPageComponent implements OnInit,AfterViewInit {
     //     this.scene.add( this.model);
     //   });
       if(this.model==undefined){
-        this.loader.load('./honey-beer-app/assets/3D-models/honey-bottle-and-can.glb',(gltf:GLTF)=>{ 
+        this.loader.load('./assets/3D-models/honey-bottle-and-can.glb',(gltf:GLTF)=>{ 
         this.model = gltf.scene;
         this.scene.add( this.model);
         });
