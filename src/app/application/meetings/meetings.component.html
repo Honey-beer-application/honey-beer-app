@@ -2,7 +2,8 @@
     <div class="products" >
         <button class="link-product-card" *ngFor="let meeting of availableMeetings">
             <div class="product-container">
-                <img src="./../../../../assets/images/honey-beer-logo.png" alt="">
+                <!-- <img src="./../../../../assets/images/honey-beer-logo.png" alt=""> -->
+                <img src="./assets/images/honey-beer-logo.png" alt="">
                 <h1>{{meeting.subject}}</h1>
                 <p>date: {{getDate(meeting.startTime)}}</p>
                 <p>{{getTime(meeting.startTime)}} - {{getTime(meeting.endTime)}}</p>
