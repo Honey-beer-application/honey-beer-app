@@ -1,6 +1,6 @@
 {
     "/api":{
-        "target":"https://localhost:7165",
+        "target":["https://localhost:7165","https://honeybeer.bsite.net/*"],
         "secure":false
     }
 }
