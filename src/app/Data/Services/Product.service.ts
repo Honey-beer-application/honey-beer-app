@@ -9,7 +9,10 @@ export class ProductService{
 
     }
 
+    // public loadAllProducts():Observable<IProduct[]>{
+    //     return this.httpClient.get<IProduct[]>("https://localhost:7165/api/product");
+    // }
     public loadAllProducts():Observable<IProduct[]>{
-        return this.httpClient.get<IProduct[]>("https://localhost:7165/api/product");
+        return this.httpClient.get<IProduct[]>("https://honeybeer.bsite.net/api/product");
     }
 }
