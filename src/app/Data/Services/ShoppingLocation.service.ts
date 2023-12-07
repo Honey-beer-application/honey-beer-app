@@ -8,10 +8,10 @@ export class ShoppingLocationService{
     constructor(private httpClient:HttpClient){
 
     }
-    // public loadAllShoppingLocations():Observable<IShoppingLocation[]>{
-    //     return this.httpClient.get<IShoppingLocation[]>("https://localhost:7165/api/ShoppingLocation")
-    // }
     public loadAllShoppingLocations():Observable<IShoppingLocation[]>{
-        return this.httpClient.get<IShoppingLocation[]>("https://honeybeer.bsite.net/api/ShoppingLocation")
+        return this.httpClient.get<IShoppingLocation[]>("https://localhost:7165/api/ShoppingLocation")
     }
+    // public loadAllShoppingLocations():Observable<IShoppingLocation[]>{
+    //     return this.httpClient.get<IShoppingLocation[]>("https://honeybeer.bsite.net/api/ShoppingLocation")
+    // }
 }

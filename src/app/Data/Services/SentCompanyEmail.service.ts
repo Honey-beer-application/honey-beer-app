@@ -9,16 +9,16 @@ export class SentCompanyEmailService{
     constructor(private httpClient:HttpClient){
 
     }
-    // public saveSentComapnyEmail(sentCompanyEmail:ISentCompanyEmail):Observable<boolean>{
-    //     return this.httpClient.post<boolean>("https://localhost:7165/api/SentCompanyEmail",{
-    //         "pib":Number(sentCompanyEmail.pib),
-    //         "dateAndTime":sentCompanyEmail.dateAndTime
-    //     });
-    // }
     public saveSentComapnyEmail(sentCompanyEmail:ISentCompanyEmail):Observable<boolean>{
-        return this.httpClient.post<boolean>("https://honeybeer.bsite.net/api/SentCompanyEmail",{
+        return this.httpClient.post<boolean>("https://localhost:7165/api/SentCompanyEmail",{
             "pib":Number(sentCompanyEmail.pib),
             "dateAndTime":sentCompanyEmail.dateAndTime
         });
     }
+    // public saveSentComapnyEmail(sentCompanyEmail:ISentCompanyEmail):Observable<boolean>{
+    //     return this.httpClient.post<boolean>("https://honeybeer.bsite.net/api/SentCompanyEmail",{
+    //         "pib":Number(sentCompanyEmail.pib),
+    //         "dateAndTime":sentCompanyEmail.dateAndTime
+    //     });
+    // }
 }

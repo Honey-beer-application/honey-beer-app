@@ -8,10 +8,10 @@ export class LocationService{
     constructor(private httpClient:HttpClient){
 
     }
-    // public loadAllLocations():Observable<ILocation[]>{
-    //     return this.httpClient.get<ILocation[]>("https://localhost:7165/api/Location");
-    // }
     public loadAllLocations():Observable<ILocation[]>{
-        return this.httpClient.get<ILocation[]>("https://honeybeer.bsite.net/api/Location");
+        return this.httpClient.get<ILocation[]>("https://localhost:7165/api/Location");
     }
+    // public loadAllLocations():Observable<ILocation[]>{
+    //     return this.httpClient.get<ILocation[]>("https://honeybeer.bsite.net/api/Location");
+    // }
 }
