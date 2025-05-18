@@ -4,7 +4,7 @@ import { Subscription, filter } from 'rxjs';
 import OfferByCompany from 'src/app/Data/Classes/OfferByCompany';
 import CompanyController from 'src/app/Data/Controllers/CompanyController';
 import { OfferByCompanyController } from 'src/app/Data/Controllers/OfferByCompanyController';
-import OfferController from 'src/app/Data/Controllers/OfferComtroller';
+import OfferController from 'src/app/Data/Controllers/OfferController';
 import ICompany from 'src/app/Data/Interfaces/ICompany';
 import IOffer from 'src/app/Data/Interfaces/IOffer';
 import IOfferByCompany from 'src/app/Data/Interfaces/IOfferByCompany';
@@ -23,10 +23,10 @@ export class CreateOfferComponent implements OnDestroy{
   public offerAmount:FormControl;
   public offerBeginDate:FormControl;
   public offerEndDate:FormControl;
-  constructor(private fb:FormBuilder,private offerByCompanyController:OfferByCompanyController){
+  constructor(private fb:FormBuilder,private offerByCompanyController:OfferByCompanyController, private companyController:CompanyController){
     this.offerByCompany = new OfferByCompany();
     this.subs.add(
-      CompanyController.companyObservable.subscribe((data:ICompany)=>{
+      this.companyController.companyObservable.subscribe((data:ICompany)=>{
         this.offerByCompany.companyInstance=data;
         this.offerByCompany.pib=data.PIB;
       })

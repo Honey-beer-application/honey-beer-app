@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VotingFormsCardComponent } from './voting-forms-card.component';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('VotingFormsCardComponent', () => {
   let component: VotingFormsCardComponent;
@@ -8,7 +9,8 @@ describe('VotingFormsCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [VotingFormsCardComponent]
+      declarations: [VotingFormsCardComponent],
+      providers: [provideHttpClient()]
     });
     fixture = TestBed.createComponent(VotingFormsCardComponent);
     component = fixture.componentInstance;

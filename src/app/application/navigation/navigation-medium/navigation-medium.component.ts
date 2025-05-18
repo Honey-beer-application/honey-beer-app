@@ -29,7 +29,7 @@ export class NavigationMediumComponent implements OnDestroy {
   public hoveredImage:string="#";
   private customer:ICustomer;
   private company:ICompany;
-  constructor(private router:Router,private customerController:CustomerController){
+  constructor(private router:Router,private customerController:CustomerController, private companyController: CompanyController){
     this.subs = new Subscription();
     this.customer = new Customer();
     this.company = new Company();
@@ -37,7 +37,7 @@ export class NavigationMediumComponent implements OnDestroy {
       this.customerController.registeredCustomer.asObservable().subscribe((data:ICustomer)=>this.customer=data)
     )
     this.subs.add(
-      CompanyController.companyObservable.subscribe((data:ICompany)=>this.company=data)
+      this.companyController.companyObservable.subscribe((data:ICompany)=>this.company=data)
     )
 
   }

@@ -33,7 +33,7 @@ export class AccountComponent {
   public emailEntered:Boolean|undefined=undefined;
   public titleEntered:Boolean|undefined=undefined;
   public messageEntered:Boolean|undefined=undefined; 
-  constructor(private fb:FormBuilder,private customerController:CustomerController,private sentCompanyEmailController:SentCompanyEmailController){
+  constructor(private fb:FormBuilder,private customerController:CustomerController,private sentCompanyEmailController:SentCompanyEmailController, private companyController:CompanyController){
     this.message = {from_email:'',title:'',message:''};
     this.subs = new Subscription();
     this.emailFrom = new FormControl(undefined,[Validators.required,Validators.email]);
@@ -53,7 +53,7 @@ export class AccountComponent {
       this.message.from_email=this.customer.email;
     }
     this.subs.add(
-      CompanyController.companyObservable.subscribe((data:ICompany)=>{
+      this.companyController.companyObservable.subscribe((data:ICompany)=>{
         if(data.PIB>0n){
           this.message.from_email=data.email;
           this.company=data;

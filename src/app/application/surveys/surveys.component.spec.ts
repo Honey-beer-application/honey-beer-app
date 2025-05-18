@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SurveysComponent } from './surveys.component';
+import { provideHttpClient } from '@angular/common/http';
+import { EventController } from 'src/app/Data/Controllers/EventController';
 
 describe('SurveysComponent', () => {
   let component: SurveysComponent;
@@ -8,9 +10,11 @@ describe('SurveysComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SurveysComponent]
+      declarations: [SurveysComponent],
+      providers: [provideHttpClient()]
     });
     fixture = TestBed.createComponent(SurveysComponent);
+    TestBed.inject(EventController)
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import OfferController from './../../Data/Controllers/OfferComtroller';
+import OfferController from '../../Data/Controllers/OfferController';
 import Offer from 'src/app/Data/Classes/Offer';
 import IOffer from 'src/app/Data/Interfaces/IOffer';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';

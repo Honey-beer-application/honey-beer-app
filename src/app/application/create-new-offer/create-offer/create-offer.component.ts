@@ -5,7 +5,7 @@ import Company from 'src/app/Data/Classes/Company';
 import Offer from 'src/app/Data/Classes/Offer';
 import OfferByCompany from 'src/app/Data/Classes/OfferByCompany';
 import CompanyController from 'src/app/Data/Controllers/CompanyController';
-import OfferController from 'src/app/Data/Controllers/OfferComtroller';
+import OfferController from 'src/app/Data/Controllers/OfferController';
 import { ProductController } from 'src/app/Data/Controllers/ProductController';
 import ICompany from 'src/app/Data/Interfaces/ICompany';
 import IOffer from 'src/app/Data/Interfaces/IOffer';
@@ -27,7 +27,7 @@ export class CreateOfferComponent implements OnDestroy {
   public offerAmount:FormControl;
   public offerBeginDate:FormControl;
   public offerEndDate:FormControl;
-  constructor(private fb:FormBuilder,private offerController:OfferController){
+  constructor(private fb:FormBuilder,private offerController:OfferController, private companyController:CompanyController){
     this.offer = new Offer();
     this.company = new Company();
     this.subs.add(
@@ -36,7 +36,7 @@ export class CreateOfferComponent implements OnDestroy {
       })
     );
     this.subs.add(
-      CompanyController.companyObservable.subscribe((data:ICompany)=>{
+      this.companyController.companyObservable.subscribe((data:ICompany)=>{
         this.company=data;
       })
     );

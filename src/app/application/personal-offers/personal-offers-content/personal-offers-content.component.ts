@@ -39,7 +39,7 @@ export class PersonalOffersContentComponent implements OnDestroy {
               private fb:FormBuilder,
               private router:Router){
     this.subs.add(
-      CompanyController.companyObservable.subscribe(
+      this.companyController.companyObservable.subscribe(
         (data:ICompany)=>this.registeredCompany=data
       )
     )

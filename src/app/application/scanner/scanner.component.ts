@@ -10,7 +10,8 @@ import ICustomer from 'src/app/Data/Interfaces/ICustomer';
 @Component({
   selector: 'app-scanner',
   templateUrl: './scanner.component.html',
-  styleUrls: ['./scanner.component.scss']
+  styleUrls: ['./scanner.component.scss'],
+  exportAs: 'scanner'
 })
 export class ScannerComponent implements OnDestroy{
 

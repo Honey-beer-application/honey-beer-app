@@ -21,7 +21,7 @@ export class NewReservationComponent {
   public reservationForm!:FormGroup;
   public reservationAmount:FormControl;
   public reservationDeliveryDate:FormControl;
-  constructor(private fb:FormBuilder,private reservationController:ReservationController){
+  constructor(private fb:FormBuilder,private reservationController:ReservationController, private companyController:CompanyController){
     this.reservation = new Reservation();
     this.subs.add(
       this.reservationController.productObservable.subscribe((data:IProduct)=>{
@@ -37,7 +37,7 @@ export class NewReservationComponent {
     });
 
     this.subs.add(
-      CompanyController.companyObservable.subscribe((data:ICompany)=>{
+      this.companyController.companyObservable.subscribe((data:ICompany)=>{
         this.reservation.pib=data.PIB;
       })
     );

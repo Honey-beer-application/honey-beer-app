@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OffersComponent } from './offers.component';
+import { provideHttpClient } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('OffersComponent', () => {
   let component: OffersComponent;
@@ -8,7 +10,9 @@ describe('OffersComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [OffersComponent]
+      declarations: [OffersComponent],
+      imports: [ReactiveFormsModule],
+      providers: [provideHttpClient()]
     });
     fixture = TestBed.createComponent(OffersComponent);
     component = fixture.componentInstance;

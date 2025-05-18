@@ -39,7 +39,7 @@ export class UpdateOfferComponent implements OnDestroy{
 
       //loading company
       this.subs.add(
-        CompanyController.companyObservable.subscribe((data:ICompany)=>this.registeredCompany=data)
+        this.companyController.companyObservable.subscribe((data:ICompany)=>this.registeredCompany=data)
       )
       
       //loading offerByCompany

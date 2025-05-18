@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SurveyCardComponent } from './survey-card.component';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('SurveyCardComponent', () => {
   let component: SurveyCardComponent;
@@ -8,7 +9,8 @@ describe('SurveyCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SurveyCardComponent]
+      declarations: [SurveyCardComponent],
+      providers: [provideHttpClient()]
     });
     fixture = TestBed.createComponent(SurveyCardComponent);
     component = fixture.componentInstance;

@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavigationSmallComponent } from './navigation-small.component';
+import { provideHttpClient } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('NavigationSmallComponent', () => {
   let component: NavigationSmallComponent;
@@ -8,7 +10,9 @@ describe('NavigationSmallComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NavigationSmallComponent]
+      declarations: [NavigationSmallComponent],
+      imports: [MatIconModule],
+      providers: [provideHttpClient()]
     });
     fixture = TestBed.createComponent(NavigationSmallComponent);
     component = fixture.componentInstance;

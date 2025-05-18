@@ -10,13 +10,15 @@ import { Product } from "../Classes/Product";
       ProductController._productToLoad.next(product);
     }
 
-    private static _productToLoad: BehaviorSubject<IProduct> = new BehaviorSubject(<IProduct>(new Product()));
-    public static productToLoadObservable:Observable<IProduct> = ProductController._productToLoad.asObservable();
+    private static readonly _productToLoad: BehaviorSubject<IProduct> = new BehaviorSubject(<IProduct>(new Product()));
+    public static get productToLoadObservable(){
+      return ProductController._productToLoad.asObservable();
+    }
     
    public static setProduct(product:IProduct){
     ProductController._productToLoad.next(product);
    }
-    constructor(private productService:ProductService){
+    constructor(private readonly productService:ProductService){
     }
     public loadAllProducts():Observable<Array<IProduct>>{
         return this.productService.loadAllProducts();

@@ -37,7 +37,7 @@ export class NavigationBigComponent {
       this.customerController.registeredCustomer.asObservable().subscribe((data:ICustomer)=>this.customer=data)
     )
     this.subs.add(
-      CompanyController.companyObservable.subscribe((data:ICompany)=>this.company=data)
+      this.companyController.companyObservable.subscribe((data:ICompany)=>this.company=data)
     )
   }
   public isCustomerRegistered():boolean{

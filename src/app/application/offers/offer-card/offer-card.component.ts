@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import OfferController from 'src/app/Data/Controllers/OfferComtroller';
+import Offer from 'src/app/Data/Classes/Offer';
+import OfferController from 'src/app/Data/Controllers/OfferController';
 import IOffer from 'src/app/Data/Interfaces/IOffer';
 
 @Component({
@@ -10,7 +11,7 @@ import IOffer from 'src/app/Data/Interfaces/IOffer';
 })
 export class OfferCardComponent {
 
-  @Input('offer') offer!:IOffer;
+  @Input('offer') offer:IOffer = new Offer();
   constructor(private router:Router,private offerController:OfferController){
 
   }

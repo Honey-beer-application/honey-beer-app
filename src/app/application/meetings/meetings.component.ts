@@ -17,7 +17,7 @@ export class MeetingsComponent implements OnDestroy{
   public availableMeetings:IMeeting[];
   private company:ICompany;
 
-  constructor(private meetingController:MeetingConroller){
+  constructor(private meetingController:MeetingConroller, private companyController:CompanyController){
     this.subs = new Subscription();
     this.availableMeetings = new Array<IMeeting>();
     this.company= new Company();
@@ -27,7 +27,7 @@ export class MeetingsComponent implements OnDestroy{
       })
     )
     this.subs.add(
-      CompanyController.companyObservable.subscribe((data:ICompany)=>this.company=data)
+      this.companyController.companyObservable.subscribe((data:ICompany)=>this.company=data)
     )
   }
   ngOnDestroy(): void {

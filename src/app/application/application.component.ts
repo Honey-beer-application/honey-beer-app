@@ -27,7 +27,7 @@ export class ApplicationComponent implements OnDestroy,OnInit {
   private emailTitle:FormControl;
   private emailMessage:FormControl;
   private customer:ICustomer;
-  constructor(private fb:FormBuilder,private customerController:CustomerController,private emailController:EmailController){
+  constructor(private fb:FormBuilder,private customerController:CustomerController,private emailController:EmailController, private companyController:CompanyController){
     this.message = {from_email:'',title:'',message:''};
     this.subs = new Subscription();
     this.emailFrom = new FormControl(undefined,[Validators.required,Validators.email]);
@@ -76,7 +76,7 @@ export class ApplicationComponent implements OnDestroy,OnInit {
   }
   ngOnInit(): void {
     this.subs.add(
-      CompanyController.companyObservable.subscribe((data:ICompany)=>{
+      this.companyController.companyObservable.subscribe((data:ICompany)=>{
         if(data.PIB>0n)
           this.message.from_email=data.email;
       }));

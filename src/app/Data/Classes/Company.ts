@@ -35,4 +35,20 @@ export default class Company implements ICompany{
         this._email = "";
         this._password = "";
     }
+    public setPIB(value :bigint) : this{
+        this._PIB = value;
+        return this;
+    }
+    public setName(value: string): this{
+        this._name = value;
+        return this;
+    }
+    public setPassword(value: string): this{
+        this._password = value;
+        return this;
+    }
+    public setEmail(value: string): this{
+        this._email = value;
+        return this;
+    }
 }

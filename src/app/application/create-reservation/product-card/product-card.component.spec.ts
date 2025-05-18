@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductCardComponent } from './product-card.component';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { ProductController } from 'src/app/Data/Controllers/ProductController';
+import { ReservationController } from 'src/app/Data/Controllers/ReservationController';
+import { RouterModule } from '@angular/router';
 
 describe('ProductCardComponent', () => {
   let component: ProductCardComponent;
@@ -8,9 +13,13 @@ describe('ProductCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ProductCardComponent]
+      declarations: [ProductCardComponent],
+      imports: [RouterModule],
+      providers: [provideHttpClientTesting(), provideHttpClient()]
     });
     fixture = TestBed.createComponent(ProductCardComponent);
+    TestBed.inject(ProductController);
+    TestBed.inject(ReservationController);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

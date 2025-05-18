@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PromotionCardComponent } from './promotion-card.component';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('PromotionCardComponent', () => {
   let component: PromotionCardComponent;
@@ -8,7 +9,8 @@ describe('PromotionCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PromotionCardComponent]
+      declarations: [PromotionCardComponent],
+      providers: [provideHttpClient()]
     });
     fixture = TestBed.createComponent(PromotionCardComponent);
     component = fixture.componentInstance;
