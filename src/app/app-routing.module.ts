@@ -8,14 +8,9 @@ const routes: Routes = [
     redirectTo:"app"
   },
   {
-    path:"register",
+    path:"register-and-login",
     pathMatch:"full",
-    loadChildren:()=> import("./register/register.module").then(m=>m.RegisterModule)
-  },
-  {
-    path:"login",
-    pathMatch:"full",
-    loadChildren:()=>import("./login/login.module").then(m=>m.LoginModule)
+    loadChildren:()=> import("./register_and_login/register.module").then(m=>m.RegisterModule)
   },
   {
     path:"app",

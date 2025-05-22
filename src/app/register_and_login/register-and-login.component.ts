@@ -1,20 +1,21 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import {Location } from '@angular/common';
 import { NavigationEnd, Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { filter } from 'rxjs';
-import CustomerController from './../Data/Controllers/CustomerConstroller';
-import Customer from './../Data/Classes/Customer';
-import ICustomer from './../Data/Interfaces/ICustomer';
-import CompanyController from './../Data/Controllers/CompanyController';
-import Company from './../Data/Classes/Company';
+import CustomerController from '../Data/Controllers/CustomerConstroller';
+import Customer from '../Data/Classes/Customer';
+import ICustomer from '../Data/Interfaces/ICustomer';
+import CompanyController from '../Data/Controllers/CompanyController';
+import Company from '../Data/Classes/Company';
+import CustomError from '../Data/Classes/CustomError';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-register-and-login',
+  templateUrl: './register-and-login.component.html',
+  styleUrls: ['./register-and-login.component.scss']
 })
-export class RegisterComponent implements OnInit,AfterViewInit {
+export class RegisterComponent implements AfterViewInit {
   
   //##################
   //  CUSTOMER FORM
@@ -30,36 +31,36 @@ export class RegisterComponent implements OnInit,AfterViewInit {
   //##################
 
   public companyForm:FormGroup;
-  public companyPIB:FormControl = new FormControl("",[Validators.required,Validators.min(10000001),Validators.max(99999999)]);
-  public companyUsername:FormControl = new FormControl("",[Validators.required,Validators.maxLength(50)]);
-  public companyEmail: FormControl = new FormControl("", [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]);
-  public companyPassword:FormControl = new FormControl("",[Validators.required,Validators.minLength(8)]);
-  public companyConfirmedPassword:FormControl = new FormControl("",[Validators.required,Validators.minLength(8)]);
+  public companyPIB:FormControl<bigint|null> = new FormControl(BigInt(0),[Validators.required,Validators.min(10000001),Validators.max(99999999)]);
+  public companyUsername:FormControl<string|null> = new FormControl("",[Validators.required,Validators.maxLength(50)]);
+  public companyEmail: FormControl<string|null> = new FormControl("", [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]);
+  public companyPassword:FormControl<string|null> = new FormControl("",[Validators.required,Validators.minLength(8)]);
+  public companyConfirmedPassword:FormControl<string|null> = new FormControl("",[Validators.required,Validators.minLength(8)]);
 
   //##################
   //  CUSTOMER
   //##################
-  private customer:ICustomer;
+  private readonly customer:ICustomer;
 
   //##################
   //  COMPANY
   //##################
-  private company:Company;
+  private readonly company:Company;
 
   @ViewChild('register') signUpButton:ElementRef = new ElementRef(document.getElementById('register'));
   @ViewChild('signIn') signInButton:ElementRef = new ElementRef(document.getElementById('signIn'));
   @ViewChild('main') main:ElementRef = new ElementRef(document.getElementById('main'));
 
 
-  private history: string[] = [];
+  private readonly history: string[] = [];
 
 
   constructor(
-    private location:Location,
-    private router:Router,
-    private fb:FormBuilder,
-    private customerController:CustomerController,
-    private companyController:CompanyController
+    private readonly location:Location,
+    private readonly router:Router,
+    public fb:FormBuilder,
+    private readonly customerController:CustomerController,
+    private readonly companyController:CompanyController
     ){
     
     this.customer = new Customer();
@@ -76,7 +77,16 @@ export class RegisterComponent implements OnInit,AfterViewInit {
       password:this.customerPassword,
       confirmationPassword: this.customerConfirmedPassword,
       email: this.customerEmail
-    })
+    },
+    {
+      validator: (formGroup: FormGroup): ValidationErrors | null => {
+        const [password, confirmationPassword] = [
+          formGroup.get("password")?.value,
+          formGroup.get("confirmationPassword")?.value
+        ];
+        return password !== confirmationPassword? {passwordNotMatched: "Passwords are not matching"}: null;
+      }
+    } as AbstractControlOptions)
 
     this.customerForm.valueChanges
     .pipe(filter(data=>this.customerForm.valid&&data.password==data.confirmationPassword))
@@ -103,9 +113,7 @@ export class RegisterComponent implements OnInit,AfterViewInit {
       this.main.nativeElement.classList.remove("right-panel-active");
     });
   }
-  ngOnInit(): void {
-    
-  }
+  
   backToPrevoiusPage(){
     this.history.pop();
     if (this.history.length > 0) {
@@ -116,16 +124,22 @@ export class RegisterComponent implements OnInit,AfterViewInit {
   }
   public saveCustomer():void{
     this.customerController.createCustomer(this.customer.username,this.customer.email,this.customer.password)
-    .subscribe((res:ICustomer)=>{
+    .subscribe({
+      next:(res:ICustomer) =>{
       this.customerController.registeredCustomer.next(res);
       alert("Account is successfully created.");
-    },(error)=>{alert(error.error.detail)});
+    },
+    error:(error: CustomError)=>{alert(error.error.detail)}
+    });
   }
   public saveCompany():void{
     this.companyController.createCompany(this.company.PIB,this.company.name,this.company.email,this.company.password)
-    .subscribe((res)=>{
+    .subscribe({
+      next:()=>{
       alert("Company is successfuly registered.");
       this.companyController.setCompany(this.company);
-    },(error)=>alert(error.error.detail));
+    },
+    error:(error)=>alert(error.error.detail)
+    });
   }
 }
