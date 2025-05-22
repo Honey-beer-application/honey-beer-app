@@ -22,9 +22,6 @@ body{
     max-width: 100%;
     min-width: 215px;
 }
-// .full-height,.app-height,html, body{
-//     min-height:100svh;
-// }
 
 //flex
 
@@ -54,12 +51,11 @@ button{
 .application{
     width:100%;
     height: 100svh;
-    &>app-application,app-register{
-        // min-height: 100%;
+    &>app-application,app-app-register-and-login{
         display: flex;
         flex-direction: column;
     }
-    &>app-register{
+    &>app-app-register-and-login{
         align-items: center;
         justify-content: center;
         background-color: #f6f5f7;
