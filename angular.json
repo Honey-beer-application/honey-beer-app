@@ -107,7 +107,8 @@
             "karmaConfig": "karma.conf.js",
             "codeCoverage": true,
             "watch": false,
-            "browsers": "ChromeHeadless"
+            "browsers": "ChromeHeadless",
+            "codeCoverageExclude": ["src/**/*module.ts"]
           }
         }
       }
