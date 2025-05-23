@@ -108,7 +108,7 @@
             "codeCoverage": true,
             "watch": false,
             "browsers": "ChromeHeadless",
-            "codeCoverageExclude": ["src/**/*module.ts"]
+            "codeCoverageExclude": ["src/**/*module.ts", "src/app/Data/Classes/*", "src/app/Data/Interfaces/*"]
           }
         }
       }
