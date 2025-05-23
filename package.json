@@ -6,7 +6,8 @@
     "start": "ng serve --proxy-config proxy.config.json --open",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "sonar": "ng test & sonar-scanner"
   },
   "private": true,
   "dependencies": {
@@ -27,6 +28,7 @@
     "leaflet": "^1.9.4",
     "ngx-scanner-qrcode": "^1.5.8",
     "rxjs": "~7.8.0",
+    "sonarqube-scanner": "^4.3.0",
     "three": "^0.153.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
@@ -35,7 +37,6 @@
     "@angular-devkit/build-angular": "^16.0.5",
     "@angular/cli": "~16.0.5",
     "@angular/compiler-cli": "^16.0.0",
-    "@sonar/scan": "^4.3.0",
     "@types/jasmine": "~4.3.0",
     "@types/leaflet": "^1.9.3",
     "jasmine": "^5.7.1",

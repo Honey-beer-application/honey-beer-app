@@ -103,7 +103,11 @@
               "src/styles.scss",
               "./node_modules/@syncfusion/ej2-material-theme/styles/material.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "karmaConfig": "karma.conf.js",
+            "codeCoverage": true,
+            "watch": false,
+            "browsers": "ChromeHeadless"
           }
         }
       }
