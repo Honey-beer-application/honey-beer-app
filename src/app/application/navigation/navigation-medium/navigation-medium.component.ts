@@ -44,56 +44,8 @@ export class NavigationMediumComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
-  public redirectToMainPage():void{
-    this.router.navigateByUrl("app");
-  }
-  public redirectToProducts():void{
-    this.router.navigateByUrl("app/products");
-  }
-  public navigateToScanner():void{
-    this.router.navigateByUrl("app/scanner");
-  }
-  public navigateToOffers():void{
-    this.router.navigateByUrl("app/offers");
-  }
-  public navigateToPersonalOffers():void{
-    this.router.navigateByUrl("app/personal_offers");
-  }
-  public redirectToLogin():void{
-    this.router.navigateByUrl("login");
-  }
-  public redirectToRegister():void{
-    this.router.navigateByUrl("register");
-  }
-  public navigateToCreateOffer():void{
-    this.router.navigateByUrl("app/new_offer")
-  }
-  public navigateToReservations():void{
-    this.router.navigateByUrl("app/reservations");
-  }
-  public navigateToCreateReservation():void{
-    this.router.navigateByUrl("app/create-reservation");
-  }
-  public redirectToProductStores():void{
-    this.router.navigateByUrl("app/product-stores");
-  }
-  public redirectToOurStores():void{
-    this.router.navigateByUrl('app/our-stores');
-  }
   public setImage(value:string):void{
     this.hoveredImage=value;
-  }
-  public redirectToDiscounts():void{
-    this.router.navigateByUrl('app/discounts');
-  }
-  public redirectToSurveys():void{
-    this.router.navigateByUrl('app/surveys');
-  }
-  public redirectToPromotions():void{
-    this.router.navigateByUrl('app/promotions');
-  }
-  public redirectToMeetings():void{
-    this.router.navigateByUrl('app/meetings');
   }
   public isCustomerRegistered():boolean{
     return this.customer.customerId!=0n;
@@ -101,10 +53,7 @@ export class NavigationMediumComponent implements OnDestroy {
   public isCompanyRegistered():boolean{
     return this.company.PIB!=0n;
   }
-  public redirectToAccount():void{
-    this.router.navigateByUrl('app/account');
-  }
-  public redirectToVotingForms():void{
-    this.router.navigateByUrl("app/voting-forms");
+  public redirectTo(route: string): void{
+    this.router.navigateByUrl(route)
   }
 }
