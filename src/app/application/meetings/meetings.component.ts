@@ -35,9 +35,14 @@ export class MeetingsComponent implements OnDestroy{
   }
   scheduleMeting(meeting: IMeeting) {
     meeting.pib = this.company.PIB;
-    this.meetingController.scheduleMeeting(meeting).subscribe((data:boolean)=>{
-      alert("Meeting is scheduled successfully.");
-    },(error:Object)=>alert(JSON.stringify(error)));
+    this.meetingController.scheduleMeeting(meeting).subscribe(
+      {
+        next:(data:boolean)=>{
+          alert("Meeting is scheduled successfully.");
+        },
+        error:(error:Object)=>alert(JSON.stringify(error))
+      }
+    );
     this.availableMeetings = this.availableMeetings.filter(meet=>meet.meetingId!==meeting.meetingId);
   }
 
