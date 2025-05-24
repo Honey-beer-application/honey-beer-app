@@ -1,6 +1,6 @@
-import { Component,ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MeetingConroller } from 'src/app/Data/Controllers/MeetingController';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import ICompany from 'src/app/Data/Interfaces/ICompany';
 import Company from 'src/app/Data/Classes/Company';
 import CompanyController from 'src/app/Data/Controllers/CompanyController';
@@ -13,11 +13,11 @@ import { IMeeting } from 'src/app/Data/Interfaces/IMeeting';
 export class MeetingsComponent implements OnDestroy{
 
 
-  private subs:Subscription;
+  private readonly subs:Subscription;
   public availableMeetings:IMeeting[];
   private company:ICompany;
 
-  constructor(private meetingController:MeetingConroller, private companyController:CompanyController){
+  constructor(private readonly meetingController:MeetingConroller, private readonly companyController:CompanyController){
     this.subs = new Subscription();
     this.availableMeetings = new Array<IMeeting>();
     this.company= new Company();

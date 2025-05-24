@@ -11,8 +11,8 @@ import { IEvent } from 'src/app/Data/Interfaces/IEvent';
 export class SurveysComponent implements OnDestroy {
 
   public surveys:IEvent[];
-  private subs:Subscription;
-  constructor(private eventController:EventController){
+  private readonly subs:Subscription;
+  constructor(private readonly eventController:EventController){
     this.subs = new Subscription();
     this.surveys = new Array<IEvent>();
     this.subs.add(

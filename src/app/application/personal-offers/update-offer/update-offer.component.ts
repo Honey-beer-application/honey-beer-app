@@ -1,4 +1,4 @@
-import { ApplicationRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {OfferByCompanyController} from './../../../Data/Controllers/OfferByCompanyController';
 import IOfferByCompany from 'src/app/Data/Interfaces/IOfferByCompany';
 import { ActivatedRoute } from '@angular/router';
@@ -17,7 +17,7 @@ import ICompany from 'src/app/Data/Interfaces/ICompany';
 export class UpdateOfferComponent implements OnDestroy{
 
 
-  private subs:Subscription = new Subscription();
+  private readonly subs:Subscription = new Subscription();
 
   private registeredCompany!:ICompany;
 
@@ -27,10 +27,10 @@ export class UpdateOfferComponent implements OnDestroy{
   public offerEndDate:FormControl;
   public offerByCompany!:IOfferByCompany;
   constructor(
-    private offerByCompanyController:OfferByCompanyController, 
-    private activatedRoute:ActivatedRoute,
-    private companyController:CompanyController,
-    private fb:FormBuilder)
+    private readonly offerByCompanyController:OfferByCompanyController, 
+    private readonly activatedRoute:ActivatedRoute,
+    private readonly companyController:CompanyController,
+    private readonly fb:FormBuilder)
   {
 
       this.offerAmount = new FormControl('',[Validators.required,Validators.min(0)]);
@@ -82,12 +82,15 @@ export class UpdateOfferComponent implements OnDestroy{
     public saveOfferByComapny(){
       this.offerByCompanyController.changeOfferByCompany(this.offerByCompany)
       .subscribe(
-        (data)=>alert("Offer is successfully changed."),
-        (error)=>alert(error.error.detail));
+        {
+          next: (data)=>alert("Offer is successfully changed."),
+          error:(error)=>alert(error.error.detail)
+        }
+      );
     }
     public convertDate(date:Date){
-      var day:number = date.getDate();
-      var month:number = date.getMonth()+1
+      let day:number = date.getDate();
+      let month:number = date.getMonth()+1
       return date.getFullYear()+"-"+(month<10?"0"+month:month)+"-"+(day<9?"0"+day:day);
     }
 }
