@@ -3,11 +3,9 @@ import { Subscription } from 'rxjs';
 import { EventController } from 'src/app/Data/Controllers/EventController';
 import { IEvent } from 'src/app/Data/Interfaces/IEvent';
 import {Event} from './../../../Data/Classes/Event';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, UntypedFormArray, UntypedFormGroup, ValidationErrors, Validator, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { IQuestion } from 'src/app/Data/Interfaces/IQuestion';
-import {Question} from 'src/app/Data/Classes/Question';
 import { IAnswer } from 'src/app/Data/Interfaces/IAnswer';
-import { Answer } from 'src/app/Data/Classes/Answer';
 
 @Component({
   selector: 'app-survey',
@@ -17,10 +15,10 @@ import { Answer } from 'src/app/Data/Classes/Answer';
 export class SurveyComponent implements OnInit,OnDestroy {
 
   public survey:IEvent;
-  private subs:Subscription;
+  private readonly subs:Subscription;
   public surveyForm:FormGroup<{questions:FormArray<FormGroup>}>;
   public answers:FormControl[];
-  constructor(private surveyController:EventController,private fb:FormBuilder,private eventController:EventController){
+  constructor(private readonly surveyController:EventController,private readonly fb:FormBuilder,private readonly eventController:EventController){
     this.subs = new Subscription();
     this.survey = new Event();
     this.surveyForm = new FormGroup({questions:new FormArray(new Array<FormGroup>())});
@@ -35,10 +33,10 @@ export class SurveyComponent implements OnInit,OnDestroy {
     //forming local variable questions to declare an array
     let questions:Array<FormGroup>=new Array<FormGroup>();
     //iteration trough questions
-    this.survey.questions.map((question:IQuestion)=>{
+    this.survey.questions.forEach((question:IQuestion)=>{
       let radioAnswers:Array<FormGroup> = [];
       let answers:Array<FormGroup> = [];
-        question.answers.map((answer:IAnswer)=>{
+        question.answers.forEach((answer:IAnswer)=>{
           //creating answer value and label in question
           if(question.questionTypeInstance.name=="Text")
           answers.push(new FormGroup({
@@ -81,7 +79,7 @@ export class SurveyComponent implements OnInit,OnDestroy {
     this.subs.unsubscribe();
   }
   get questions():Array<FormGroup>{
-    return this.surveyForm.controls.questions.controls as Array<FormGroup>;
+    return this.surveyForm.controls.questions.controls;
   }
   public returnAnswersArray(question:FormGroup):Array<FormGroup>{
     return (<FormArray>question.controls["answers"]).controls as Array<FormGroup>
@@ -93,7 +91,7 @@ export class SurveyComponent implements OnInit,OnDestroy {
     if(this.surveyForm.valid){
       this.surveyForm.value.questions?.forEach((question:any,i:number)=>{
         if(question.questionType=="Single choice"){
-          let answer:IAnswer = new Answer();
+          let answer:IAnswer;
           answer = (this.survey.questions[i].answers.filter(a=>a.value==question.answers[0].value))[0];
           this.survey.questions[i].answers = new Array<IAnswer>();
           this.survey.questions[i].answers.push(answer)
@@ -109,7 +107,7 @@ export class SurveyComponent implements OnInit,OnDestroy {
         }
       });
       this.subs.add(
-        this.eventController.saveEventForm(this.survey).subscribe((data)=>alert("Form is successfully submitted."),(error)=>alert(JSON.stringify(error)))
+        this.eventController.saveEventForm(this.survey).subscribe({next:(data)=>alert("Form is successfully submitted."),error:(error)=>alert(JSON.stringify(error))})
       );
     }else{
       alert("Values are not entered correctly.");
@@ -120,7 +118,7 @@ export function customValidateFormArray(): ValidatorFn {
   return (formArray:AbstractControl<any,any>):{[key: string]: any} | null=>{
     let numberOfValidFields:number=0;
     (<FormArray<FormGroup>>formArray).controls.forEach((x:FormGroup)=>{
-        if(x.value.value==true) numberOfValidFields++; 
+        if(x.value.value===true) numberOfValidFields++; 
     })
     return numberOfValidFields>=2?null:{error:'At least 2 options must be selected.'};
   }

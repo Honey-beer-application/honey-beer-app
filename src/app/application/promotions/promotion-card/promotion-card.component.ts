@@ -13,7 +13,7 @@ export class PromotionCardComponent {
 
   @Input('promotion') promotion:IEvent;
 
-  constructor(private router:Router,private eventController:EventController){
+  constructor(private readonly router:Router,private readonly eventController:EventController){
     this.promotion = new Event();
   }
   public redirectToPromotion(promotion:IEvent):void{

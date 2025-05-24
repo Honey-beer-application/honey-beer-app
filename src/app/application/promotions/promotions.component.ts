@@ -10,13 +10,15 @@ import { IEvent } from 'src/app/Data/Interfaces/IEvent';
 })
 export class PromotionsComponent implements OnDestroy {
 
-  private subs:Subscription = new Subscription();
+  private readonly subs:Subscription = new Subscription();
   public promotions:IEvent[] = [];
-  constructor(private eventController:EventController){
+  constructor(private readonly eventController:EventController){
     this.subs.add(
       this.eventController.loadAllPromotions().subscribe(
-        (data:IEvent[])=>this.promotions=data,
-        (error)=>alert(error.error.detail)
+        {
+          next: (data:IEvent[])=>this.promotions=data,
+        error: (error)=>alert(error.error.detail)
+        }
       )
     )
   }

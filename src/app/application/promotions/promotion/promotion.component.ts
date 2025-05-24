@@ -14,8 +14,8 @@ export class PromotionComponent {
 
   public promotion:IEvent;
   private map!:any;
-  private subs:Subscription;
-  constructor(private eventController:EventController){
+  private readonly subs:Subscription;
+  constructor(private readonly eventController:EventController){
     this.subs = new Subscription();
     this.promotion= new Event();
     this.subs.add(

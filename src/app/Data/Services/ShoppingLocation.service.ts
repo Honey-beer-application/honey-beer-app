@@ -5,7 +5,7 @@ import {Injectable} from "@angular/core"
 
 @Injectable({providedIn:"root"})
 export class ShoppingLocationService{
-    constructor(private httpClient:HttpClient){
+    constructor(private readonly httpClient:HttpClient){
 
     }
     public loadAllShoppingLocations():Observable<IShoppingLocation[]>{

@@ -1,12 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { SentCompanyEmail } from "../Classes/SentCompanyEmail";
 import { Observable } from "rxjs";
 import { ISentCompanyEmail } from "../Interfaces/ISentCompanyEmail";
 
 @Injectable({providedIn:"root"})
 export class SentCompanyEmailService{
-    constructor(private httpClient:HttpClient){
+    constructor(private readonly httpClient:HttpClient){
 
     }
     public saveSentComapnyEmail(sentCompanyEmail:ISentCompanyEmail):Observable<boolean>{

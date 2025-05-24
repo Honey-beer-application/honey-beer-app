@@ -2,12 +2,11 @@ import { HttpClient } from "@angular/common/http";
 import {Injectable} from "@angular/core"
 import { Observable } from "rxjs";
 import { IMeeting } from "../Interfaces/IMeeting";
-import ICompany from "../Interfaces/ICompany";
 
 @Injectable({providedIn:"root"})
 export class MeetingService{
 
-    constructor(private httpClient:HttpClient){
+    constructor(private readonly httpClient:HttpClient){
 
     }
     public loadAllMeetings():Observable<IMeeting[]>{

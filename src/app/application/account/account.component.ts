@@ -8,9 +8,6 @@ import CustomerController from 'src/app/Data/Controllers/CustomerConstroller';
 import ICompany from 'src/app/Data/Interfaces/ICompany';
 import ICustomer from 'src/app/Data/Interfaces/ICustomer';
 import emailjs from "@emailjs/browser";
-import { IEmail } from 'src/app/Data/Interfaces/IEmail';
-import { Email } from 'src/app/Data/Classes/Email';
-import { EmailController } from 'src/app/Data/Controllers/EmailController';
 import { SentCompanyEmailController } from 'src/app/Data/Controllers/SentCompanyEmailController';
 import { SentCompanyEmail } from 'src/app/Data/Classes/SentCompanyEmail';
 import { ISentCompanyEmail } from 'src/app/Data/Interfaces/ISentCompanyEmail';
@@ -23,17 +20,17 @@ import { ISentCompanyEmail } from 'src/app/Data/Interfaces/ISentCompanyEmail';
 export class AccountComponent {
 
   private message:{from_email:string,title:string,message:string};
-  private subs:Subscription;
+  private readonly subs:Subscription;
   public emailForm:FormGroup;
-  private emailFrom:FormControl;
-  private emailTitle:FormControl;
-  private emailMessage:FormControl;
+  private readonly emailFrom:FormControl;
+  private readonly emailTitle:FormControl;
+  private readonly emailMessage:FormControl;
   private customer:ICustomer;
   private company:ICompany;
-  public emailEntered:Boolean|undefined=undefined;
-  public titleEntered:Boolean|undefined=undefined;
-  public messageEntered:Boolean|undefined=undefined; 
-  constructor(private fb:FormBuilder,private customerController:CustomerController,private sentCompanyEmailController:SentCompanyEmailController, private companyController:CompanyController){
+  public emailEntered:boolean|undefined=undefined;
+  public titleEntered:boolean|undefined=undefined;
+  public messageEntered:boolean|undefined=undefined; 
+  constructor(private readonly fb:FormBuilder,private readonly customerController:CustomerController,private readonly sentCompanyEmailController:SentCompanyEmailController, private readonly companyController:CompanyController){
     this.message = {from_email:'',title:'',message:''};
     this.subs = new Subscription();
     this.emailFrom = new FormControl(undefined,[Validators.required,Validators.email]);
@@ -65,8 +62,7 @@ export class AccountComponent {
         this.verifiyFields(data);
         return data;}))
       .pipe(filter((data:{from_email:string,title:string,message:string})=>{
-        if(data.from_email==undefined)
-          data.from_email=this.message.from_email;
+        data.from_email ??= this.message.from_email;
         return data.from_email!=undefined&&
               data.message!=undefined&&
               data.title!=undefined&&
@@ -96,8 +92,8 @@ export class AccountComponent {
     });
     let sentEmail:ISentCompanyEmail = new SentCompanyEmail();
     sentEmail.pib=this.company.PIB;
-    this.sentCompanyEmailController.saveCompanyEmail(sentEmail).subscribe((data)=>
-    alert("Email is registered in database."),(error)=>JSON.stringify(error));
+    this.sentCompanyEmailController.saveCompanyEmail(sentEmail).subscribe({next:(data)=>
+    alert("Email is registered in database."),error:(error)=>JSON.stringify(error)});
     alert("Email has been successfully sent");
   }
   public isCompanyRegistered():boolean{

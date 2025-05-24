@@ -39,7 +39,6 @@
             <input
             [ngClass]="this.customerConfirmedPassword.valid?'success':'none'"
              type="password" name="confirmpswd" placeholder="Confirm password" formControlName="confirmationPassword" required="">
-            <!-- <a href="#">Forgot your password?</a> -->
             <button id="customerRegister" [disabled]="!this.customerForm.valid" 
             (click)="saveCustomer()">Register</button>
         </form>

@@ -4,7 +4,7 @@ import { IDiscount } from "../Interfaces/IDiscount";
 import { Observable } from "rxjs";
 @Injectable({providedIn:"root"})
 export class DiscountService{
-    constructor(private httpClient:HttpClient){
+    constructor(private readonly httpClient:HttpClient){
 
     }
     public loadAllDiscounts():Observable<IDiscount[]>{

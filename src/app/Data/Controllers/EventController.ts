@@ -6,7 +6,7 @@ import {Event} from "./../Classes/Event"
 @Injectable({providedIn:"root"})
 export class EventController{
     public surveyToLoad:BehaviorSubject<IEvent>;
-    constructor(private eventService:EventService){
+    constructor(private readonly eventService:EventService){
         this.surveyToLoad = new BehaviorSubject<IEvent>(<IEvent><unknown>(new Event()));
     }
     

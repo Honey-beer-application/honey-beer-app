@@ -18,7 +18,6 @@
             <p>from {{convertDate(offerBC.offerInstance.beginDate)}} to {{convertDate(offerBC.offerInstance.endDate)}}</p>
             <h1 *ngIf="offerBC.offerInstance.productInstance!=null">For product: <br>{{offerBC.offerInstance.productInstance.name}}</h1>
             <p *ngIf="offerBC.offerInstance.productInstance!=null">description: <br>{{offerBC.offerInstance.productInstance.description}}</p>
-            <!-- <a href="app/personal_offers/{{offerBC.offerId}}/edit" (click)="saveOfferByCompanyToLoad(offerBC)">Edit</a> -->
             <button class="btn-redirect" (click)="redirectToEdit(offerBC)">Edit</button>
         </div>
         <ng-component *ngIf="this.offerByCompanyList.length>0;else noResult">

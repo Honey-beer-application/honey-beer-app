@@ -15,13 +15,13 @@ import IReservation from 'src/app/Data/Interfaces/IReservation';
 })
 export class NewReservationComponent {
 
-  private subs:Subscription = new Subscription();
+  private readonly subs:Subscription = new Subscription();
   public reservation:IReservation;
 
   public reservationForm!:FormGroup;
   public reservationAmount:FormControl;
   public reservationDeliveryDate:FormControl;
-  constructor(private fb:FormBuilder,private reservationController:ReservationController, private companyController:CompanyController){
+  constructor(private readonly fb:FormBuilder,private readonly reservationController:ReservationController, private readonly companyController:CompanyController){
     this.reservation = new Reservation();
     this.subs.add(
       this.reservationController.productObservable.subscribe((data:IProduct)=>{
@@ -60,8 +60,10 @@ export class NewReservationComponent {
   public saveReservation(){
     this.subs.add(
       this.reservationController.saveReservation(this.reservation).subscribe(
-        (data)=>alert("Reservation is successfully saved."),
-        (error)=>alert(error))
+        {
+          next:(data)=>alert("Reservation is successfully saved."),
+          error: (error)=>alert(error)
+        })
     )
   }
   public convertDate(date:Date):string{

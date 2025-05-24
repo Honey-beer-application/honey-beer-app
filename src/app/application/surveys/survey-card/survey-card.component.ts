@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventController } from 'src/app/Data/Controllers/EventController';
 import { IEvent } from 'src/app/Data/Interfaces/IEvent';
@@ -13,7 +13,7 @@ export class SurveyCardComponent{
 
   @Input('survey') survey:IEvent;
 
-  constructor(private router:Router,private eventController:EventController){
+  constructor(private readonly router:Router,private readonly eventController:EventController){
     this.survey = new Event();
   }
   public redirectToSurvey(survey:IEvent):void{

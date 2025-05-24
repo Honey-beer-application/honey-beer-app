@@ -3,7 +3,7 @@
         <!-- development link -->
         <!-- <img src="./../assets/images/honey-beer-logo.png" (click)="redirectToMainPage()" alt=""> -->
         <!-- deployment link -->
-        <img src="./assets/images/honey-beer-logo.png" (click)="redirectToMainPage()" alt="">
+        <img src="./assets/images/honey-beer-logo.png" (click)="redirectTo('app')" alt="">
     </div>
     <div class="menu-container">
         <mat-icon class="side-menu-bitton">menu
@@ -14,13 +14,13 @@
                 <h1>Account</h1>
                 <ul>
                     <li>
-                        <button  (click)="redirectToLogin()">Log in</button>
+                        <button  (click)="redirectTo('register')">Log in</button>
                     </li>
                     <li>
-                        <button  (click)="redirectToRegister()">Register</button>
+                        <button  (click)="redirectTo('register')">Register</button>
                     </li>
                     <li *ngIf="isCustomerRegistered() || isCompanyRegistered()">
-                        <button  (click)="redirectToAccount()">Account</button>
+                        <button  (click)="redirectTo('app/account')">Account</button>
                     </li>
                 </ul>
             </div>
@@ -28,20 +28,19 @@
                 <h1>Our beer</h1>
                 <ul>
                     <li>
-                        <!-- <button class="menu-button" href="#" *ngIf="this.isCompanyRegistered()">Buy online</button> -->
-                        <button (click)="redirectToProductStores()">Product stores</button>
+                        <button (click)="redirectTo('app/product-stores')">Product stores</button>
                     </li>
                     <li>
-                        <button (click)="redirectToOurStores()">Our stores</button>
+                        <button (click)="redirectTo('app/our-stores')">Our stores</button>
                     </li>
                     <li>
-                        <button (click)="redirectToDiscounts()">Discounts</button>
+                        <button (click)="redirectTo('app/discounts')">Discounts</button>
                     </li>
                     <li>
-                        <button (click)="redirectToSurveys()">Surveys</button>
+                        <button (click)="redirectTo('app/surveys')">Surveys</button>
                     </li>
                     <li>
-                        <button (click)="redirectToVotingForms()">Pick your choice</button>
+                        <button (click)="redirectTo('app/voting-forms')">Pick your choice</button>
                     </li>
                 </ul>
             </div>
@@ -49,31 +48,31 @@
                 <h1>Inside honey beer</h1>
                 <ul>
                     <li>
-                        <button (click)="redirectToProducts()">Products</button>
+                        <button (click)="redirectTo('app/products')">Products</button>
                     </li>
                     <li>
-                        <button (click)="redirectToPromotions()">Promotions</button>
+                        <button (click)="redirectTo('app/promotions')">Promotions</button>
                     </li>
                     <li *ngIf="isCustomerRegistered()">
-                        <button (click)="navigateToScanner()">QR code Scanner</button>
+                        <button (click)="redirectTo('app/scanner')">QR code Scanner</button>
                     </li>
                     <li *ngIf="isCompanyRegistered()">
-                        <button (click)="navigateToOffers()">Offers</button>
+                        <button (click)="redirectTo('app/offers')">Offers</button>
                     </li>
                     <li *ngIf="isCompanyRegistered()">
-                        <button (click)="navigateToPersonalOffers()">Personal offers</button>
+                        <button (click)="redirectTo('app/personal_offers')">Personal offers</button>
                     </li>
                     <li *ngIf="isCompanyRegistered()">
-                        <button (click)="navigateToCreateOffer()">Create offer</button>
+                        <button (click)="redirectTo('app/new_offer')">Create offer</button>
                     </li>
                     <li *ngIf="isCompanyRegistered()">
-                        <button (click)="navigateToReservations()">Reservations</button>
+                        <button (click)="redirectTo('app/reservations')">Reservations</button>
                     </li>
                     <li *ngIf="isCompanyRegistered()">
-                        <button (click)="navigateToCreateReservation()">Create reservation</button>
+                        <button (click)="redirectTo('app/create-reservation')">Create reservation</button>
                     </li>
                     <li *ngIf="isCompanyRegistered()">
-                        <button (click)="redirectToMeetings()">Available meetings</button>
+                        <button (click)="redirectTo('app/meetings')">Available meetings</button>
                     </li>
                 </ul>
             </div>

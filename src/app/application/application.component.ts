@@ -18,16 +18,16 @@ import { Email } from '../Data/Classes/Email';
 export class ApplicationComponent implements OnDestroy,OnInit {
   
   private message!:{from_email:string,title:string,message:string};
-  public emailEntered:Boolean|undefined=undefined;
-  public titleEntered:Boolean|undefined=undefined;
-  public messageEntered:Boolean|undefined=undefined; 
-  private subs:Subscription;
+  public emailEntered:boolean|undefined=undefined;
+  public titleEntered:boolean|undefined=undefined;
+  public messageEntered:boolean|undefined=undefined; 
+  private readonly subs:Subscription;
   public emailForm:FormGroup;
-  private emailFrom:FormControl;
-  private emailTitle:FormControl;
-  private emailMessage:FormControl;
+  private readonly emailFrom:FormControl;
+  private readonly emailTitle:FormControl;
+  private readonly emailMessage:FormControl;
   private customer:ICustomer;
-  constructor(private fb:FormBuilder,private customerController:CustomerController,private emailController:EmailController, private companyController:CompanyController){
+  constructor(private readonly fb:FormBuilder,private readonly customerController:CustomerController,private readonly emailController:EmailController, private readonly companyController:CompanyController){
     this.message = {from_email:'',title:'',message:''};
     this.subs = new Subscription();
     this.emailFrom = new FormControl(undefined,[Validators.required,Validators.email]);
@@ -52,8 +52,7 @@ export class ApplicationComponent implements OnDestroy,OnInit {
         this.verifiyFields(data);
         return data;}))
       .pipe(filter((data:{from_email:string,title:string,message:string})=>{
-        if(data.from_email==undefined)
-          data.from_email=this.message.from_email;
+        data.from_email ??= this.message.from_email;
         return data.from_email!=undefined&&
               data.message!=undefined&&
               data.title!=undefined&&
@@ -93,7 +92,7 @@ export class ApplicationComponent implements OnDestroy,OnInit {
     });
     let sentEmail:IEmail = new Email();
     sentEmail.email=this.message.from_email;
-    this.emailController.saveEmail(sentEmail).subscribe((data)=>alert("Email is registered in database."),(error)=>JSON.stringify(error));
+    this.emailController.saveEmail(sentEmail).subscribe({next:(data)=>alert("Email is registered in database."),error:(error)=>JSON.stringify(error)});
     alert("Email has been successfully sent");
   }
 }

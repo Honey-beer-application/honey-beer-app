@@ -1,11 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import CompanyController from 'src/app/Data/Controllers/CompanyController';
-import CustomerController from 'src/app/Data/Controllers/CustomerConstroller';
 import { ProductController } from 'src/app/Data/Controllers/ProductController';
-import ICompany from 'src/app/Data/Interfaces/ICompany';
 import IProduct from 'src/app/Data/Interfaces/IProduct';
 
 @Component({
@@ -15,24 +11,26 @@ import IProduct from 'src/app/Data/Interfaces/IProduct';
 })
 export class CreateReservationComponent implements OnDestroy {
 
-  private subs:Subscription = new Subscription();
+  private readonly subs:Subscription = new Subscription();
   public products:IProduct[] = new Array<IProduct>();
   private allProducts:IProduct[] = new Array<IProduct>();
 
   public productsForm:FormGroup;
-  private productName:FormControl;
-  private productDescription:FormControl;
+  private readonly productName:FormControl;
+  private readonly productDescription:FormControl;
 
 
-  constructor(private productController:ProductController,private fb:FormBuilder){
+  constructor(private readonly productController:ProductController,private readonly fb:FormBuilder){
     //initialization
     this.productName = new FormControl();
     this.productDescription = new FormControl();
 
     this.subs.add(
       this.productController.loadAllProducts().subscribe(
-        (data:IProduct[])=>{this.allProducts=data;this.products=data;},
-        (error)=>alert(error.error.detail)
+        {
+          next:(data:IProduct[])=>{this.allProducts=data;this.products=data;},
+          error:(error)=>alert(error.error.detail)
+        }
       )
     );
 

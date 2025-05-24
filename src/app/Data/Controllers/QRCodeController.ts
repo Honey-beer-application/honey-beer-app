@@ -6,7 +6,7 @@ import {Injectable} from "@angular/core"
 @Injectable({providedIn:"root"})
 export default class QRCodeController{
 
-    constructor(private qrCodeService:QRCodeService){
+    constructor(private readonly qrCodeService:QRCodeService){
 
     }
     public scanQRCode(qrCode:IQRCode):Observable<IQRCode>{

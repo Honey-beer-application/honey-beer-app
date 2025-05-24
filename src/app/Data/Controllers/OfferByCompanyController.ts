@@ -8,16 +8,16 @@ import OfferByCompany from "../Classes/OfferByCompany";
 
 @Injectable({providedIn:"root"})
 export class OfferByCompanyController{
-    private offerByCompanyToLoadObject: IOfferByCompany;
-    private _offerBycompanyToLoad: BehaviorSubject<IOfferByCompany>;
-    private _offerByCompanyToLoadObservable: Observable<IOfferByCompany> ;
+    private readonly offerByCompanyToLoadObject: IOfferByCompany;
+    private readonly _offerBycompanyToLoad: BehaviorSubject<IOfferByCompany>;
+    private readonly _offerByCompanyToLoadObservable: Observable<IOfferByCompany> ;
     public get offerByCompanyToLoadObservable():Observable<IOfferByCompany> {
         return this._offerByCompanyToLoadObservable;
     }
      public setOfferByCompanyToLoad(data:IOfferByCompany){
         this._offerBycompanyToLoad.next(data);
      }
-    constructor(private offerByCompanyService:OfferByCompanyService,@Optional() @SkipSelf() parent?:OfferByCompanyController){
+    constructor(private readonly offerByCompanyService:OfferByCompanyService,@Optional() @SkipSelf() parent?:OfferByCompanyController){
         if (parent) {
             throw Error(
                 `[GuardedSingletonService]: trying to create multiple instances,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ReservationController } from 'src/app/Data/Controllers/ReservationController';
 import IReservation from 'src/app/Data/Interfaces/IReservation';
@@ -11,13 +11,13 @@ import IReservation from 'src/app/Data/Interfaces/IReservation';
 })
 export class ReservationsComponent {
 
-  private subs:Subscription;
+  private readonly subs:Subscription;
   private allReservations:IReservation[];
   public reservations:IReservation[];
   public reservationForm:FormGroup;
-  private reservationAmount:FormControl;
-  private reservationDalivery:FormControl;
-  constructor(private reservationController:ReservationController,private fb:FormBuilder){
+  private readonly reservationAmount:FormControl;
+  private readonly reservationDalivery:FormControl;
+  constructor(private readonly reservationController:ReservationController,private readonly fb:FormBuilder){
     //initializations
     this.subs = new Subscription();
     this.allReservations = new Array<IReservation>();
@@ -33,7 +33,7 @@ export class ReservationsComponent {
     this.subs.add(
       this.reservationController.laodAllReservations().subscribe(
         (data:IReservation[])=>{
-          data.map((reservation:IReservation)=>{
+          data.forEach((reservation:IReservation)=>{
             reservation.delivery = new Date(reservation.delivery.toString().split('T')[0]);
             return reservation;
           });

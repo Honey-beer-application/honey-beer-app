@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ProductController } from 'src/app/Data/Controllers/ProductController';
 import { ShoppingLocationController } from 'src/app/Data/Controllers/ShoppingLocationController';
-import IProduct from 'src/app/Data/Interfaces/IProduct';
 import { IShoppingLocation } from 'src/app/Data/Interfaces/IShoppingLocation';
 
 @Component({
@@ -12,13 +10,15 @@ import { IShoppingLocation } from 'src/app/Data/Interfaces/IShoppingLocation';
 })
 export class ProductStoresComponent {
 
-  private subs:Subscription = new Subscription();
+  private readonly subs:Subscription = new Subscription();
   public shoppingLocations:IShoppingLocation[] = [];
-  constructor(private shoppingLocationController:ShoppingLocationController){
+  constructor(private readonly shoppingLocationController:ShoppingLocationController){
     this.subs.add(
       this.shoppingLocationController.loadAllShoppingLocations().subscribe(
-        (data:IShoppingLocation[])=>this.shoppingLocations=data,
-        (error)=>alert(error.error.detail)
+        {
+          next: (data:IShoppingLocation[])=>this.shoppingLocations=data,
+          error: (error)=>alert(error.error.detail)
+        }
       )
     )
   }

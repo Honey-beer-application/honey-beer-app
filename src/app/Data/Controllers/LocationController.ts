@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { ILocation } from "../Interfaces/ILocation";
 @Injectable({providedIn:"root"})
 export class LocationController{
-    constructor(private locationService:LocationService){
+    constructor(private readonly locationService:LocationService){
 
     }
     public loadAllLocations():Observable<ILocation[]>{

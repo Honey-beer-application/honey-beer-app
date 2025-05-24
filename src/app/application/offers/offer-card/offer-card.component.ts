@@ -12,7 +12,7 @@ import IOffer from 'src/app/Data/Interfaces/IOffer';
 export class OfferCardComponent {
 
   @Input('offer') offer:IOffer = new Offer();
-  constructor(private router:Router,private offerController:OfferController){
+  constructor(private readonly router:Router,private readonly offerController:OfferController){
 
   }
   public redirectToPersonalOffer(offer:IOffer):void{

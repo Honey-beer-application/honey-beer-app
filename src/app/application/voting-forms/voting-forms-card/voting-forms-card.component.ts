@@ -13,7 +13,7 @@ export class VotingFormsCardComponent {
 
   @Input('survey') survey:IEvent;
 
-  constructor(private router:Router,private eventController:EventController){
+  constructor(private readonly router:Router,private readonly eventController:EventController){
     this.survey = new Event();
   }
   public redirectToSurvey(survey:IEvent):void{

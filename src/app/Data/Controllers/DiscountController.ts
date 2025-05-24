@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 
 @Injectable({providedIn:"root"})
 export class DiscountController{
-    constructor(private discountService:DiscountService){
+    constructor(private readonly discountService:DiscountService){
 
     }
     public loadAllDiscounts():Observable<IDiscount[]>{

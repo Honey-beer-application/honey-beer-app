@@ -2,13 +2,13 @@ import { HttpClient } from "@angular/common/http";
 import Customer from "../Classes/Customer";
 import {Injectable} from "@angular/core"
 import ICustomer from "../Interfaces/ICustomer";
-import { Observable, throwError } from "rxjs";
+import { Observable } from "rxjs";
 
 
 @Injectable({providedIn:"root"})
 export class CustomerService{
 
-    public constructor(private httpClient:HttpClient){
+    public constructor(private readonly httpClient:HttpClient){
 
     }
     public createCustomer(username:string,email:string,password:string):Observable<ICustomer>{

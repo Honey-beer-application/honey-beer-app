@@ -8,7 +8,7 @@ import OfferByCompany from "../Classes/OfferByCompany";
 @Injectable({providedIn:"root"})
 export default class OfferByCompanyService{
     
-    constructor(private httpClient:HttpClient){
+    constructor(private readonly httpClient:HttpClient){
 
     }
     public loadAllOffersByCompany(company:ICompany):Observable<IOfferByCompany[]>{
@@ -25,7 +25,7 @@ export default class OfferByCompanyService{
         return this.httpClient.get<OfferByCompany>(`https://localhost:7165/api/OfferByCompany/getOfferByCompany/:id?id=${id}`);
     }
     public changeOfferByCompany(offerByCompany:IOfferByCompany):Observable<boolean>{
-        var object:Object = {
+        let object:Object = {
             "pib": Number(offerByCompany.pib),
             "productId": Number(offerByCompany.offerId),
             "offerId": Number(offerByCompany.productId),

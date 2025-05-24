@@ -4,7 +4,7 @@ import IQRCode from "../Interfaces/IQRCode";
 import { Observable } from "rxjs";
 @Injectable({providedIn:"root"})
 export class QRCodeService{
-    constructor(private httpClient:HttpClient){
+    constructor(private readonly httpClient:HttpClient){
 
     }
     public scanQRCode(qrCode:IQRCode):Observable<IQRCode>{

@@ -2,13 +2,12 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import Offer from "../Classes/Offer";
 import {Injectable} from "@angular/core"
-import IOffer from "../Interfaces/IOffer";
 import IOfferByCompany from "../Interfaces/IOfferByCompany";
 
 @Injectable({providedIn:"root"})
 export default class OfferService{
     
-    constructor(private httpClient:HttpClient){
+    constructor(private readonly httpClient:HttpClient){
 
     }
     public loadAllOffers():Observable<Offer[]>{

@@ -7,7 +7,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        //padding:0px 0px 0px 40px;
         &>button{
             margin-top:50px;
             margin-bottom:50px;
@@ -23,7 +22,7 @@
             text-decoration: none;
             text-align: center;
             border: 1px solid #B7ADA1;
-            font-family: Space Mono;
+            font-family: Space Mono, system-ui;
             border-color: #b7ada1;
             box-shadow: 4px -4px #1e1e1e,-4px 4px #1e1e1e,-4px -4px #1e1e1e,4px 4px #1e1e1e;
             &:hover{
@@ -35,11 +34,11 @@
         }
         &>h1{
             text-transform: uppercase;
-            font-family: 'Cako';
+            font-family: 'Cako', system-ui;
             font-weight: 400;
             &>b{
                 font-weight: 1000;
-                font-family: 'Freizeit120';
+                font-family: 'Freizeit120', system-ui;
             }
             margin-bottom: 50px;
         }

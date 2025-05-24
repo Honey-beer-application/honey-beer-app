@@ -1,5 +1,4 @@
 import { HttpClient } from "@angular/common/http";
-import CompanyController from "../Controllers/CompanyController";
 import {Injectable} from "@angular/core";
 import Company from "../Classes/Company";
 import { Observable } from "rxjs";
@@ -8,7 +7,7 @@ import ICompany from "../Interfaces/ICompany";
 @Injectable({providedIn:"root"})
 export default class CompanyService{
 
-    constructor(private httpClient:HttpClient){
+    constructor(private readonly httpClient:HttpClient){
     }
 
     public createCompany(PIB:bigint,name:string,email:string,password:string):Observable<ICompany>{

@@ -1,11 +1,10 @@
 import {Injectable} from "@angular/core"
 import { MeetingService } from "../Services/Meeting.service";
-import ICompany from "../Interfaces/ICompany";
 import { Observable } from "rxjs";
 import { IMeeting } from "../Interfaces/IMeeting";
 @Injectable({providedIn:"root"})
 export class MeetingConroller{
-    constructor(private meetingService:MeetingService){
+    constructor(private readonly meetingService:MeetingService){
 
     }
     public loadAllMeetings():Observable<IMeeting[]>{

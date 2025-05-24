@@ -8,7 +8,7 @@ import IReservation from "../Interfaces/IReservation";
 export class ReservationController{
     public productBS:BehaviorSubject<IProduct>;
     public productObservable:Observable<IProduct>;
-    constructor(private reservationService:ReservationService){
+    constructor(private readonly reservationService:ReservationService){
         this.productBS = new BehaviorSubject<IProduct>(<IProduct>(new Product()));
         this.productObservable = this.productBS.asObservable();
     }

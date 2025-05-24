@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 
 @Injectable({providedIn:"root"})
 export class LocationService{
-    constructor(private httpClient:HttpClient){
+    constructor(private readonly httpClient:HttpClient){
 
     }
     public loadAllLocations():Observable<ILocation[]>{

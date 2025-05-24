@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { NgxScannerQrcodeComponent, ScannerQRCodeResult } from 'ngx-scanner-qrcode';
-import { BehaviorSubject, Subscriber, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import IQRCode from './../../Data/Interfaces/IQRCode';
 import QRCode from './../../Data/Classes/QRCode';
 import QRCodeController from './../../Data/Controllers/QRCodeController';
@@ -16,11 +16,11 @@ import ICustomer from 'src/app/Data/Interfaces/ICustomer';
 export class ScannerComponent implements OnDestroy{
 
   private qrCode:string | null = null;
-  private subs : Subscription;
+  private readonly subs : Subscription;
   @ViewChild('action') action!:NgxScannerQrcodeComponent ;
 
   public event!:BehaviorSubject<ScannerQRCodeResult[]> ;
-  constructor(private qrCodeController:QRCodeController,private customerController:CustomerController){
+  constructor(private readonly qrCodeController:QRCodeController,private readonly customerController:CustomerController){
     this.subs = new Subscription();
   }
   ngOnDestroy(): void {
@@ -32,7 +32,6 @@ export class ScannerComponent implements OnDestroy{
   }
 
   public onEvent(e: ScannerQRCodeResult[]): void {
-    // e && action && action.pause();
     if(this.qrCode==null){
       this.qrCode = e[0].value;
       let qrCode:IQRCode = new QRCode();
@@ -42,8 +41,10 @@ export class ScannerComponent implements OnDestroy{
       );
       this.qrCodeController.scanQRCode(qrCode)
       .subscribe(
-        (data)=>alert("QR code is successfully scanned."),
-        (error)=>alert(JSON.stringify(error.error))
+        {
+          next:(data)=>alert("QR code is successfully scanned."),
+          error:(error)=>alert(JSON.stringify(error.error))
+        }
       );
     }
   }

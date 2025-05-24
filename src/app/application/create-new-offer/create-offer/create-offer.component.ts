@@ -19,7 +19,7 @@ import IProduct from 'src/app/Data/Interfaces/IProduct';
 })
 export class CreateOfferComponent implements OnDestroy {
 
-  private subs:Subscription = new Subscription();
+  private readonly subs:Subscription = new Subscription();
   public offer:IOffer;
   private company:ICompany;
 
@@ -27,7 +27,7 @@ export class CreateOfferComponent implements OnDestroy {
   public offerAmount:FormControl;
   public offerBeginDate:FormControl;
   public offerEndDate:FormControl;
-  constructor(private fb:FormBuilder,private offerController:OfferController, private companyController:CompanyController){
+  constructor(private readonly fb:FormBuilder,private readonly offerController:OfferController, private readonly companyController:CompanyController){
     this.offer = new Offer();
     this.company = new Company();
     this.subs.add(
@@ -70,8 +70,8 @@ export class CreateOfferComponent implements OnDestroy {
     offerByCompany.productId=this.offer.productInstance==undefined?0n:this.offer.productInstance.productId;
     offerByCompany.offerInstance=this.offer;
     this.offerController.saveOffer(offerByCompany).subscribe(
-      (data)=>alert("Offer is successfully saved."),
-      (error)=>alert(error.error.detail))
+      {next:(data)=>alert("Offer is successfully saved."),
+      error:(error)=>alert(error.error.detail)})
     // this.subs.add(
       
     // )

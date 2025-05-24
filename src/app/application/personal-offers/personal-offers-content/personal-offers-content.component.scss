@@ -13,7 +13,7 @@
         border:1px solid #B7ADA1;
         border-radius: 3px;
         padding:10px 20px 10px 20px;
-        font-family: 'Freizeit120';
+        font-family: 'Freizeit120', system-ui;
         font-weight: 300;
         background-color: #1e1e1e;
         color:white;text-decoration: none;
@@ -46,7 +46,7 @@
             flex-direction: column;
             >label{
                 text-align: center;
-                font-family: "Freizeit120";
+                font-family: "Freizeit120", system-ui;
                 padding:5px 0px 5px 0px;
             }
             >input{
@@ -79,7 +79,7 @@
             max-width: 300px;
             margin-inline:auto;
             >h1{
-                font-family: 'Freizeit120';
+                font-family: 'Freizeit120', system-ui;
                 font-size: 24px;
                 margin:10px 0px 10px 0px;
             }

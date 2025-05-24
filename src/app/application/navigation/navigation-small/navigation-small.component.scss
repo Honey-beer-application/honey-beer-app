@@ -35,7 +35,7 @@
         &>button{
             height:100%;
             background-color: transparent;
-            font-family: 'Freizeit120';
+            font-family: 'Freizeit120', system-ui;
         }
         &:last-child{
             &:hover>.side-menu{
@@ -58,14 +58,9 @@
                 right:0px;
                 left:0px;
                 max-width: 100%;
-                height:percentage($number: 0);
-                flex-direction: column;
-                //width:fit-content;
-                padding: 0px 20px 0px 20px;
                 gap:20px;
                 background-color: #e4ddcd;
                 align-items: center;
-                //transition: height 0.5s ease-in-out, padding 0.5s ease-in-out;
                 &>.arrow-drop-down-content{
                     display: flex;
                     flex-direction: column;
@@ -74,7 +69,7 @@
                     align-items: center;
                     &>h1{
                         margin-bottom: 20px;
-                        font-family: "Freizeit120";
+                        font-family: "Freizeit120", system-ui;
                     }
                     >ul{
                         display: flex;
@@ -107,14 +102,14 @@
                     text-decoration: none;
                     color: black;
                     text-transform: uppercase;
-                    font-family: 'Freizeit120';
+                    font-family: 'Freizeit120', system-ui;
                     font-size: 14px;
                 }
                 .build-a-bottle-link{
                     border:1px solid #B7ADA1;
                     border-radius: 3px;
                     padding:10px 20px 10px 20px;
-                    font-family: 'Freizeit120';
+                    font-family: 'Freizeit120', system-ui;
                     background-color: #1e1e1e;
                     color:white;
                     transition:background-color 0.2s ease-in-out,color 0.2s ease-in-out,box-shadow 0.2s ease-in-out;

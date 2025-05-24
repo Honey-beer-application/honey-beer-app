@@ -20,29 +20,31 @@ interface IData{
 export class OffersComponent implements OnDestroy{
 
   public offers!:IOffer[];
-  private subs:Subscription = new Subscription();
+  private readonly subs:Subscription = new Subscription();
   public offersFG!:FormGroup;
-  private discount!:FormControl;
-  private offerBeginDate!:FormControl;
-  private offerEndDate!:FormControl;
-  private productName!:FormControl;
-  private productDescription!:FormControl;
+  private readonly discount!:FormControl;
+  private readonly offerBeginDate!:FormControl;
+  private readonly offerEndDate!:FormControl;
+  private readonly productName!:FormControl;
+  private readonly productDescription!:FormControl;
 
-  private observable:BehaviorSubject<IOffer[]> = new BehaviorSubject(new Array<IOffer>());
+  private readonly observable:BehaviorSubject<IOffer[]> = new BehaviorSubject(new Array<IOffer>());
 
 
-  constructor(private offerController:OfferController,private fb:FormBuilder){
+  constructor(private readonly offerController:OfferController,private readonly fb:FormBuilder){
     this.offerController.loadAllOffers().subscribe(
-      (data:Offer[])=>{
-        data.map((offer:IOffer)=>{
-          offer.beginDate = new Date(offer.beginDate.toString().split('T')[0]);
-          offer.endDate = new Date(offer.endDate.toString().split('T')[0]);
-          return offer;
-        })
-        this.observable.next(data);
-        this.offers = data;
-      },
-      (error)=>alert(error.error.detail)
+      {
+        next:(data:Offer[])=>{
+          data.forEach((offer:IOffer)=>{
+            offer.beginDate = new Date(offer.beginDate.toString().split('T')[0]);
+            offer.endDate = new Date(offer.endDate.toString().split('T')[0]);
+            return offer;
+          })
+          this.observable.next(data);
+          this.offers = data;
+        },
+        error:(error)=>alert(error.error.detail)
+      }
     );
     this.offersFG = this.fb.group({
       "discount":this.discount,

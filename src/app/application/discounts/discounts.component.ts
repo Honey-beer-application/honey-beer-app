@@ -10,13 +10,15 @@ import { IDiscount } from 'src/app/Data/Interfaces/IDiscount';
 })
 export class DiscountsComponent {
 
-  private subs:Subscription = new Subscription();
+  private readonly subs:Subscription = new Subscription();
   public discounts:IDiscount[] = [];
-  constructor(private discountController:DiscountController){
+  constructor(private readonly discountController:DiscountController){
     this.subs.add(
       this.discountController.loadAllDiscounts().subscribe(
-        (data:IDiscount[])=>{this.discounts=data;},
-        (error)=>alert(error.error.detail)
+        {
+          next:(data:IDiscount[])=>{this.discounts=data;},
+          error:(error)=>alert(error.error.detail)
+        }
       )
     )
   }

@@ -4,7 +4,7 @@ import { ShoppingLocationService } from "../Services/ShoppingLocation.service";
 import {Injectable} from "@angular/core"
 @Injectable({providedIn:"root"})
 export class ShoppingLocationController{
-    constructor(private shoppingLocationService:ShoppingLocationService){
+    constructor(private readonly shoppingLocationService:ShoppingLocationService){
 
     }
     public loadAllShoppingLocations():Observable<IShoppingLocation[]>{

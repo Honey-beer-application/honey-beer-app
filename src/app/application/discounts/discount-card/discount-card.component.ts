@@ -12,7 +12,7 @@ export class DiscountCardComponent {
 
   @Input('discount') discount:IDiscount;
 
-  constructor(private router:Router){
+  constructor(private readonly router:Router){
     this.discount = new Discount();
   }
 }

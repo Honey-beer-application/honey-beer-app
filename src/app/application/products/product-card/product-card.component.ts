@@ -3,7 +3,7 @@ import IProduct from './../../../Data/Interfaces/IProduct';
 import {Product} from "./../../../Data/Classes/Product";
 import { Router } from '@angular/router';
 import { ProductController } from 'src/app/Data/Controllers/ProductController';
-import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-card',
@@ -15,7 +15,7 @@ export class ProductCardComponent {
 
   @Input('product') product:IProduct;
 
-  constructor(private router:Router,private productController:ProductController){
+  constructor(private readonly router:Router,private readonly productController:ProductController){
     this.product = new Product();
   }
   public redirectToProduct(product:IProduct):void{

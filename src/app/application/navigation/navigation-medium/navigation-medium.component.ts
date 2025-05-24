@@ -25,11 +25,11 @@ export class NavigationMediumComponent implements OnDestroy {
     "https://images.unsplash.com/photo-1547595628-c61a29f496f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGRyaW5rfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
   ];
 
-  private subs:Subscription;
+  private readonly subs:Subscription;
   public hoveredImage:string="#";
   private customer:ICustomer;
   private company:ICompany;
-  constructor(private router:Router,private customerController:CustomerController, private companyController: CompanyController){
+  constructor(private readonly router:Router,private readonly customerController:CustomerController, private readonly companyController: CompanyController){
     this.subs = new Subscription();
     this.customer = new Customer();
     this.company = new Company();

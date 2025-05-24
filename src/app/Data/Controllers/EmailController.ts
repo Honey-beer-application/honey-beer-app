@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 
 @Injectable({providedIn:"root"})
 export class EmailController{
-    constructor( private emailService:EmailService){
+    constructor( private readonly emailService:EmailService){
 
     }
     public saveEmail(email:IEmail):Observable<boolean>{

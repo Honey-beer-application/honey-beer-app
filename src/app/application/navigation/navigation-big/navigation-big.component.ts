@@ -26,12 +26,11 @@ export class NavigationBigComponent {
     "https://images.unsplash.com/photo-1547595628-c61a29f496f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGRyaW5rfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
   ];
   public customer:ICustomer;
-  private subs:Subscription = new Subscription();
+  private readonly subs:Subscription = new Subscription();
   public company!:ICompany;
-  constructor(private customerController:CustomerController,
-    private companyController:CompanyController,
-    private router:Router){
-    // this.customer=this.customerController.registeredCustomer;
+  constructor(private readonly customerController:CustomerController,
+    private readonly companyController:CompanyController,
+    private readonly router:Router){
     this.customer=new Customer();
     this.subs.add(
       this.customerController.registeredCustomer.asObservable().subscribe((data:ICustomer)=>this.customer=data)
@@ -48,18 +47,22 @@ export class NavigationBigComponent {
   }
   public deleteAccount(){
     this.companyController.deleteCompany(this.company).subscribe(
-      (data)=>{alert("Account has been successfuly deleted.");this.companyController.setCompany(new Company())},
-      (error)=>alert(JSON.stringify(error))
+      {
+        next:(data)=>{alert("Account has been successfuly deleted.");this.companyController.setCompany(new Company())},
+        error:(error)=>alert(JSON.stringify(error))
+      }
     )
   }
   public deleteCustomerAccount(){
     this.customerController.deleteCustomer(this.customer)
     .subscribe(
-      (data)=>{
-        alert("Personal account was successfuly deleted.");
-        this.customerController.registeredCustomer.next(new Customer());
-      },
-      (error)=>alert(error.error.detail)
+      {
+        next:(data)=>{
+          alert("Personal account was successfuly deleted.");
+          this.customerController.registeredCustomer.next(new Customer());
+        },
+        error:(error)=>alert(error.error.detail)
+      }
     );
   }
   public redirectToMainPage():void{

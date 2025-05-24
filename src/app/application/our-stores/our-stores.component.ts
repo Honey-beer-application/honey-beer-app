@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import * as L from 'leaflet';
 import { Subscription } from 'rxjs';
 import { LocationController } from 'src/app/Data/Controllers/LocationController';
@@ -12,8 +12,8 @@ export class OurStoresComponent implements AfterViewInit{
 
   public locations:ILocation[];
   private map!:any;
-  private subs:Subscription;
-  constructor(private locationController:LocationController){
+  private readonly subs:Subscription;
+  constructor(private readonly locationController:LocationController){
     this.subs = new Subscription();
     this.locations=[];
     this.subs.add(

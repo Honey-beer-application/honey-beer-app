@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Injectable} from "@angular/core"
 import { IEvent } from "../Interfaces/IEvent";
 import { Observable } from "rxjs";
@@ -6,7 +6,7 @@ import { Event } from "../Classes/Event";
 @Injectable({providedIn:"root"})
 export class EventService{
 
-    constructor(private httpClient:HttpClient){
+    constructor(private readonly httpClient:HttpClient){
     }
 
 

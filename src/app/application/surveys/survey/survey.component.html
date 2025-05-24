@@ -17,7 +17,7 @@
                     <div formArrayName="answers">
                         <div *ngFor="let answer of returnAnswersArray(question);let i=index" [formGroupName]="i">
                             <input formControlName="value" type="checkbox">
-                            <label>{{answer.get("label")?.value}}</label>
+                            <label htmlFor="">{{answer.get("label")?.value}}</label>
                         </div>
                     </div>
                 </ng-container>
@@ -27,7 +27,7 @@
                         <ng-container *ngFor="let answer of returnAnswersArray(question);let i=index" [formGroupName]="i">
                             <div *ngFor="let label of returnLabelsArray(answer)">
                                 <input formControlName="value" type="radio" name="value" value='{{label.get("value")?.value}}'>
-                                <label>{{label.get("value")?.value}}</label>
+                                <label htmlFor="">{{label.get("value")?.value}}</label>
                             </div>
                         </ng-container>
                     </div>
@@ -37,7 +37,7 @@
                     <div formArrayName="answers">
                         <div *ngFor="let answer of returnAnswersArray(question);let i=index" [formGroupName]="i">
                             <input formControlName="value" type="checkbox">
-                            <label>{{answer.get("label")?.value}}</label>
+                            <label htmlFor="">{{answer.get("label")?.value}}</label>
                         </div>
                     </div>
                 </ng-container>

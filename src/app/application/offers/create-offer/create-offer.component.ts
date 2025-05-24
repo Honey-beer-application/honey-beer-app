@@ -16,14 +16,14 @@ import IOfferByCompany from 'src/app/Data/Interfaces/IOfferByCompany';
 })
 export class CreateOfferComponent implements OnDestroy{
 
-  private subs:Subscription = new Subscription();
+  private readonly subs:Subscription = new Subscription();
   public offerByCompany:IOfferByCompany;
 
   public offerByCompanyForm!:FormGroup;
   public offerAmount:FormControl;
   public offerBeginDate:FormControl;
   public offerEndDate:FormControl;
-  constructor(private fb:FormBuilder,private offerByCompanyController:OfferByCompanyController, private companyController:CompanyController){
+  constructor(private readonly fb:FormBuilder,private readonly offerByCompanyController:OfferByCompanyController, private readonly companyController:CompanyController){
     this.offerByCompany = new OfferByCompany();
     this.subs.add(
       this.companyController.companyObservable.subscribe((data:ICompany)=>{
@@ -63,8 +63,10 @@ export class CreateOfferComponent implements OnDestroy{
   public saveOfferByComapny(){
     this.subs.add(
       this.offerByCompanyController.saveOfferByCompany(this.offerByCompany).subscribe(
-        (data)=>alert("Offer is successfully saved."),
-        (error)=>alert(error))
+        {
+          next:(data)=>alert("Offer is successfully saved."),
+          error:(error)=>alert(error)
+        })
     )
   }
   public convertDate(date:Date){

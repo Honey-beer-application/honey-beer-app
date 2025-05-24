@@ -1,4 +1,4 @@
-import { ApplicationRef, Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { map,BehaviorSubject, Subscription} from 'rxjs';
 import CompanyController from './../../../Data/Controllers/CompanyController';
@@ -25,19 +25,19 @@ export class PersonalOffersContentComponent implements OnDestroy {
   private observable:BehaviorSubject<IOfferByCompany[]> = new BehaviorSubject(new Array<IOfferByCompany>());
   public offerByCompanyList:IOfferByCompany[] = [];
 
-  private subs:Subscription = new Subscription();
+  private readonly subs:Subscription = new Subscription();
   private registeredCompany!:ICompany;
   public offersFG!:FormGroup;
-  private discount!:FormControl;
-  private offerBeginDate!:FormControl;
-  private offerEndDate!:FormControl;
-  private productName!:FormControl;
-  private productDescription!:FormControl;
+  private readonly discount!:FormControl;
+  private readonly offerBeginDate!:FormControl;
+  private readonly offerEndDate!:FormControl;
+  private readonly productName!:FormControl;
+  private readonly productDescription!:FormControl;
 
   constructor(public offerByCompanyController:OfferByCompanyController,
-              private companyController:CompanyController, 
-              private fb:FormBuilder,
-              private router:Router){
+              private readonly companyController:CompanyController, 
+              private readonly fb:FormBuilder,
+              private readonly router:Router){
     this.subs.add(
       this.companyController.companyObservable.subscribe(
         (data:ICompany)=>this.registeredCompany=data
@@ -47,7 +47,7 @@ export class PersonalOffersContentComponent implements OnDestroy {
       this.offerByCompanyController.loadAllOffersByCompany(this.registeredCompany)
       .pipe(map(list=>
         {
-          list.map(item=>{
+          list.forEach(item=>{
             item.offerInstance.beginDate = new Date(item.offerInstance.beginDate.toString().split('T')[0]);
             item.offerInstance.endDate = new Date(item.offerInstance.endDate.toString().split('T')[0]);
             item.companyInstance=this.registeredCompany;
@@ -55,8 +55,10 @@ export class PersonalOffersContentComponent implements OnDestroy {
         return list;
         }))
       .subscribe(
-        (data:IOfferByCompany[])=>{this.observable=new BehaviorSubject(data);this.offerByCompanyList=data;},
-        (error)=>alert(error.error.detail)
+        {
+          next: (data:IOfferByCompany[])=>{this.observable=new BehaviorSubject(data);this.offerByCompanyList=data;},
+          error: (error)=>alert(error.error.detail)
+        }
       )
     )
 

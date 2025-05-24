@@ -14,7 +14,7 @@ export class ProductCardComponent {
 
   @Input('product') product:IProduct;
 
-  constructor(private router:Router,private productController:ProductController,private reservationController:ReservationController){
+  constructor(private readonly router:Router,private readonly productController:ProductController,private readonly reservationController:ReservationController){
     this.product = new Product();
   }
   public redirectToProduct(product:IProduct):void{

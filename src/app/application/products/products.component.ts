@@ -10,13 +10,15 @@ import IProduct from './../../Data/Interfaces/IProduct';
 })
 export class ProductsComponent implements OnDestroy {
 
-  private subs:Subscription = new Subscription();
+  private readonly subs:Subscription = new Subscription();
   public products:IProduct[] = [];
-  constructor(private productController:ProductController){
+  constructor(private readonly productController:ProductController){
     this.subs.add(
       this.productController.loadAllProducts().subscribe(
-        (data:IProduct[])=>this.products=data,
-        (error)=>alert(error.error.detail)
+        {
+          next:(data:IProduct[])=>this.products=data,
+          error:(error)=>alert(error.error.detail)
+        }
       )
     )
   }

@@ -1,11 +1,3 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <nav class="navigation">
   <app-navigation-big class="app-navigation-big"/>
   <app-navigation-medium class="app-navigation-medium"/>
@@ -15,7 +7,6 @@
   <router-outlet></router-outlet>
 </div>
 <div class="footer">
-  <!-- <h1>Footer</h1> -->
   <div class="suggestions" [formGroup]="emailForm">
     <h3>Suggestions:</h3>
     <input [ngClass]="this.emailEntered==undefined?'none':(this.emailEntered==true?'success':'error')" type="text" placeholder="From (for not registered users)" formControlName="from_email">
@@ -24,11 +15,3 @@
     <button (click)="sendEmail()">Send suggestion</button>
   </div>
 </div>
-  
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-  <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-  <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-  <!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-  <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
