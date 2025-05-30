@@ -27,7 +27,7 @@ export class MeetingsComponent implements OnDestroy{
       })
     )
     this.subs.add(
-      this.companyController.companyObservable.subscribe((data:ICompany)=>this.company=data)
+      this.companyController.companyObservable().subscribe((data:ICompany)=>this.company=data)
     )
   }
   ngOnDestroy(): void {
@@ -40,7 +40,7 @@ export class MeetingsComponent implements OnDestroy{
         next:(data:boolean)=>{
           alert("Meeting is scheduled successfully.");
         },
-        error:(error:Object)=>alert(JSON.stringify(error))
+        error:(error)=>alert(error.error.detail)
       }
     );
     this.availableMeetings = this.availableMeetings.filter(meet=>meet.meetingId!==meeting.meetingId);
@@ -48,7 +48,7 @@ export class MeetingsComponent implements OnDestroy{
 
   getDate(date:Date):string{
     date = new Date(date);
-    return date.getDate()+"."+(date.getMonth()+1)+"."+date.getFullYear();
+    return date.getDate()+"."+(date.getMonth()+1)+"."+date.getFullYear()+".";
   }
 
   getTime(date:Date):string{
