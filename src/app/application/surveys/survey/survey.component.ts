@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { EventController } from 'src/app/Data/Controllers/EventController';
 import { IEvent } from 'src/app/Data/Interfaces/IEvent';
 import {Event} from './../../../Data/Classes/Event';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { IQuestion } from 'src/app/Data/Interfaces/IQuestion';
 import { IAnswer } from 'src/app/Data/Interfaces/IAnswer';
 
@@ -18,7 +18,7 @@ export class SurveyComponent implements OnInit,OnDestroy {
   private readonly subs:Subscription;
   public surveyForm:FormGroup<{questions:FormArray<FormGroup>}>;
   public answers:FormControl[];
-  constructor(private readonly surveyController:EventController,private readonly fb:FormBuilder,private readonly eventController:EventController){
+  constructor(private readonly surveyController:EventController){
     this.subs = new Subscription();
     this.survey = new Event();
     this.surveyForm = new FormGroup({questions:new FormArray(new Array<FormGroup>())});
@@ -63,9 +63,9 @@ export class SurveyComponent implements OnInit,OnDestroy {
         }));
       //adding answers and forming questions
       questions.push(new FormGroup({
-        questionType:new FormControl(question.questionTypeInstance.name),
-        questionName:new FormControl(question.text),
-        answers:new FormArray<FormGroup>(answers,pickValidator(question.questionTypeInstance.name))
+        questionType:new FormControl(question.questionTypeInstance.name,[]),
+        questionName:new FormControl(question.text,[]),
+        answers:new FormArray<FormGroup>(answers,[pickValidator(question.questionTypeInstance.name)])
       }));
     });
     //forming surveyForm
@@ -89,25 +89,25 @@ export class SurveyComponent implements OnInit,OnDestroy {
   }
   public saveAnswers(){
     if(this.surveyForm.valid){
-      this.surveyForm.value.questions?.forEach((question:any,i:number)=>{
-        if(question.questionType=="Single choice"){
-          let answer:IAnswer;
-          answer = (this.survey.questions[i].answers.filter(a=>a.value==question.answers[0].value))[0];
+      this.surveyForm.controls.questions.controls.forEach((question:FormGroup<any>, i:number)=>{
+        if(question.get('questionType')?.value=="Single choice"){
+          let answer:IAnswer | undefined;
+          answer = (question.get("answers")!.value)[0];
           this.survey.questions[i].answers = new Array<IAnswer>();
-          this.survey.questions[i].answers.push(answer)
+          this.survey.questions[i].answers.push(answer!);
         }
         else
         { 
-          question.answers.forEach((answer:any,j:number)=>{
+          question.get('answers')?.value.forEach((answer:any,j:number)=>{
             this.survey.questions[i].answers[j].value=answer.value;
           });
-          if(question.questionType!="Text"){
+          if(question.get('questionType')?.value!="Text"){
             this.survey.questions[i].answers=this.survey.questions[i].answers.filter(a=>a.value.toString()==true.toString());
           }
         }
       });
       this.subs.add(
-        this.eventController.saveEventForm(this.survey).subscribe({next:(data)=>alert("Form is successfully submitted."),error:(error)=>alert(JSON.stringify(error))})
+        this.surveyController.saveEventForm(this.survey).subscribe({next:(data)=>alert("Form is successfully submitted."),error:(error)=>alert(error.error.detail)})
       );
     }else{
       alert("Values are not entered correctly.");
@@ -118,18 +118,16 @@ export function customValidateFormArray(): ValidatorFn {
   return (formArray:AbstractControl<any,any>):{[key: string]: any} | null=>{
     let numberOfValidFields:number=0;
     (<FormArray<FormGroup>>formArray).controls.forEach((x:FormGroup)=>{
-        if(x.value.value===true) numberOfValidFields++; 
+        if(x.valid===true) numberOfValidFields++; 
     })
     return numberOfValidFields>=2?null:{error:'At least 2 options must be selected.'};
   }
 }
 export function pickValidator(questionType:string):ValidatorFn{
-  switch(questionType){
-    case "Multiple choice":
+  if(questionType=== "Multiple choice")
       return customValidateFormArray();
-    default:
+    else
       return returnDefaultFuntion();
-  }
 }
 function returnDefaultFuntion():ValidatorFn{
   return (formArray:AbstractControl<any,any>):{[key: string]: any} | null=>null;
