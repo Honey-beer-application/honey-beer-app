@@ -9,15 +9,16 @@ import IProduct from 'src/app/Data/Interfaces/IProduct';
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss']
 })
+
 export class ProductCardComponent {
 
   @Input('product') product:IProduct;
 
-  constructor(private readonly router:Router){
+  constructor(private readonly router:Router, private readonly productController: ProductController){
     this.product = new Product();
   }
   public redirectToCreateOffer(product:IProduct):void{
-    ProductController.setProduct(product);
+    this.productController.setProduct(product);
     this.router.navigateByUrl(`/app/new_offer/${this.product.productId}/create`);
   }
 }

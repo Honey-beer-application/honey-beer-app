@@ -27,16 +27,16 @@ export class CreateOfferComponent implements OnDestroy {
   public offerAmount:FormControl;
   public offerBeginDate:FormControl;
   public offerEndDate:FormControl;
-  constructor(private readonly fb:FormBuilder,private readonly offerController:OfferController, private readonly companyController:CompanyController){
+  constructor(private readonly fb:FormBuilder,private readonly offerController:OfferController, private readonly companyController:CompanyController, private readonly productController: ProductController){
     this.offer = new Offer();
     this.company = new Company();
     this.subs.add(
-      ProductController.productToLoadObservable.subscribe((data:IProduct)=>{
+      this.productController.productToLoadObservable.subscribe((data:IProduct)=>{
         this.offer.productInstance = data;
       })
     );
     this.subs.add(
-      this.companyController.companyObservable.subscribe((data:ICompany)=>{
+      this.companyController.companyObservable().subscribe((data:ICompany)=>{
         this.company=data;
       })
     );
@@ -69,12 +69,14 @@ export class CreateOfferComponent implements OnDestroy {
     offerByCompany.pib=this.company.PIB;
     offerByCompany.productId=this.offer.productInstance==undefined?0n:this.offer.productInstance.productId;
     offerByCompany.offerInstance=this.offer;
-    this.offerController.saveOffer(offerByCompany).subscribe(
-      {next:(data)=>alert("Offer is successfully saved."),
-      error:(error)=>alert(error.error.detail)})
-    // this.subs.add(
-      
-    // )
+    this.subs.add(
+      this.offerController.saveOffer(offerByCompany).subscribe(
+        {
+          next:(data)=>alert("Offer is successfully saved."),
+          error:(error)=>alert(error.error.detail)
+        }
+      )     
+    )
   }
   public convertDate(date:Date):string{
     let month:number = date.getMonth()+1;
