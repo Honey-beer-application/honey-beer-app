@@ -47,13 +47,13 @@ export class Question implements IQuestion{
     public set answers(value: IAnswer[]) {
         this._answers = value;
     }
-    constructor(){
-        this._answers=[];
-        this._eventId=0n;
-        this._questionId=0n;
-        this._questionTypeId=0n;
-        this._questionTypeInstance = new QuestionType();
-        this._text="";
+    constructor(parameters?:{answers?:IAnswer[],eventId?:bigint,questionId?:bigint,questionTypeId?:bigint, questionTypeInstance?: IQuestionType,text?:string}){
+        this._answers=parameters?.answers??[];
+        this._eventId=parameters?.eventId??0n;
+        this._questionId=parameters?.questionId??0n;
+        this._questionTypeId=parameters?.questionTypeId??0n;
+        this._questionTypeInstance = parameters?.questionTypeInstance??new QuestionType();
+        this._text=parameters?.text??"";
     }
     public toJSON(question:IQuestion) {
         return{

@@ -30,11 +30,11 @@ export class Answer implements IAnswer{
     public set value(value: string) {
         this._value = value;
     }
-    constructor(){
-        this._eventId=0n;
-        this._questionId=0n;
-        this._answerId=0n;
-        this._value="";
+    constructor(parameters?:{eventId?:bigint,questionId?:bigint, answerId?:bigint, value?:string}){
+        this._eventId=parameters?.eventId??0n;
+        this._questionId=parameters?.questionId??0n;
+        this._answerId=parameters?.answerId??0n;
+        this._value=parameters?.value??"";
     }
     toJSON(answer:IAnswer): {} {
         return {

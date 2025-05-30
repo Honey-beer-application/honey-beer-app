@@ -43,13 +43,13 @@ export class Meeting implements IMeeting{
     public set pib(value: bigint) {
         this._pib = value;
     }
-    constructor(){
-        this._endTime=new Date();
-        this._location="";
-        this._meetingId=0n;
-        this._startTime=new Date();
-        this._subject="";
-        this._pib = 0n;
+    constructor(parameters?:{meetingId?:bigint, subject?: string, startTime?: Date,endTime?: Date, location?: string,pib?:bigint}){
+        this._endTime=parameters?.endTime??new Date();
+        this._location=parameters?.location??"";
+        this._meetingId=parameters?.meetingId??0n;
+        this._startTime=parameters?.startTime??new Date();
+        this._subject=parameters?.subject??"";
+        this._pib = parameters?.pib??0n;
     }
     
 }

@@ -41,12 +41,12 @@ export default class OfferByCompany implements IOfferByCompany{
     public set offerInstance(value: IOffer) {
         this._offerInstance = value;
     }
-    constructor(){
-        this._pib=0n;
-        this._productId=0n;
-        this._offerId=0n;
-        this._companyInstance=new Company();
-        this._offerInstance=new Offer();
+    constructor(properties?:{pib?:bigint,productId?:bigint, offerId?:bigint, companyInstance?: ICompany, offerInstance?: IOffer}){
+        this._pib=properties?.pib??0n;
+        this._productId=properties?.productId??0n;
+        this._offerId=properties?.offerId??0n;
+        this._companyInstance=properties?.companyInstance??new Company();
+        this._offerInstance=properties?.offerInstance??new Offer();
     }
     
 }

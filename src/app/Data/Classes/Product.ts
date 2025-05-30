@@ -32,10 +32,10 @@ export class Product implements IProduct{
     public set offerInstance(value: IOffer) {
         this._offerInstance = value;
     }
-    constructor(){
-        this._productId=0n;
-        this._name="";
-        this._description="";
-        this._offerInstance= new Offer();
+    constructor(parameters?: {productId?:bigint, name?:string, description?: string, offerInstance?: IOffer}){
+        this._productId=parameters?.productId??0n;
+        this._name=parameters?.name??"";
+        this._description=parameters?.description??"";
+        this._offerInstance= parameters?.offerInstance??new Offer();
     }
 }

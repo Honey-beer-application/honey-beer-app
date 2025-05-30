@@ -8,12 +8,15 @@ import ICompany from "../Interfaces/ICompany";
 export default class CompanyController{
     private readonly _registeredCompany:ICompany = new Company().setPIB(10000001n).setEmail("kompanija1@gmail.com").setName("kompanija1").setPassword("kompanija1");
     private readonly _companyBehaviour:BehaviorSubject<ICompany> = new BehaviorSubject<ICompany>(this._registeredCompany);
-    public get companyObservable(): Observable<ICompany> {
+
+    public companyObservable(): Observable<ICompany>{
         return this._companyBehaviour.asObservable();
     }
-    public setCompany(company:ICompany){
-        this._companyBehaviour.next(company);
+
+    public setCompany(value:ICompany){
+        this._companyBehaviour.next(value);
     }
+    
     constructor(private readonly companyService:CompanyService){
     }
 

@@ -10,9 +10,12 @@ import OfferByCompany from "../Classes/OfferByCompany";
 export class OfferByCompanyController{
     private readonly offerByCompanyToLoadObject: IOfferByCompany;
     private readonly _offerBycompanyToLoad: BehaviorSubject<IOfferByCompany>;
-    private readonly _offerByCompanyToLoadObservable: Observable<IOfferByCompany> ;
+    private _offerByCompanyToLoadObservable: Observable<IOfferByCompany> ;
     public get offerByCompanyToLoadObservable():Observable<IOfferByCompany> {
         return this._offerByCompanyToLoadObservable;
+    }
+    public set offerByCompanyToLoadObservable(value: Observable<IOfferByCompany>) {
+        this._offerByCompanyToLoadObservable = value;
     }
      public setOfferByCompanyToLoad(data:IOfferByCompany){
         this._offerBycompanyToLoad.next(data);

@@ -76,17 +76,17 @@ export class Event implements IEvent{
     public set eventLocations(value: IEventLocation[]) {
         this._eventLocations = value;
     }
-    constructor(){
-        this._beginDate = null;
-        this._creationDate = new Date();
-        this._description = "";
-        this._endDate= new Date();
-        this._eventId = 0n;
-        this._eventTypeId = 0n;
-        this._eventTypeInstance = new EventType();
-        this._questions = [];
-        this._title="";
-        this._eventLocations = [];
+    constructor(parameters?:{beginDate?: Date, creationDate?: Date, description?: string, endDate?: Date, eventId?:bigint, eventTypeId?: bigint, eventTypeInstance?: EventType, questions?: IQuestion[], title?: string, eventLocations?: IEventLocation[]}){
+        this._beginDate = parameters?.beginDate??null;
+        this._creationDate = parameters?.creationDate??new Date();
+        this._description = parameters?.description??"";
+        this._endDate= parameters?.endDate??new Date();
+        this._eventId = parameters?.eventId??0n;
+        this._eventTypeId = parameters?.eventTypeId??0n;
+        this._eventTypeInstance = parameters?.eventTypeInstance??new EventType();
+        this._questions = parameters?.questions??[];
+        this._title=parameters?.title??"";
+        this._eventLocations = parameters?.eventLocations??[];
     }
     
     

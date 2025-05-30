@@ -13,7 +13,7 @@ export class ReservationController{
         this.productObservable = this.productBS.asObservable();
     }
 
-    public laodAllReservations():Observable<IReservation[]>{
+    public loadAllReservations():Observable<IReservation[]>{
         return this.reservationService.loadAllReservations();
     }
     public saveReservation(reservation:IReservation):Observable<boolean> {

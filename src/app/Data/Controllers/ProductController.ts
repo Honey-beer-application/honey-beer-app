@@ -6,17 +6,14 @@ import { Product } from "../Classes/Product";
 
 @Injectable({providedIn:"root"})
  export class ProductController{
-    setProduct(product: IProduct) {
-      ProductController._productToLoad.next(product);
-    }
 
-    private static readonly _productToLoad: BehaviorSubject<IProduct> = new BehaviorSubject(<IProduct>(new Product()));
-    public static get productToLoadObservable(){
-      return ProductController._productToLoad.asObservable();
+    private readonly _productToLoad: BehaviorSubject<IProduct> = new BehaviorSubject(<IProduct>(new Product()));
+    public get productToLoadObservable(){
+      return this._productToLoad.asObservable();
     }
     
-   public static setProduct(product:IProduct){
-    ProductController._productToLoad.next(product);
+   public setProduct(product:IProduct){
+    this._productToLoad.next(product);
    }
     constructor(private readonly productService:ProductService){
     }

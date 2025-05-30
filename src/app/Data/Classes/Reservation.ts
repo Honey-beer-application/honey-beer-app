@@ -46,13 +46,13 @@ export default class Reservation implements IReservation{
     public set productInstance(value: IProduct) {
         this._productInstance = value;
     }
-    constructor(){
-        this._reservationId = 0n;
-        this._productId=0n;
-        this._pib=0n;
-        this._amount=0;
-        this._delivery = new Date();
-        this._productInstance = new Product();
+    constructor(parameters?:{reservationId?:bigint, productId?: bigint, pib?: bigint, amount?: number, delivery?: Date, productInstance?: IProduct}){
+        this._reservationId = parameters?.reservationId??0n;
+        this._productId=parameters?.productId??0n;
+        this._pib=parameters?.pib??0n;
+        this._amount=parameters?.amount??0;
+        this._delivery = parameters?.delivery??new Date();
+        this._productInstance = parameters?.productInstance??new Product();
         
     }
 }

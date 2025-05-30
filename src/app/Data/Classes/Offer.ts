@@ -45,12 +45,12 @@ export default class Offer implements IOffer{
     public set productInstance(value: IProduct | null) {
         this._productInstance = value;
     }
-    constructor(){
-        this._productId=0n;
-        this._offerId=0n;
-        this._amount=0;
-        this._beginDate=new Date();
-        this._endDate= new Date();
-        this._productInstance = null;
+    constructor(parameters?: {productId?:bigint, offerId?: bigint, amount?:number, beginDate?:Date, endDate?:Date, productInstance?:IProduct}){
+        this._productId=parameters?.productId??0n;
+        this._offerId=parameters?.offerId ??0n;
+        this._amount=parameters?.amount??0;
+        this._beginDate=parameters?.beginDate??new Date();
+        this._endDate=parameters?.endDate?? new Date();
+        this._productInstance = parameters?.productInstance?? null;
     }
 }

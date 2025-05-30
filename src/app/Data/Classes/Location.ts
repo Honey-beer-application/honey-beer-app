@@ -29,11 +29,11 @@ export class Location implements ILocation{
     public set email(value: string) {
         this._email = value;
     }
-    constructor(){
-        this._locationId=0n;
-        this._locationName="";
-        this._phone="";
-        this._email="";
+    constructor(parameters?:{locationId?: bigint, locationName?: string, phone?: string, email?: string}){
+        this._locationId=parameters?.locationId??0n;
+        this._locationName=parameters?.locationName??"";
+        this._phone=parameters?.phone??"";
+        this._email=parameters?.email??"";
     }
     
 }

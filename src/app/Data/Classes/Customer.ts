@@ -39,11 +39,11 @@ export default class Customer implements ICustomer{
     public set personalEmailInstance(value: IPersonalEmail) {
         this._personalEmailInstance = value;
     }
-    constructor(){
-        this._customerId= 0n;
-        this._email = "";
-        this._username = "";
-        this._password = "";
-        this._personalEmailInstance = new PersonalEmail();
+    constructor(parameters?:{customerId?:bigint, email?:string, username?:string, password?: string, personalEmailInstance?: IPersonalEmail}){
+        this._customerId= parameters?.customerId??0n;
+        this._email = parameters?.email??"";
+        this._username = parameters?.username??"";
+        this._password = parameters?.password??"";
+        this._personalEmailInstance = parameters?.personalEmailInstance??new PersonalEmail();
     }
 }

@@ -15,9 +15,9 @@ export class QuestionType implements IQuestionType{
     public set name(value: string) {
         this._name = value;
     }
-    constructor(){
-        this._questionTypeId=0n;
-        this._name="";
+    constructor(parameters?:{questionTypeId?:bigint, name?:string}){
+        this._questionTypeId=parameters?.questionTypeId??0n;
+        this._name=parameters?.name??"";
     }
     public toJSON(questionType:IQuestionType) {
         return {

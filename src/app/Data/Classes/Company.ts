@@ -29,7 +29,7 @@ export default class Company implements ICompany{
     public set email(value: string) {
         this._email = value;
     }
-    constructor(parameters?:{PIB:bigint|null,name:string|null,email:string|null,password:string|null} | undefined){
+    constructor(parameters?:{PIB?:bigint|null,name?:string|null,email?:string|null,password?:string| null} | undefined){
         this._PIB=parameters?.PIB??BigInt(0);
         this._name = parameters?.name??"";
         this._email = parameters?.email??"";
