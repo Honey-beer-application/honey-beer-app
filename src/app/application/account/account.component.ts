@@ -7,7 +7,7 @@ import CompanyController from 'src/app/Data/Controllers/CompanyController';
 import CustomerController from 'src/app/Data/Controllers/CustomerConstroller';
 import ICompany from 'src/app/Data/Interfaces/ICompany';
 import ICustomer from 'src/app/Data/Interfaces/ICustomer';
-import emailjs from "@emailjs/browser";
+import emailjs, { EmailJSResponseStatus } from "@emailjs/browser";
 import { SentCompanyEmailController } from 'src/app/Data/Controllers/SentCompanyEmailController';
 import { SentCompanyEmail } from 'src/app/Data/Classes/SentCompanyEmail';
 import { ISentCompanyEmail } from 'src/app/Data/Interfaces/ISentCompanyEmail';
@@ -29,7 +29,12 @@ export class AccountComponent {
   private company:ICompany;
   public emailEntered:boolean|undefined=undefined;
   public titleEntered:boolean|undefined=undefined;
-  public messageEntered:boolean|undefined=undefined; 
+  public messageEntered:boolean|undefined=undefined;
+  public email: {
+      init: (publicKey: string, origin?: string) => void;
+      send: (serviceID: string, templateID: string, templatePrams?: Record<string, unknown> | undefined, publicKey?: string | undefined) => Promise<EmailJSResponseStatus>;
+      sendForm: (serviceID: string, templateID: string, form: string | HTMLFormElement, publicKey?: string | undefined) => Promise<EmailJSResponseStatus>;
+  } = emailjs;
   constructor(private readonly fb:FormBuilder,private readonly customerController:CustomerController,private readonly sentCompanyEmailController:SentCompanyEmailController, private readonly companyController:CompanyController){
     this.message = {from_email:'',title:'',message:''};
     this.subs = new Subscription();
@@ -50,7 +55,7 @@ export class AccountComponent {
       this.message.from_email=this.customer.email;
     }
     this.subs.add(
-      this.companyController.companyObservable.subscribe((data:ICompany)=>{
+      this.companyController.companyObservable().subscribe((data:ICompany)=>{
         if(data.PIB>0n){
           this.message.from_email=data.email;
           this.company=data;
@@ -84,8 +89,8 @@ export class AccountComponent {
       this.messageEntered=this.emailMessage.valid;
   }
   public sendEmail():void{
-    emailjs.init('kik40nluAvZK_YLAq');
-    emailjs.send("service_x8k6zkl","template_szo4oub",{
+    this.email.init('kik40nluAvZK_YLAq');
+    this.email.send("service_x8k6zkl","template_szo4oub",{
       from_email: this.message.from_email,
       message: this.message.message,
       title: this.message.title,
@@ -93,7 +98,7 @@ export class AccountComponent {
     let sentEmail:ISentCompanyEmail = new SentCompanyEmail();
     sentEmail.pib=this.company.PIB;
     this.sentCompanyEmailController.saveCompanyEmail(sentEmail).subscribe({next:(data)=>
-    alert("Email is registered in database."),error:(error)=>JSON.stringify(error)});
+    alert("Email is registered in database."),error:(error)=>alert(error.error.detail)});
     alert("Email has been successfully sent");
   }
   public isCompanyRegistered():boolean{
