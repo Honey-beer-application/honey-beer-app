@@ -31,12 +31,8 @@ export class ReservationsComponent {
     })
 
     this.subs.add(
-      this.reservationController.laodAllReservations().subscribe(
+      this.reservationController.loadAllReservations().subscribe(
         (data:IReservation[])=>{
-          data.forEach((reservation:IReservation)=>{
-            reservation.delivery = new Date(reservation.delivery.toString().split('T')[0]);
-            return reservation;
-          });
           this.allReservations=data;
           this.reservations=this.allReservations}
       )
