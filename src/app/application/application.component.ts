@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import emailjs from "@emailjs/browser";
+import emailjs, { EmailJSResponseStatus } from "@emailjs/browser";
 import { Subscription, filter, map } from 'rxjs';
 import CustomerController from '../Data/Controllers/CustomerConstroller';
 import CompanyController from '../Data/Controllers/CompanyController';
@@ -27,6 +27,11 @@ export class ApplicationComponent implements OnDestroy,OnInit {
   private readonly emailTitle:FormControl;
   private readonly emailMessage:FormControl;
   private customer:ICustomer;
+  public email: {
+    init: (publicKey: string, origin?: string) => void;
+    send: (serviceID: string, templateID: string, templatePrams?: Record<string, unknown> | undefined, publicKey?: string | undefined) => Promise<EmailJSResponseStatus>;
+    sendForm: (serviceID: string, templateID: string, form: string | HTMLFormElement, publicKey?: string | undefined) => Promise<EmailJSResponseStatus>;
+} = emailjs;
   constructor(private readonly fb:FormBuilder,private readonly customerController:CustomerController,private readonly emailController:EmailController, private readonly companyController:CompanyController){
     this.message = {from_email:'',title:'',message:''};
     this.subs = new Subscription();
@@ -75,7 +80,7 @@ export class ApplicationComponent implements OnDestroy,OnInit {
   }
   ngOnInit(): void {
     this.subs.add(
-      this.companyController.companyObservable.subscribe((data:ICompany)=>{
+      this.companyController.companyObservable().subscribe((data:ICompany)=>{
         if(data.PIB>0n)
           this.message.from_email=data.email;
       }));
@@ -84,15 +89,14 @@ export class ApplicationComponent implements OnDestroy,OnInit {
     this.subs.unsubscribe();
   }
   public sendEmail():void{
-    emailjs.init('kik40nluAvZK_YLAq');
-    emailjs.send("service_x8k6zkl","template_szo4oub",{
+    this.email.init('kik40nluAvZK_YLAq');
+    this.email.send("service_x8k6zkl","template_szo4oub",{
       from_email: this.message.from_email,
       message: this.message.message,
       title: this.message.title,
     });
     let sentEmail:IEmail = new Email();
     sentEmail.email=this.message.from_email;
-    this.emailController.saveEmail(sentEmail).subscribe({next:(data)=>alert("Email is registered in database."),error:(error)=>JSON.stringify(error)});
-    alert("Email has been successfully sent");
+    this.emailController.saveEmail(sentEmail).subscribe({next:(data)=>alert("Email has been successfully sent"),error:(error)=>alert(error.error.detail)});
   }
 }
