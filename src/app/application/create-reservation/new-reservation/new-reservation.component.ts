@@ -37,7 +37,7 @@ export class NewReservationComponent {
     });
 
     this.subs.add(
-      this.companyController.companyObservable.subscribe((data:ICompany)=>{
+      this.companyController.companyObservable().subscribe((data:ICompany)=>{
         this.reservation.pib=data.PIB;
       })
     );
@@ -53,6 +53,7 @@ export class NewReservationComponent {
       })
     )
   }
+  
   ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
@@ -62,7 +63,7 @@ export class NewReservationComponent {
       this.reservationController.saveReservation(this.reservation).subscribe(
         {
           next:(data)=>alert("Reservation is successfully saved."),
-          error: (error)=>alert(error)
+          error: (error)=>alert(error.error.detail)
         })
     )
   }
