@@ -12,6 +12,6 @@ export class ProductComponent{
 
   public product:IProduct=new Product();
   constructor(private readonly productController:ProductController){
-    ProductController.productToLoadObservable.subscribe((data:IProduct)=>this.product=data);
+    this.productController.productToLoadObservable.subscribe((data:IProduct)=>this.product=data);
   }
 }
