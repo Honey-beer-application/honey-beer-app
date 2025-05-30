@@ -4,14 +4,9 @@ import Offer from 'src/app/Data/Classes/Offer';
 import IOffer from 'src/app/Data/Interfaces/IOffer';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import IData from 'src/app/Data/Interfaces/IData';
 
-interface IData{
-  beginDate:string | null,
-  discount: number | null,
-  endDate: string| null,
-  productDescription:string| null,
-  productName:string|null
-}
+
 @Component({
   selector: 'app-offers',
   templateUrl: './offers.component.html',
@@ -35,11 +30,6 @@ export class OffersComponent implements OnDestroy{
     this.offerController.loadAllOffers().subscribe(
       {
         next:(data:Offer[])=>{
-          data.forEach((offer:IOffer)=>{
-            offer.beginDate = new Date(offer.beginDate.toString().split('T')[0]);
-            offer.endDate = new Date(offer.endDate.toString().split('T')[0]);
-            return offer;
-          })
           this.observable.next(data);
           this.offers = data;
         },
@@ -67,16 +57,27 @@ export class OffersComponent implements OnDestroy{
     this.observable
     .subscribe((data:IOffer[])=>{
       this.offers = data;
-      if(select.discount!=null&&select.discount!=0)
-      this.offers =this.offers.filter((item:IOffer)=>item.amount==select.discount);
-      if(select.beginDate!=null&&select.beginDate!="")
-      this.offers =this.offers.filter((item:IOffer)=> item.beginDate.toISOString()==new Date(String(select.beginDate)).toISOString());
-      if(select.endDate!=null&&select.endDate!="")
-      this.offers =this.offers.filter((item:IOffer)=>item.endDate.toISOString()==new Date(String(select.endDate)).toISOString());
-      if(select.productName!=null)
-      this.offers = this.offers.filter((item:IOffer)=>item.productInstance?.name.includes(String(select.productName)));
-      if(select.productDescription!=null)
-      this.offers = this.offers.filter((item:IOffer)=>item.productInstance?.description.includes(String(select.productDescription)));
+      if(select.discount!=null&&select.discount!=0){
+        this.offers =this.offers.filter((item:IOffer)=>item.amount==select.discount);
+      }
+      if(select.beginDate!=null&&select.beginDate!=""){
+        this.offers =this.offers.filter((item:IOffer)=> 
+          item.beginDate.toISOString()
+          ==
+          new Date(String(select.beginDate)).toISOString());
+      }
+      if(select.endDate!=null&&select.endDate!=""){
+        this.offers =this.offers.filter((item:IOffer)=>
+          item.endDate.toISOString()
+          ==
+          new Date(String(select.endDate)).toISOString());
+      }
+      if(select.productName!=null){
+        this.offers = this.offers.filter((item:IOffer)=>item.productInstance?.name.includes(String(select.productName)));
+      }
+      if(select.productDescription!=null){
+        this.offers = this.offers.filter((item:IOffer)=>item.productInstance?.description.includes(String(select.productDescription)));
+      }
     })
   }
   public convertDate(date:Date):string{

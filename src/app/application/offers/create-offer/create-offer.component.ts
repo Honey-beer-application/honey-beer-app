@@ -26,7 +26,7 @@ export class CreateOfferComponent implements OnDestroy{
   constructor(private readonly fb:FormBuilder,private readonly offerByCompanyController:OfferByCompanyController, private readonly companyController:CompanyController){
     this.offerByCompany = new OfferByCompany();
     this.subs.add(
-      this.companyController.companyObservable.subscribe((data:ICompany)=>{
+      this.companyController.companyObservable().subscribe((data:ICompany)=>{
         this.offerByCompany.companyInstance=data;
         this.offerByCompany.pib=data.PIB;
       })
@@ -65,7 +65,7 @@ export class CreateOfferComponent implements OnDestroy{
       this.offerByCompanyController.saveOfferByCompany(this.offerByCompany).subscribe(
         {
           next:(data)=>alert("Offer is successfully saved."),
-          error:(error)=>alert(error)
+          error:(error)=>alert(error.error.detail)
         })
     )
   }
