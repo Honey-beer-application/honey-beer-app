@@ -32,8 +32,9 @@ export class ScannerComponent implements OnDestroy{
   }
 
   public onEvent(e: ScannerQRCodeResult[]): void {
-    if(this.qrCode==null){
+    if(this.qrCode==null&& e.length>0){
       this.qrCode = e[0].value;
+      
       let qrCode:IQRCode = new QRCode();
       qrCode.Code=this.qrCode;
       this.subs.add(
@@ -43,11 +44,12 @@ export class ScannerComponent implements OnDestroy{
       .subscribe(
         {
           next:(data)=>alert("QR code is successfully scanned."),
-          error:(error)=>alert(JSON.stringify(error.error))
+          error:(error)=>alert(error.error.detail)
         }
       );
     }
   }
+  
   public endScanning(){
     this.action.stop();
     this.qrCode=null;
