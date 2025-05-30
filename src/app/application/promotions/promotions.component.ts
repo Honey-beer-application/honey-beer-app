@@ -17,7 +17,7 @@ export class PromotionsComponent implements OnDestroy {
       this.eventController.loadAllPromotions().subscribe(
         {
           next: (data:IEvent[])=>this.promotions=data,
-        error: (error)=>alert(error.error.detail)
+          error: (error)=>alert(error.error.detail)
         }
       )
     )
