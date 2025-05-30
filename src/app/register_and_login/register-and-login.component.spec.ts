@@ -1,37 +1,45 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegisterComponent } from './register-and-login.component';
+import { RegisterAndLoginComponent } from './register-and-login.component';
 import { provideHttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { customMatchers } from './matchers';
+import { customMatchers } from '../../match_config/matchers';
 import { testLoginFormData } from './test_data';
 import CustomerController from '../Data/Controllers/CustomerConstroller';
 import Customer from '../Data/Classes/Customer';
-import { BehaviorSubject, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription, throwError } from 'rxjs';
 import ICustomer from '../Data/Interfaces/ICustomer';
 import CustomError from '../Data/Classes/CustomError';
 import Company from '../Data/Classes/Company';
 import CompanyController from '../Data/Controllers/CompanyController';
+import { By } from '@angular/platform-browser';
+import { NavigationEnd, Router } from '@angular/router';
 
-describe('RegisterComponent', () => {
-  let component: RegisterComponent;
-  let fixture: ComponentFixture<RegisterComponent>;
+describe('RegisterAndLoginComponent', () => {
+  let component: RegisterAndLoginComponent;
+  let fixture: ComponentFixture<RegisterAndLoginComponent>;
   let customerControllerSpyObj: jasmine.SpyObj<CustomerController>;
   let registeredCustomerSpyObj: jasmine.SpyObj<BehaviorSubject<ICustomer>>;
   let companyControllerSpyObj: jasmine.SpyObj<CompanyController>;
+  let routerSpyObj: jasmine.SpyObj<Router>;
   beforeEach(() => {
     registeredCustomerSpyObj = jasmine.createSpyObj('BehaviourSubject<ICustomer>',['next']);
     customerControllerSpyObj = jasmine.createSpyObj('CustomerController', ['createCustomer'], {registeredCustomer: registeredCustomerSpyObj});
     companyControllerSpyObj = jasmine.createSpyObj('CompanyController',['createCompany','setCompany']);
+    routerSpyObj = jasmine.createSpyObj('Router',['navigateByUrl'],{events: new Observable(observer => {
+                                                                                  observer.next(new NavigationEnd(0, 'http://localhost:4200/app', 'http://localhost:4200/app'));
+                                                                                  observer.complete();
+                                                                                })})
     jasmine.addMatchers(customMatchers);
     TestBed.configureTestingModule({
-      declarations: [RegisterComponent],
+      declarations: [RegisterAndLoginComponent],
       imports: [ReactiveFormsModule],
-      providers: [provideHttpClient(),{provide: CustomerController, useValue: customerControllerSpyObj},{provide: CompanyController, useValue: companyControllerSpyObj}]
-    })
+      providers: [provideHttpClient(),{provide: CustomerController, useValue: customerControllerSpyObj},{provide: CompanyController, useValue: companyControllerSpyObj}, {provide: Router, useValue: routerSpyObj}]
+    });
+    routerSpyObj = TestBed.inject(Router) as jasmine.SpyObj<Router>;
     customerControllerSpyObj = TestBed.inject(CustomerController) as jasmine.SpyObj<CustomerController>; 
     companyControllerSpyObj = TestBed.inject(CompanyController) as jasmine.SpyObj<CompanyController>;
-    fixture = TestBed.createComponent(RegisterComponent);
+    fixture = TestBed.createComponent(RegisterAndLoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     
@@ -47,10 +55,10 @@ describe('RegisterComponent', () => {
       component.customerPassword.setValue(user.password);
       component.customerConfirmedPassword.setValue(user.confirmedPassword);
       component.customerUsername.setValue(user.username);
-      component.customerForm.get("username")?.setValue(user.username);
-      component.customerForm.get("email")?.setValue(user.email);
-      component.customerForm.get("password")?.setValue(user.password);
-      component.customerForm.get("confirmationPassword")?.setValue(user.confirmedPassword);
+      component.customerForm.controls["username"].setValue(user.username);
+      component.customerForm.controls["email"].setValue(user.email);
+      component.customerForm.controls["password"].setValue(user.password);
+      component.customerForm.controls["confirmationPassword"].setValue(user.confirmedPassword);
       expect(component.customerForm).toBeValidForm(user.expectedResult);
     });
   })
@@ -94,5 +102,36 @@ describe('RegisterComponent', () => {
     component.saveCompany();
     expect(window.alert).toHaveBeenCalledWith(error.message);
   });
-
+  it('should validate company form',()=>{
+    component.companyForm.controls['companyPIB'].setValue(BigInt(10000001));
+    component.companyForm.controls['companyUsername'].setValue("company1");
+    component.companyForm.controls['companyEmail'].setValue('company1@gmail.com');
+    component.companyForm.controls['companyPassword'].setValue('company1');
+    component.companyForm.controls['companyConfirmedPassword'].setValue('company1');
+    expect(component.companyForm.valid).toEqual(true);
+  });
+  it('should trigger event listeners',()=>{
+    component.ngAfterViewInit();
+    const signUpButton = fixture.debugElement.query(By.css('#register'));
+    const signInButton = fixture.debugElement.query(By.css('#signIn'));
+    expect(()=>{
+      signUpButton.nativeElement.click();
+      signInButton.nativeElement.click();
+    }).not.toThrow();
+    
+  });
+  it('should execute backToPreviousPage function without error', ()=>{
+    spyOn(routerSpyObj.events,'subscribe').and.returnValue(new Subscription(()=>new NavigationEnd(1,'','/')));
+    routerSpyObj.navigateByUrl.and.callThrough();
+    expect(()=>component.backToPrevoiusPage()).not.toThrow();
+  });
+  it('should get one page back',()=>{
+    window.history.pushState({ patientId: 'somevalue'}, '', '');
+    window.history.pushState({ patientId: 'somevalue'}, '', '');
+    expect(()=>component.backToPrevoiusPage()).not.toThrow();
+  });
+  it('should ge to main page',()=>{
+    window.history.replaceState([],'','/');
+    expect(()=>component.backToPrevoiusPage()).not.toThrow();
+  })
 });

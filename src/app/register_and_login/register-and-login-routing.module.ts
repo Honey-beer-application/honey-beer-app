@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegisterComponent } from './register-and-login.component';
+import { RegisterAndLoginComponent } from './register-and-login.component';
 
-const routes: Routes = [{ path: '', component: RegisterComponent }];
+const routes: Routes = [{ path: '', component: RegisterAndLoginComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

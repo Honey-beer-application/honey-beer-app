@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import {Location } from '@angular/common';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { filter } from 'rxjs';
 import CustomerController from '../Data/Controllers/CustomerConstroller';
@@ -15,7 +15,7 @@ import CustomError from '../Data/Classes/CustomError';
   templateUrl: './register-and-login.component.html',
   styleUrls: ['./register-and-login.component.scss']
 })
-export class RegisterComponent implements AfterViewInit {
+export class RegisterAndLoginComponent implements AfterViewInit {
   
   //##################
   //  CUSTOMER FORM
@@ -52,9 +52,6 @@ export class RegisterComponent implements AfterViewInit {
   @ViewChild('main') main:ElementRef = new ElementRef(document.getElementById('main'));
 
 
-  private readonly history: string[] = [];
-
-
   constructor(
     private readonly location:Location,
     private readonly router:Router,
@@ -65,12 +62,6 @@ export class RegisterComponent implements AfterViewInit {
     
     this.customer = new Customer();
     this.company = new Company();
-
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.history.push(event.urlAfterRedirects);
-      }
-    });
 
     this.customerForm = fb.group({
       username:this.customerUsername,
@@ -98,10 +89,19 @@ export class RegisterComponent implements AfterViewInit {
       companyEmail: this.companyEmail,
       companyPassword: this.companyPassword,
       companyConfirmedPassword: this.companyConfirmedPassword
-    });
+    },
+    {
+        validator: (formGroup: FormGroup): ValidationErrors | null => {
+          const [companyPassword, companyConfirmedPassword] = [
+            formGroup.get("companyPassword")?.value,
+            formGroup.get("companyConfirmedPassword")?.value
+          ];
+          return companyPassword !== companyConfirmedPassword? {passwordNotMatched: "Passwords are not matching"}: null;
+        }
+      } as AbstractControlOptions);
 
     this.companyForm.valueChanges
-    .pipe(filter(data=>this.companyForm.valid&&data.companyPassword==data.companyConfirmedPassword))
+    .pipe(filter(_=>this.companyForm.valid))
     .subscribe(data=>{this.company.PIB=data.companyPIB;this.company.email=data.companyEmail;this.company.name=data.companyUsername;this.company.password=data.companyPassword});
   }
 
@@ -115,8 +115,7 @@ export class RegisterComponent implements AfterViewInit {
   }
   
   backToPrevoiusPage(){
-    this.history.pop();
-    if (this.history.length > 0) {
+    if (history.length > 1) {
       this.location.back();
     } else {
       this.router.navigateByUrl("/");
