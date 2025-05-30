@@ -39,11 +39,13 @@ export class UpdateOfferComponent implements OnDestroy{
 
       //loading company
       this.subs.add(
-        this.companyController.companyObservable.subscribe((data:ICompany)=>this.registeredCompany=data)
+        this.companyController.companyObservable().subscribe((data:ICompany)=>this.registeredCompany=data)
       )
       
       //loading offerByCompany
-      this.offerByCompanyController.offerByCompanyToLoadObservable.subscribe((data:IOfferByCompany)=>this.offerByCompany=data);
+      this.subs.add(
+        this.offerByCompanyController.offerByCompanyToLoadObservable.subscribe((data:IOfferByCompany)=>this.offerByCompany=data)
+      );
 
       //loading offerByCompany from database
       this.subs.add(
@@ -52,8 +54,6 @@ export class UpdateOfferComponent implements OnDestroy{
         {
           this.offerByCompany=data;
           this.offerByCompany.companyInstance=this.registeredCompany;
-          this.offerByCompany.offerInstance.beginDate = new Date(this.offerByCompany.offerInstance.beginDate.toString().split("T")[0]);
-          this.offerByCompany.offerInstance.endDate = new Date(this.offerByCompany.offerInstance.endDate.toString().split("T")[0]);
         })
       );
       //setting form values

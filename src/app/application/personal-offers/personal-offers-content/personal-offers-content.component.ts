@@ -39,7 +39,7 @@ export class PersonalOffersContentComponent implements OnDestroy {
               private readonly fb:FormBuilder,
               private readonly router:Router){
     this.subs.add(
-      this.companyController.companyObservable.subscribe(
+      this.companyController.companyObservable().subscribe(
         (data:ICompany)=>this.registeredCompany=data
       )
     )
@@ -48,16 +48,13 @@ export class PersonalOffersContentComponent implements OnDestroy {
       .pipe(map(list=>
         {
           list.forEach(item=>{
-            item.offerInstance.beginDate = new Date(item.offerInstance.beginDate.toString().split('T')[0]);
-            item.offerInstance.endDate = new Date(item.offerInstance.endDate.toString().split('T')[0]);
             item.companyInstance=this.registeredCompany;
           });
         return list;
         }))
       .subscribe(
         {
-          next: (data:IOfferByCompany[])=>{this.observable=new BehaviorSubject(data);this.offerByCompanyList=data;},
-          error: (error)=>alert(error.error.detail)
+          next: (data:IOfferByCompany[])=>{this.observable=new BehaviorSubject(data);this.offerByCompanyList=data;}
         }
       )
     )
@@ -85,9 +82,9 @@ export class PersonalOffersContentComponent implements OnDestroy {
       if(select.discount!=null&&select.discount!=0)
       this.offerByCompanyList =this.offerByCompanyList.filter((item:IOfferByCompany)=>item.offerInstance.amount==select.discount);
       if(select.beginDate!=null&&select.beginDate!="")
-      this.offerByCompanyList =this.offerByCompanyList.filter((item:IOfferByCompany)=> item.offerInstance.beginDate.toISOString()==new Date(String(select.beginDate)).toISOString());
+      this.offerByCompanyList =this.offerByCompanyList.filter((item:IOfferByCompany)=> item.offerInstance.beginDate.toISOString()==select.beginDate!);
       if(select.endDate!=null&&select.endDate!="")
-      this.offerByCompanyList =this.offerByCompanyList.filter((item:IOfferByCompany)=>item.offerInstance.endDate.toISOString()==new Date(String(select.endDate)).toISOString());
+      this.offerByCompanyList =this.offerByCompanyList.filter((item:IOfferByCompany)=>item.offerInstance.endDate.toISOString()==select.endDate!);
       if(select.productName!=null)
       this.offerByCompanyList = this.offerByCompanyList.filter((item:IOfferByCompany)=>item.offerInstance.productInstance?.name.includes(String(select.productName)));
       if(select.productDescription!=null)
