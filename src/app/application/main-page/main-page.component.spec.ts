@@ -17,4 +17,7 @@ describe('MainPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should load 3D model',()=>{
+    expect(()=>component.ngAfterViewInit()).not.toThrow();
+  })
 });
