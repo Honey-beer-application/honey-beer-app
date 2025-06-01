@@ -67,5 +67,8 @@ describe('NewReservationComponent', () => {
   });
   it('should convert date',()=>{
     expect(component.convertDate(new Date(2025,10,5))).toEqual('2025-11-05')
+  });
+   it('should convert date with 2 digit date',()=>{
+    expect(component.convertDate(new Date(2025,10,10))).toEqual('2025-11-10')
   })
 });

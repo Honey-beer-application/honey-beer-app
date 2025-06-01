@@ -63,8 +63,14 @@ describe('UpdateOfferComponent', () => {
     expect(component.offerByCompanyForm.valid).toEqual(true);
   });
 
-  it('should convert a date',()=>{
-    expect(()=>component.convertDate(new Date(2025, 10, 4))).not.toThrow();
+  it('should convert date',()=>{
+    let date: Date = new Date(2025,10,5);
+    expect(component.convertDate(date)).toEqual("2025-11-05")
+  });
+
+  it('should convert date',()=>{
+    let date: Date = new Date(2025,10,10);
+    expect(component.convertDate(date)).toEqual("2025-11-10")
   });
 
 });
