@@ -5,7 +5,6 @@ import { provideHttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import OfferController from 'src/app/Data/Controllers/OfferController';
 import CompanyController from 'src/app/Data/Controllers/CompanyController';
-import Offer from 'src/app/Data/Classes/Offer';
 import { of, throwError } from 'rxjs';
 import Company from 'src/app/Data/Classes/Company';
 import CustomError from 'src/app/Data/Classes/CustomError';
@@ -60,5 +59,12 @@ describe('CreateOfferComponent', () => {
   });
   it('should conert single digit day with 2 digit month',()=>{
     expect(component.convertDate(new Date(2025,10,5))).toEqual('2025-11-05')
+  });
+  it('should create offer wiithout',()=>{
+    component.offer.productInstance = null;
+    expect(()=>component.saveOffer()).not.toThrow();
+  });
+   it('should convert 2 digit date',()=>{
+    expect(component.convertDate(new Date(2025,10,10))).toEqual('2025-11-10')
   })
 });

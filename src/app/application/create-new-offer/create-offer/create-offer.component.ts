@@ -67,7 +67,7 @@ export class CreateOfferComponent implements OnDestroy {
     let offerByCompany:IOfferByCompany= new OfferByCompany();
     offerByCompany.companyInstance=this.company;
     offerByCompany.pib=this.company.PIB;
-    offerByCompany.productId=this.offer.productInstance==undefined?0n:this.offer.productInstance.productId;
+    offerByCompany.productId=this.offer.productInstance==null?0n:this.offer.productInstance.productId;
     offerByCompany.offerInstance=this.offer;
     this.subs.add(
       this.offerController.saveOffer(offerByCompany).subscribe(
