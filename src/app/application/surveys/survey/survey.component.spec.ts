@@ -67,4 +67,15 @@ describe('SurveyComponent', () => {
     expect(()=>component.saveAnswers()).not.toThrow();
     expect(window.alert).toHaveBeenCalledWith(exception.message);
   });
+  it('shoud invalidate form by using multiple choice custom validator',()=>{
+    component.surveyForm.controls.questions.controls.forEach((control:FormGroup<{question:FormControl<string>,questionType:FormControl<string>,answers:any}>)=>{
+      if(control.controls.questionType.value === 'Text')
+        (control.controls.answers as FormArray<FormGroup<{label: FormControl<string>,value:FormControl<string>}>>).controls[0].controls.value.setValue("s");
+      if(control.controls.questionType.value === 'Single choice')
+        (control.controls.answers as FormArray<FormGroup<{value: FormControl<string>}>>).controls[0].controls.value.setValue("s");
+      if(control.controls.questionType.value === 'Multiple choice')
+        (control.controls.answers as FormArray<FormGroup<{value: FormControl<string>}>>).removeAt(1);
+    });
+    expect(()=>component.saveAnswers()).not.toThrow();
+  });
 });

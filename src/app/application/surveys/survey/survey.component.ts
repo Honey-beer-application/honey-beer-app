@@ -124,7 +124,7 @@ export function customValidateFormArray(): ValidatorFn {
   }
 }
 export function pickValidator(questionType:string):ValidatorFn{
-  if(questionType=== "Multiple choice")
+  if(questionType === "Multiple choice")
       return customValidateFormArray();
     else
       return returnDefaultFuntion();
