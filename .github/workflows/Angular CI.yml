@@ -33,11 +33,11 @@ jobs:
     - name: Install Sonar scanner
       run: npm i sonarqube-scanner
     - name: Run test
-      run: ng test
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-    - name: SonarQube Scan
-      uses: SonarSource/sonarqube-scan-action@v5
+      run: npm run sonar
+    # - uses: actions/checkout@v4
+    #   with:
+    #     fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+    # - name: SonarQube Scan
+    #   uses: SonarSource/sonarqube-scan-action@v5
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
