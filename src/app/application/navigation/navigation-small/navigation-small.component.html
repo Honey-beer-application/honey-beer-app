@@ -14,10 +14,10 @@
                 <h1>Account</h1>
                 <ul>
                     <li>
-                        <button  (click)="redirectTo('register')">Log in</button>
+                        <button  (click)="redirectTo('register-and-login')">Log in</button>
                     </li>
                     <li>
-                        <button  (click)="redirectTo('register')">Register</button>
+                        <button  (click)="redirectTo('register-and-login')">Register</button>
                     </li>
                     <li *ngIf="isCustomerRegistered() || isCompanyRegistered()">
                         <button  (click)="redirectTo('app/account')">Account</button>
