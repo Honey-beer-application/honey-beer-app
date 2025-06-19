@@ -3,6 +3,7 @@ import {Injectable} from "@angular/core";
 import Company from "../Classes/Company";
 import { Observable } from "rxjs";
 import ICompany from "../Interfaces/ICompany";
+import { environment } from "src/environments/environment";
 
 @Injectable({providedIn:"root"})
 export default class CompanyService{
@@ -11,7 +12,7 @@ export default class CompanyService{
     }
 
     public createCompany(PIB:bigint,name:string,email:string,password:string):Observable<ICompany>{
-        return this.httpClient.post<Company>("https://localhost:7165/api/Company",
+        return this.httpClient.post<Company>(environment.apiUrl+"/api/Company",
         {
             "pib":PIB,
             "name":name,
@@ -20,7 +21,7 @@ export default class CompanyService{
         });
     }
     deleteCompany(company: ICompany): Observable<ICompany> {
-        return this.httpClient.delete<ICompany>("https://localhost:7165/api/company",{body:{
+        return this.httpClient.delete<ICompany>(environment.apiUrl+"/api/company",{body:{
             "pib":Number(company.PIB),
             "name":company.email,
             "email":company.name,

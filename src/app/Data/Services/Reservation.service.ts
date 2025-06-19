@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import IReservation from "../Interfaces/IReservation";
 import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
 
 @Injectable({providedIn:"root"})
 export class ReservationService{
@@ -10,10 +11,10 @@ export class ReservationService{
 
     }
     public loadAllReservations():Observable<IReservation[]>{
-        return this.httpClient.get<IReservation[]>("https://localhost:7165/api/reservation/getAllReservations");
+        return this.httpClient.get<IReservation[]>(environment.apiUrl+"/api/reservation/getAllReservations");
     }
     public saveReservation(reservation: IReservation):Observable<boolean> {
-        return this.httpClient.post<boolean>("https://localhost:7165/api/reservation/saveReservation",
+        return this.httpClient.post<boolean>(environment.apiUrl+"/api/reservation/saveReservation",
         {
             "productId": Number(reservation.productId),
             "pib": Number(reservation.pib),

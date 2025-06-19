@@ -3,6 +3,7 @@ import Customer from "../Classes/Customer";
 import {Injectable} from "@angular/core"
 import ICustomer from "../Interfaces/ICustomer";
 import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
 
 
 @Injectable({providedIn:"root"})
@@ -12,11 +13,11 @@ export class CustomerService{
 
     }
     public createCustomer(username:string,email:string,password:string):Observable<ICustomer>{
-        return this.httpClient.post<Customer>('https://localhost:7165/api/customer',{"username":username,"password":password,
+        return this.httpClient.post<Customer>(environment.apiUrl+'/api/customer',{"username":username,"password":password,
         "email":email,"personalEmailInstance":{"email":email}});
     }
     public deleteCustomer(customer:ICustomer):Observable<ICustomer>{
-        return this.httpClient.delete<ICustomer>('https://localhost:7165/api/customer',
+        return this.httpClient.delete<ICustomer>(environment.apiUrl+'/api/customer',
         {
             body:{
                 "customerId": Number(customer.customerId),

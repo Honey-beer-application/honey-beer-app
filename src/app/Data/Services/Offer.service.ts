@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import Offer from "../Classes/Offer";
 import {Injectable} from "@angular/core"
 import IOfferByCompany from "../Interfaces/IOfferByCompany";
+import { environment } from "src/environments/environment";
 
 @Injectable({providedIn:"root"})
 export default class OfferService{
@@ -11,10 +12,10 @@ export default class OfferService{
 
     }
     public loadAllOffers():Observable<Offer[]>{
-        return this.httpClient.get<Offer[]>("https://localhost:7165/api/offer");
+        return this.httpClient.get<Offer[]>(environment.apiUrl+"/api/offer");
     }
     public saveOffer(offerByCompany: IOfferByCompany): Observable<boolean> {
-        return this.httpClient.post<boolean>("https://localhost:7165/api/offer",
+        return this.httpClient.post<boolean>(environment.apiUrl+"/api/offer",
         {
             "pib":Number(offerByCompany.pib),
             "productId":Number(offerByCompany.productId),

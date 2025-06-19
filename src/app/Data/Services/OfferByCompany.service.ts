@@ -4,6 +4,7 @@ import ICompany from "../Interfaces/ICompany";
 import IOfferByCompany from "../Interfaces/IOfferByCompany";
 import { Observable } from "rxjs";
 import OfferByCompany from "../Classes/OfferByCompany";
+import { environment } from "src/environments/environment";
 
 @Injectable({providedIn:"root"})
 export default class OfferByCompanyService{
@@ -12,7 +13,7 @@ export default class OfferByCompanyService{
 
     }
     public loadAllOffersByCompany(company:ICompany):Observable<IOfferByCompany[]>{
-        return this.httpClient.post<IOfferByCompany[]>("https://localhost:7165/api/offerByCompany/get",
+        return this.httpClient.post<IOfferByCompany[]>(environment.apiUrl+"/api/offerByCompany/get",
             {
             "pib":Number(company.PIB),
             "name":company.name,
@@ -22,7 +23,7 @@ export default class OfferByCompanyService{
         );
     }
     public getOfferByCompany(id:number):Observable<OfferByCompany>{
-        return this.httpClient.get<OfferByCompany>(`https://localhost:7165/api/OfferByCompany/getOfferByCompany/:id?id=${id}`);
+        return this.httpClient.get<OfferByCompany>(environment.apiUrl+`/api/OfferByCompany/getOfferByCompany/:id?id=${id}`);
     }
     public changeOfferByCompany(offerByCompany:IOfferByCompany):Observable<boolean>{
         let object:Object = {
@@ -48,11 +49,11 @@ export default class OfferByCompanyService{
                 }
             }
         };
-        return this.httpClient.post<boolean>("https://localhost:7165/api/OfferByCompany/update",
+        return this.httpClient.post<boolean>(environment.apiUrl+"/api/OfferByCompany/update",
         object);
     }
     saveOfferByCompany(offerByCompany: IOfferByCompany): Observable<boolean> {
-        return this.httpClient.post<boolean>("https://localhost:7165/api/offerByCompany/save",
+        return this.httpClient.post<boolean>(environment.apiUrl+"/api/offerByCompany/save",
         {
             "offerId":Number(offerByCompany.offerId),
             "productId":Number(offerByCompany.productId),

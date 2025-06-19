@@ -70,6 +70,20 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "testing": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.testing.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -82,6 +96,9 @@
             },
             "development": {
               "browserTarget": "honey-beer-app:build:development"
+            },
+            "testing": {
+              "browserTarget": "honey-beer-app:build:testing"
             }
           },
           "defaultConfiguration": "development"

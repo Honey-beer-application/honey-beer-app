@@ -3,6 +3,7 @@ import {Injectable} from "@angular/core"
 import { IEvent } from "../Interfaces/IEvent";
 import { Observable } from "rxjs";
 import { Event } from "../Classes/Event";
+import { environment } from "src/environments/environment";
 @Injectable({providedIn:"root"})
 export class EventService{
 
@@ -11,13 +12,13 @@ export class EventService{
 
 
     public loadAllEvents():Observable<IEvent[]>{
-        return this.httpClient.get<IEvent[]>("https://localhost:7165/api/Event");
+        return this.httpClient.get<IEvent[]>(environment.apiUrl+"/api/Event");
     }
     public loadAllPromotions(): Observable<IEvent[]> {
-        return this.httpClient.get<IEvent[]>("https://localhost:7165/api/Promotion");
+        return this.httpClient.get<IEvent[]>(environment.apiUrl+"/api/Promotion");
     }
     public saveEventForm(eventForm: IEvent):Observable<boolean> {
-        return this.httpClient.post<boolean>("https://localhost:7165/api/Form",
+        return this.httpClient.post<boolean>(environment.apiUrl+"/api/Form",
         (new Event()).toJSON(eventForm)
         );
     }

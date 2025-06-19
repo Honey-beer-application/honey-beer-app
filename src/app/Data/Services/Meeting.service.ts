@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import {Injectable} from "@angular/core"
 import { Observable } from "rxjs";
 import { IMeeting } from "../Interfaces/IMeeting";
+import { environment } from "src/environments/environment";
 
 @Injectable({providedIn:"root"})
 export class MeetingService{
@@ -10,10 +11,10 @@ export class MeetingService{
 
     }
     public loadAllMeetings():Observable<IMeeting[]>{
-        return this.httpClient.get<IMeeting[]>("https://localhost:7165/api/Meeting");
+        return this.httpClient.get<IMeeting[]>(environment.apiUrl+"/api/Meeting");
     }
     public saveMeeting(meeting:IMeeting):Observable<boolean>{
-        return this.httpClient.post<boolean>("https://localhost:7165/api/Meeting/schedule",
+        return this.httpClient.post<boolean>(environment.apiUrl+"/api/Meeting/schedule",
         {
             "meetingId": Number(meeting.meetingId),
             "subject": meeting.subject,
