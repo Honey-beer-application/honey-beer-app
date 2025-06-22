@@ -1,21 +1,24 @@
-FROM node:alpine AS base
+FROM node:24-alpine AS base
 
 FROM base AS build
 USER root
 
 WORKDIR /app
 COPY . .
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci
-RUN npm i -g @angular/cli && ng build
+RUN --mount=type=bind,source=package.json,target=/app/package.json \
+    --mount=type=bind,source=package-lock.json,target=/app/package-lock.json \
+    --mount=type=cache,target=/root/.npm
+RUN   npm ci
+RUN   npm i -g @angular/cli
+RUN   ng build --configuration testing
+
+
 
 FROM nginx:alpine
 
 COPY --from=build /app/dist/honey-beer-app /usr/share/nginx/html
-EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 4200
+CMD ["nginx", "-g", "daemon off;"]
 
 
 
