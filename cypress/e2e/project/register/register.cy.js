@@ -1,5 +1,5 @@
-// import {environment} from "../../../../src/environments/environment"
-// /// <reference types="cypress" />
+import {environment} from "../../../../src/environments/environment"
+/// <reference types="cypress" />
 
 // describe('application register page', () => {
 // //   beforeEach(() => {

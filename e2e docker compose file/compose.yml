@@ -1,0 +1,109 @@
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker Compose reference guide at
+# https://docs.docker.com/go/compose-spec-reference/
+
+# Here the instructions define your application as a service called "server".
+# This service is built from the Dockerfile in the current directory.
+# You can add other services your application may depend on here, such as a
+# database or a cache. For examples, see the Awesome Compose repository:
+# https://github.com/docker/awesome-compose
+name: honey-beer
+services:
+  cypress:
+    container_name: cypress-container
+    working_dir: /e2e
+    image: cypress/included:latest
+    # entrypoint: npx cypress open -b chrome --project /e2e
+    entrypoint: npx cypress run -b chrome --project /e2e --headed --spec "./cypress/e2e/project/**/*"
+    environment:
+      - DISPLAY=:0
+      - CYPRESS_baseUrl=http://angular
+    volumes:
+      - ./../:/e2e
+      - /tmp/.X11-unix:/tmp/.X11-unix 
+    depends_on:
+      angular:
+        condition: service_healthy
+    networks:
+      - honey-beer
+      
+  angular:
+    container_name: angular-container
+    # build:
+    #   context: ./../
+    #   dockerfile: Dockerfile
+    image: nginx:stable-perl
+    # image: node:22-alpine
+    # working_dir: /app
+    # command: sh -c "apk add curl && npm i -g @angular/cli && \
+    #               npm install --production --legacy-peer-deps && \
+    #               npm install --save-dev @angular-devkit/build-angular --legacy-peer-deps && \ 
+    #               ng serve --configuration=testing"
+    volumes:
+      # - ./../:/app
+      # - ./../nginx:/etc/nginx/sites-enabled/default
+    #   - ./../dist/honey-beer-app:/app/dist/honey-beer-app
+      - ./../dist/honey-beer-app:/usr/share/nginx/html  
+    depends_on:
+      server:
+        condition: service_healthy      
+    ports:
+    -  4200:80
+    expose:
+      - 4200
+    hostname: angular
+    healthcheck: 
+      # test: nginx -t || exit 1
+      # test: sh -c "curl -f http://localhost/ || exit 1"
+      test: sh -c "curl -f http://localhost:80 || exit 1"
+      # start_period: 200s
+      interval: 10s
+      timeout: 400s
+      retries: 40
+    networks:
+      - honey-beer
+  server:
+    container_name: server-container
+    build:
+      context: ./../../honey-beer-backend/honey-beer-server
+    hostname: aspnetcore
+    ports:
+      - 7165:80
+
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail http://localhost/swagger/index.html || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    networks:
+      - honey-beer
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: db-container
+    restart: always
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=stvarnoNovo10
+    ports:
+      - 1433:1433
+    expose:
+      - 1433
+    hostname: 
+      mssqlserver
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd","-C", "-S", "localhost,1433", "-U", "sa", "-P", "stvarnoNovo10","-N", "-d", "master", "-Q", "SELECT 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    networks:
+      - honey-beer
+
+networks:
+  honey-beer:
+    driver: bridge
+
