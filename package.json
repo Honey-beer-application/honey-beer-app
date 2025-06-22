@@ -20,10 +20,10 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^16.0.0",
+    "@angular/animations": "^16.0.4",
     "@angular/cdk": "^16.0.3",
     "@angular/common": "^16.0.4",
-    "@angular/compiler": "^16.0.0",
+    "@angular/compiler": "^16.0.4",
     "@angular/core": "^16.0.4",
     "@angular/forms": "^16.0.0",
     "@angular/material": "^16.0.3",
@@ -43,8 +43,8 @@
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^16.0.5",
-    "@angular/cli": "~16.0.5",
+    "@angular-devkit/build-angular": "^16.2.16",
+    "@angular/cli": "^16.0.5",
     "@angular/compiler-cli": "^16.0.0",
     "@cypress/schematic": "^2.5.2",
     "@types/jasmine": "~4.3.0",
@@ -57,6 +57,6 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "typescript": "~5.0.2",
-    "vite": "^4.3.9"
+    "vite": "^4.0.0"
   }
 }

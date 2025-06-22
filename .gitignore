@@ -43,3 +43,6 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+#project
+e2e docker compose file/package-lock.json
