@@ -68,13 +68,13 @@ services:
       context: ./../../honey-beer-backend/honey-beer-server
     hostname: aspnetcore
     ports:
-      - 7165:80
+      - 7165:8080
 
     depends_on:
       db:
         condition: service_healthy
     healthcheck:
-      test: curl --fail http://localhost/swagger/index.html || exit 1
+      test: curl --fail http://localhost:8080/swagger/index.html || exit 1
       interval: 5s
       timeout: 5s
       retries: 3
@@ -88,6 +88,8 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=stvarnoNovo10
+    volumes:
+      - ./backup.sql:/app/backup.sql
     ports:
       - 1433:1433
     expose:
@@ -95,7 +97,7 @@ services:
     hostname: 
       mssqlserver
     healthcheck:
-      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd","-C", "-S", "localhost,1433", "-U", "sa", "-P", "stvarnoNovo10","-N", "-d", "master", "-Q", "SELECT 1"]
+      test: ["CMD","/opt/mssql-tools18/bin/sqlcmd","-C","-S","mssqlserver,1433","-U","sa","-P","stvarnoNovo10","-Q","SELECT 1"]
       interval: 5s
       timeout: 5s
       retries: 3
