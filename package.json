@@ -35,7 +35,7 @@
     "@types/three": "^0.152.1",
     "karma-jasmine-html-reporter": "^2.1.0",
     "leaflet": "^1.9.4",
-    "ngx-scanner-qrcode": "^1.5.8",
+    "ngx-scanner-qrcode": "^1.7.6",
     "rxjs": "~7.8.0",
     "sonarqube-scanner": "^4.3.0",
     "three": "^0.153.0",

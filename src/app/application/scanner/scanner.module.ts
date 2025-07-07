@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScannerComponent } from './scanner.component';
-import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
+import {NgxScannerQrcodeComponent} from "ngx-scanner-qrcode";
 import { ScannerroutingModule } from './scanner-routing.module';
 
 
@@ -12,7 +12,7 @@ import { ScannerroutingModule } from './scanner-routing.module';
   ],
   imports: [
     CommonModule,
-    NgxScannerQrcodeModule,
+    NgxScannerQrcodeComponent,
     ScannerroutingModule
   ]
 })
