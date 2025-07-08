@@ -31,7 +31,7 @@ jobs:
     - name: Install Angular CLI
       run:  npm i -g @angular/cli
     - name: Install Sonar scanner
-      run: npm i sonarqube-scanner
+      run: npm i --legacy-peer-deps sonarqube-scanner
     - name: Run test
       run: npm run sonar
     # - uses: actions/checkout@v4
